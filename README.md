@@ -24,7 +24,7 @@
 -> open browser on http://localhost:1234 with output "Good morning" in css: steelblue to verify correct implementing of parcel and  the filestructure.</br>
 
 <h3>Error message on client side: -> </h3> "@parcel/package-manager: Could not find module "@parcel/transformer-sass" satisfying 2.0.0-beta.2" => this message appears because there is a different version of @parcel/transformer-sass on the clients local machine.</br>
-<h3>Troubleshooting: -> </h3> To fix this, the dependence must be deleted (-> using "npm uninstall < - pkg name - >". When the user restarts the build, a new matching version of "@parcel/transformer-sass" will automatically be installed.</br>
+Troubleshooting: -> To fix this, the dependence must be deleted (-> using "npm uninstall < - pkg name - >". When the user restarts the build, a new matching version of "@parcel/transformer-sass" will automatically be installed.</br>
 
 <h2>Project Brief:</h2>
 
