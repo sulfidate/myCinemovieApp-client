@@ -4,7 +4,7 @@
 -> Create a new repo "myCinemovieApp-client" to build the app with the build tools. 
   To do this, I created a new directory "-client" with a predefined structure and filled it with the relevant files:</br>
 
-  myFlix-client</br>
+  myCinemovieApp-client</br>
   |--- package.json</br>
   |--- src/</br>
   | |---- index.html</br> 
@@ -13,13 +13,13 @@
 </br>
 -> Installing and configuring parcel & react and build project with output of 4 hashed-name files in new dist-directory:</br>
 </br>
- myFlix-client</br>
+ myCinemovieApp-client</br>
   |--- dist/</br>
   | |---- index.html</br> 
-  | |---- index.343d8f0d.css</br> 
-  | |---- index.343d8f0d.css.map</br>
-  | |---- index.b834a3f4.js </br>
-  | |---- index.b834a3f4.js.map</br>
+  | |---- index.faa115f8.css</br> 
+  | |---- index.faa115f8.css.map</br>
+  | |---- index.c91888ee.js </br>
+  | |---- index.c91888ee.js.map</br>
   </br>
 -> open browser on http://localhost:1234 with output "Good morning" in css: steelblue to verify correct implementing of parcel and  the filestructure.</br>
 
