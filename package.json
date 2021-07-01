@@ -1,0 +1,19 @@
+{
+  "name": "mycinemovieapp-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sulfidate/myCinemovieApp-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sulfidate/myCinemovieApp-client/issues"
+  },
+  "homepage": "https://github.com/sulfidate/myCinemovieApp-client#readme"
+}
