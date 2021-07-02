@@ -1,5 +1,33 @@
 <h1>Project Achievement 3 - React App (myCinemovieApp)</h1>
 <h5>Start 29.06.2020</h5>
+
+<h2>task 3.3:</h2>
+1.-4. create components-folder with three components: </br>
+--- main-view: has the movies array state with at least 3 movies -> renders them as MovieCard,</br>
+--- movie-card: displays a basic movie summary, </br>
+--- movie-view: displays further information like movie’s title, description and poster image,</br>
+5. create code that let users go to the MovieView when clicking a MovieCard (master-detail pattern)
+6. Add a "back"-button to MovieView to go back to MainView's original state
+7. build project and test functionallity locally</br>
+8. commit changes and push them to GitHub</br>
+</br>
+
+-> current directory/file structure
+  myCinemovieApp-client</br>
+  |--- package.json,README.md</br>
+  |--- src/components/</br>
+  | |--- main-view/main-view.jsx</br> 
+  | |--- movie-card/movie-card.jsx</br> 
+  | |--- movie-view/movie-view.jsx</br>   
+  |--- dist/</br>
+  | |--- index.html</br> 
+  | |---- index.faa115f8.css</br> 
+  | |---- index.faa115f8.css.map</br>
+  | |---- index.c91888ee.js </br>
+  | |---- index.c91888ee.js.map</br>
+</br>
+
+
 <h2>task 3.2:</h2>
 -> Create a new repo "myCinemovieApp-client" to build the app with the build tools. 
   To do this, I created a new directory "-client" with a predefined structure and filled it with the relevant files:</br>
