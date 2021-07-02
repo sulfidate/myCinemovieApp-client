@@ -18,7 +18,11 @@
   |--- src/components/</br>
   | |--- main-view/main-view.jsx</br> 
   | |--- movie-card/movie-card.jsx</br> 
-  | |--- movie-view/movie-view.jsx
+  | |--- movie-view/movie-view.jsx </br>
+  |--- src/</br>
+  | |---- index.html</br> 
+  | |---- index.scss </br>
+  | |---- index.jsx</br>
   |--- dist/</br>
   | |--- index.html</br> 
   | |---- index.faa115f8.css</br> 
