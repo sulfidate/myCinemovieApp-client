@@ -6,13 +6,13 @@
 --- main-view: has the movies array state with at least 3 movies -> renders them as MovieCard,</br>
 --- movie-card: displays a basic movie summary, </br>
 --- movie-view: displays further information like movie’s title, description and poster image,</br>
-5. create code that let users go to the MovieView when clicking a MovieCard (master-detail pattern)
-6. Add a "back"-button to MovieView to go back to MainView's original state
+5. create code that let users go to the MovieView when clicking a MovieCard (master-detail pattern)</br>
+6. Add a "back"-button to MovieView to go back to MainView's original state</br>
 7. build project and test functionallity locally</br>
 8. commit changes and push them to GitHub</br>
 </br>
 
--> current directory/file structure
+-> current directory/file structure</br>
   myCinemovieApp-client</br>
   |--- package.json,README.md</br>
   |--- src/components/</br>
@@ -29,7 +29,7 @@
 
 
 <h2>task 3.2:</h2>
--> Create a new repo "myCinemovieApp-client" to build the app with the build tools. 
+-> Create a new repo "myCinemovieApp-client" to build the app with the build tools. </br>
   To do this, I created a new directory "-client" with a predefined structure and filled it with the relevant files:</br>
 
   myCinemovieApp-client</br>
