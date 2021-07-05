@@ -1,0 +1,134 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _loginView = require("../login-view/login-view");
+var _registrationView = require("../registration-view/registration-view");
+var _movieCard = require("../movie-card/movie-card");
+var _movieView = require("../movie-view/movie-view");
+class MainView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.state = {
+            movies: [],
+            selectedMovie: null,
+            user: null,
+            registered: true
+        };
+    }
+    componentDidMount() {
+        _axiosDefault.default.get('https://mycinemoviedatabase.herokuapp.com/movies').then((response)=>{
+            this.setState({
+                movies: response.data
+            });
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+    setSelectedMovie(movie) {
+        this.setState({
+            selectedMovie: movie
+        });
+    }
+    onLoggedIn(user) {
+        this.setState({
+            user
+        });
+    }
+    changeReg(regStatus) {
+        this.setState({
+            registered: regStatus
+        });
+    }
+    render() {
+        const { movies , selectedMovie , user , registered  } = this.state;
+        if (!user && registered) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+            regData: (Status)=>this.changeReg(Status)
+            ,
+            onLoggedIn: (user1)=>this.onLoggedIn(user1)
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 53
+            },
+            __self: this
+        }));
+        if (user && !registered) return(/*#__PURE__*/ _reactDefault.default.createElement(_registrationView.RegistrationView, {
+            regData: (Status)=>this.changeReg(Status)
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 55
+            },
+            __self: this
+        }));
+        if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "main-view",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 57
+            },
+            __self: this
+        }));
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "main-view",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 60
+            },
+            __self: this
+        }, selectedMovie ? /*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
+            movie: selectedMovie,
+            onBackClick: (newSelectedMovie)=>{
+                this.setSelectedMovie(newSelectedMovie);
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 62
+            },
+            __self: this
+        }) : movies.map((movie)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
+                key: movie._id,
+                movie: movie,
+                onMovieClick: (movie1)=>{
+                    this.setSelectedMovie(movie1);
+                },
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                    lineNumber: 64
+                },
+                __self: this
+            })
+        )));
+    }
+} //   render() {
+ //     const { movies, selectedMovie } = this.state;
+ //     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+ //     if (movies.length === 0) return <div className="main-view" />;
+ //     return (
+ //       <div className="main-view">
+ //         {selectedMovie
+ //           ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+ //           : movies.map(movie => (
+ //             <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
+ //           ))
+ //         }
+ //       </div>
+ //     );
+ //   }
+ // }
+exports.default = MainView;
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
