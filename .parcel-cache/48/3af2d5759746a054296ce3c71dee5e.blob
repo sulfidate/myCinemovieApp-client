@@ -22006,6 +22006,8 @@ helpers.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView
+);
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
@@ -23583,4 +23585,4 @@ module.exports = CancelToken;
 
 },{}]},["1j6wU","50OyE","7HZFv"], "7HZFv", "parcelRequired605")
 
-//# sourceMappingURL=index.c91888ee.js.map
+//# sourceMappingURL=index.HASH_REF_18cf56c8277fbabc758d0476c91888ee.js.map

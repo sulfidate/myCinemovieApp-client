@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -10,9 +9,8 @@ export default class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
-      user: null
-    };
+      selectedMovie: null
+    }
   }
 
   componentDidMount() {
@@ -27,16 +25,14 @@ export default class MainView extends React.Component {
       });
   }
 
-  setSelectedMovie(movie) {
+  setSelectedMovie(newSelectedMovie) {
     this.setState({
-      selectedMovie: movie
+      selectedMovie: newSelectedMovie
     });
   }
 
   render() {
     const { movies, selectedMovie } = this.state;
-
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     if (movies.length === 0) return <div className="main-view" />;
 
@@ -52,4 +48,3 @@ export default class MainView extends React.Component {
     );
   }
 }
-// export default MainView;
