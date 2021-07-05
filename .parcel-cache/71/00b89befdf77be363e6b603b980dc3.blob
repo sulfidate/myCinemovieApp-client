@@ -22006,6 +22006,8 @@ helpers.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView
+);
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
@@ -22086,7 +22088,7 @@ class MainView extends _reactDefault.default.Component {
             })
         )));
     }
-} // export default MainView;
+}
 exports.default = MainView;
 
   helpers.postlude(module);
@@ -23613,7 +23615,7 @@ function LoginView(props) {
     const handleSubmit = ()=>{
         e.preventDefault();
         console.log(username, password);
-        /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ props.onLoggedIn(username);
+    /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ // props.onLoggedIn(username);
     };
     return(/*#__PURE__*/ _reactDefault.default.createElement("form", {
         __source: {
@@ -23675,4 +23677,4 @@ $RefreshReg$(_c, "LoginView");
 }
 },{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"1OQ1F","../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7oGZh"}]},["1j6wU","50OyE","7HZFv"], "7HZFv", "parcelRequired605")
 
-//# sourceMappingURL=index.c91888ee.js.map
+//# sourceMappingURL=index.HASH_REF_18cf56c8277fbabc758d0476c91888ee.js.map
