@@ -22043,7 +22043,15 @@ class MainView extends _reactDefault.default.Component {
     }
     render() {
         const { movies , selectedMovie  } = this.state;
-        // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+        if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+            logginIn: (user)=>this.onLoggedIn(user)
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 45
+            },
+            __self: this
+        }));
         if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "main-view",
             __source: {
@@ -24358,4 +24366,4 @@ $RefreshReg$(_c, "LoginView");
 }
 },{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"1OQ1F","../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7oGZh"}]},["1j6wU","50OyE","7HZFv"], "7HZFv", "parcelRequired605")
 
-//# sourceMappingURL=index.c91888ee.js.map
+//# sourceMappingURL=index.HASH_REF_18cf56c8277fbabc758d0476c91888ee.js.map

@@ -24293,7 +24293,7 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
-    const handleSubmit = (e)=>{
+    const handleSubmit = ()=>{
         e.preventDefault();
         console.log(username, password);
         props.onLoggedIn(username);
@@ -24358,4 +24358,4 @@ $RefreshReg$(_c, "LoginView");
 }
 },{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"1OQ1F","../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7oGZh"}]},["1j6wU","50OyE","7HZFv"], "7HZFv", "parcelRequired605")
 
-//# sourceMappingURL=index.c91888ee.js.map
+//# sourceMappingURL=index.HASH_REF_18cf56c8277fbabc758d0476c91888ee.js.map

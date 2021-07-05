@@ -22038,17 +22038,26 @@ class MainView extends _reactDefault.default.Component {
     }
     onLoggedIn(user) {
         this.setState({
+            user: newuser,
             user
         });
     }
     render() {
         const { movies , selectedMovie  } = this.state;
-        // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+        if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+            onLoggedIn: (user)=>this.onLoggedIn(user)
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 47
+            },
+            __self: this
+        }));
         if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "main-view",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 47
+                lineNumber: 49
             },
             __self: this
         }));
@@ -22056,7 +22065,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 50
+                lineNumber: 52
             },
             __self: this
         }, selectedMovie ? /*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
@@ -22066,7 +22075,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 52
+                lineNumber: 54
             },
             __self: this
         }) : movies.map((movie)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
@@ -22077,7 +22086,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                    lineNumber: 54
+                    lineNumber: 56
                 },
                 __self: this
             })
@@ -24358,4 +24367,4 @@ $RefreshReg$(_c, "LoginView");
 }
 },{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"1OQ1F","../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7oGZh"}]},["1j6wU","50OyE","7HZFv"], "7HZFv", "parcelRequired605")
 
-//# sourceMappingURL=index.c91888ee.js.map
+//# sourceMappingURL=index.HASH_REF_18cf56c8277fbabc758d0476c91888ee.js.map
