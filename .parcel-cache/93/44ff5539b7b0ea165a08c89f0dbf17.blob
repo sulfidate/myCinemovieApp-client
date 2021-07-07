@@ -1,0 +1,4 @@
+.card-body {
+  font-style: italic;
+  font-weight: 100;
+}

@@ -1,0 +1,18 @@
+.my-flix {
+  color: steelblue;
+}
+.card {
+  width: 200px;
+  height: 500px;
+  float: left;
+  padding: 15px;
+}
+
+.card-body {
+  background-color: aqua;
+}
+
+.card-title {
+  background-color: blue;
+}
+/*# sourceMappingURL=index.HASH_REF_83db45f702478847477d862cfaa115f8.css.map */

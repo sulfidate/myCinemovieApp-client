@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 
 export class MovieView extends React.Component {
 
@@ -8,21 +11,19 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-
-      </div>
+      <Row className="movie-view justify-content-md-center">
+        <Col md={8}>
+          <Image className="movie-poster" src={movie.ImagePath} thumbnail fluid style={{ width: '500px' }} />
+          <div className="movie-title">
+            <h1 className="label">Title: <span className="value">{movie.Title}</span></h1>
+          </div>
+          <div className="movie-description">
+            <h2 className="label">Description: </h2>
+            <p className="value">{movie.Description}</p>
+            <Button variant="info" size="sm" block onClick={() => { onBackClick(null); }}>Back</Button>{' '}
+          </div>
+        </Col>
+      </Row>
     );
   }
 }

@@ -1,0 +1,18 @@
+.card {
+  width: 200px;
+  height: 500px;
+  float: left;
+  padding: 15px;
+}
+
+.card-body {
+  background-color: aqua;
+}
+
+.card-title {
+  background-color: blue;
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.6;
+}

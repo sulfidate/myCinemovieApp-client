@@ -1,0 +1,15 @@
+.my-flix {
+  color: steelblue;
+}
+.card {
+  padding: 15px;
+}
+
+.card-title {
+  height: 65px;
+}
+
+.card-body {
+  font-style: italic;
+}
+/*# sourceMappingURL=index.HASH_REF_83db45f702478847477d862cfaa115f8.css.map */

@@ -1,0 +1,13 @@
+.card {
+  width: 250px;
+  height: 500px;
+  padding: 15px;
+}
+
+.card-title {
+  height: 50px;
+}
+
+.card-body {
+  font-style: italic;
+}
