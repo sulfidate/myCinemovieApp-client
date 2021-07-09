@@ -1,0 +1,11 @@
+.movie-poster {
+  padding: 1em;
+}
+
+.movie-title {
+  font-size: 3em;
+}
+
+.movie-description {
+  font-size: 1.7em;
+}

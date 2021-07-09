@@ -5,8 +5,8 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import './main-view.scss';
+import { Row, Col, Navbar, Nav, NavDropdown, Form, FormControl, Container, Button, Image } from 'react-bootstrap';
 
 export default class MainView extends React.Component {
   constructor() {
@@ -59,20 +59,31 @@ export default class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view"></div>;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-            <Col md={8}>
+      <div className="main-wrapper justify-content-md-center">
+        <header>
+          <Navbar bg="light" expand="lg">
+            <Container>
+              <Navbar.Brand style={{ fontSize: '3em', marginRight: '1em' }} href="#home">my Cinemovie database</Navbar.Brand>
+              <Navbar.Toggle />
+              <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>
+                  Signed in as user: <a href="#profile">{user}</a>
+                </Navbar.Text>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        </header>
+        <Row className="main-view">
+          {selectedMovie
+            ? (
               <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={3}>
+            )
+            : movies.map(movie => (
               <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-            </Col>
-          ))
-        }
-      </Row>
+            ))
+          }
+        </Row>
+      </div>
     );
 
   }

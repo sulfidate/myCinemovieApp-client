@@ -1,11 +1,28 @@
-
+body {
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+}
 .card {
-  padding: 15px;
-  margin: 5px 0 10px 0;
+  padding: 15px 15px 0 15px;
+  margin: 10px 0 5px 0;
+}
+.movie-poster {
+  width: 65%;
+  margin: 15px 0 15px 0;
 }
 
-.card-subtitle {
-  height: auto;
-  padding-bottom: 10px;
+.movie-title {
+  font-size: 3em;
+}
+
+.movie-description {
+  font-size: 1.7em;
+}
+
+
+header {
+  margin: 10px 0 15px 0;
 }
 /*# sourceMappingURL=index.faa115f8.css.map */

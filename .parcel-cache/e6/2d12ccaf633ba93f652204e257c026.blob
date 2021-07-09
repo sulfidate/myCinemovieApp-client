@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>myCineMovieApp</title>
+  <link rel="preconnect" href="d7c2b8c89e8843c0697300fa104dd24b">
+  <link href="4685a5eb77b68ef4da9f8442873835cd" rel="stylesheet">
+  <link rel="stylesheet" href="ddb275f0a5c68d71579dd976c8dbc1e2">
+</head>
+
+<body>
+  <div class="app-container"></div>
+  <script src="ba52405b23f1ffb73d1c04c33e81fe6d"></script>
+</body>
+
+</html>

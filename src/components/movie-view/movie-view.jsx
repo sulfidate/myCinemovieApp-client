@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import './movie-view.scss';
+
 
 export class MovieView extends React.Component {
 
@@ -11,19 +14,18 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Row className="movie-view justify-content-md-center">
-        <Col md={8}>
-          <Image className="movie-poster" src={movie.ImagePath} thumbnail fluid style={{ width: '500px' }} />
+      <Col lg={10}>
+        <div className="movie-view justify-content-md-center">
+          <Image className="movie-poster" src={movie.ImagePath} rounded fluid />
           <div className="movie-title">
-            <h1 className="label">Title: <span className="value">{movie.Title}</span></h1>
+            <div className="value">{movie.Title}</div>
           </div>
           <div className="movie-description">
-            <h2 className="label">Description: </h2>
-            <p className="value">{movie.Description}</p>
-            <Button variant="info" size="sm" block onClick={() => { onBackClick(null); }}>Back</Button>{' '}
+            <div className="value">{movie.Description}</div>
           </div>
-        </Col>
-      </Row>
+          <Button className="label" variant="info" size="lg" block style={{ margin: '15px 0 15px 0' }} onClick={() => { onBackClick(null); }}>Back</Button>{' '}
+        </div>
+      </Col>
     );
   }
 }

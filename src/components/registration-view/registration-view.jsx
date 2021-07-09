@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
+import './registration-view.scss';
 
 
 export function RegistrationView() {
@@ -23,30 +24,6 @@ export function RegistrationView() {
 
 
   return (
-    // <>
-    //   <form>
-    //     <h1>Registration Form</h1>
-    //     <label>
-    //       Username:
-    //       <input type="text" />
-    //     </label>
-    //     <label>
-    //       Password:
-    //       <input type="password" />
-    //     </label>
-    //     <br />
-    //     <label>
-    //       Email:
-    //       <input type="email" />
-    //     </label>
-    //     <label>
-    //       Date of Birth:
-    //       <input type="date" />
-    //     </label>
-    //     <button type="submit" onClick={sendForm}>Submit</button>
-    //   </form>
-    // </>
-
     <Row className="registration-view justify-content-md-center">
       <Col md={5}>
         <Jumbotron fluid>

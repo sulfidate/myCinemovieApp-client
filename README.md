@@ -1,6 +1,61 @@
 <h1>Project Achievement 3 - React App (myCinemovieApp)</h1>
 <h5>Start 29.06.2020</h5>
 
+<h2>task 3.5:</h2>
+1.-2. I have installed React Bootstrap to myFlix-client project folder and add it to index.html file.</br>
+3. Then i apply a responsive Grid to my views using Bootstrap</br>
+4. And i use Bootstrap to incorporate all UI elements (form elements, navigation components, buttons</br>
+5. Color
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+  Font
+    --font-family: 'lato', sans-serif;
+    --font-weight: 400;
+	  --font-size: 16px;
+	  --line-height: 1.6;
+
+  Breakpoints
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+
+  UI elements
+    --Row
+    --Col
+    --Form
+    --FormControl
+    --Button 
+    --Jumbotron 
+    --Container
+    --Navbar
+    --Nav
+    --NavDropdown
+    --Image
+    --Card
+
+<h2>task 3.4:</h2>
+...
 <h2>task 3.3:</h2>
 1.-4. create components-folder with three components: </br>
 --- main-view: has the movies array state with at least 3 movies -> renders them as MovieCard,</br>

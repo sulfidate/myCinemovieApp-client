@@ -12,17 +12,15 @@ export class MovieCard extends React.Component {
     const { movie, onMovieClick } = this.props;
 
     return (
-      <Row className="movie-card justify-content-md-center">
-        <Col md={12}>
-          <Card className="card" border="info">
-            <Image variant="top" thumbnail src={movie.ImagePath} />
-            <Card.Body className="card-body">
-              <Card.Subtitle className="card-subtitle" >{movie.Title}</Card.Subtitle>
-              <Button className="card-button" onClick={() => onMovieClick(movie)} variant="info" size="sm" block>Open</Button>
-            </Card.Body>
-          </Card >
-        </Col>
-      </Row >
+      <Col lg={3}>
+        <Card className="card" border="info">
+          <Card.Img variant="top" src={movie.ImagePath} />
+          <Card.Body>
+            <Card.Title style={{ height: '3.9rem' }}>{movie.Title}</Card.Title>
+            <Button onClick={() => onMovieClick(movie)} variant="info" size="sm" block>Open</Button>
+          </Card.Body>
+        </Card >
+      </Col>
     );
   }
 }

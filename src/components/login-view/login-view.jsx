@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
+import './login-view.scss';
+
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -25,7 +27,7 @@ export function LoginView(props) {
 
   return (
     <Row className="login-view justify-content-md-center">
-      <Col md={5}>
+      <Col md={12}>
         <Jumbotron fluid>
           <Container>
             <h1>my Cinemovie database</h1>
