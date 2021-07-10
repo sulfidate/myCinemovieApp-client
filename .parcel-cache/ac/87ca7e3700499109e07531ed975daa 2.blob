@@ -1,0 +1,7 @@
+.movie-poster {
+  width: 100%;
+}
+
+.movie-title, .movie-description {
+  font-size: 2em;
+}

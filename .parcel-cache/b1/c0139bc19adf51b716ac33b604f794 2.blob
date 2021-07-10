@@ -1,0 +1,21 @@
+
+
+.movie-poster {
+  width: 100%;
+}
+
+.label {
+  font-size: 3em;
+}
+
+.value {
+  font-size: 2em;
+}
+
+.button {
+  font-size: 3em;
+}
+
+
+
+/*# sourceMappingURL=index.HASH_REF_83db45f702478847477d862cfaa115f8.css.map */

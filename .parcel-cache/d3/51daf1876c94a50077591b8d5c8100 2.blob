@@ -1,0 +1,15 @@
+.card {
+  width: 200px;
+  height: 500px;
+  float: left;
+  padding: 15px;
+}
+
+.card-body {
+  background-color: aqua;
+}
+
+.card-title {
+  background-color: blue;
+  font-size: 50%;
+}

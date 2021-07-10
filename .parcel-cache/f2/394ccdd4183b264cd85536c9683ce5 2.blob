@@ -1,0 +1,11 @@
+.movie-poster {
+  width: 100%;
+}
+
+.label {
+  font-size: 5em;
+}
+
+.value {
+  font-size: 1em;
+}

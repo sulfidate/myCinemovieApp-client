@@ -1,0 +1,11 @@
+.card {
+  padding: 15px;
+}
+
+.card-title {
+  height: 65px;
+}
+
+.card-body {
+  font-style: italic;
+}

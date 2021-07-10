@@ -1,0 +1,12 @@
+.card {
+  padding: 15px;
+  margin: 5px 0 10px 0;
+}
+
+.card-title {
+  height: 65px;
+}
+
+.card-body {
+  font-style: italic;
+}

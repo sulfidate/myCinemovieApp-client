@@ -1,0 +1,15 @@
+.movie-poster {
+  width: 100%;
+}
+
+.label {
+  font-size: 3em;
+}
+
+.value {
+  font-size: 2em;
+}
+
+Button {
+  background-color: red;
+}

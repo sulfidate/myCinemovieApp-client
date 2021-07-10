@@ -1,0 +1,20 @@
+
+.card {
+  padding: 15px 15px 0 15px;
+  margin: 10px 0 5px 0;
+}
+.movie-poster {
+  padding: 1em;
+}
+
+.movie-title {
+  font-size: 3em;
+}
+
+.movie-description {
+  font-size: 1.7em;
+}
+
+
+
+/*# sourceMappingURL=index.HASH_REF_83db45f702478847477d862cfaa115f8.css.map */
