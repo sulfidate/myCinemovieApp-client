@@ -1,0 +1,7 @@
+header {
+  margin: 10px 0 15px 0;
+}
+
+.menu-button a:hover, a:active {
+  color: white;
+}

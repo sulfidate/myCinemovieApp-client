@@ -1,39 +1,45 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Container from 'react-bootstrap/Container';
+
+import { Row, Col, Form, Button, Form, Jumbotron, Container } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+
 import './login-view.scss';
+
 
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  function errorMsg() {
+    const error = document.getElementById('error');
+    error.innerText = "Username or Password is wrong";
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    // Send a request to the server for authentication, then call props.onLoggedIn(username)
-    props.loggingIn(username);
+    /* Send a request to the server for authentication */
+    axios.post('https://mycinemoviedatabase.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user');
+      });
   };
-
-  const handleRegistration = () => {
-    let reg = false
-    props.regData(reg);
-  }
 
   return (
     <Row className="login-view justify-content-md-center">
-      <Col md={12}>
+      <Col md={6}>
         <Jumbotron fluid>
           <Container>
-            <h1>my Cinemovie database</h1>
-            <p>
-              This pretty little database gives you, as a registered user, the possibility to get information about films, such as their directors or their genres.
-            </p>
+            <h1 className="title">Login View</h1>
             <p>
               To login please fill in you're username and password...
             </p>
@@ -52,6 +58,9 @@ export function LoginView(props) {
           <Button variant="info" size="sm" block type="submit" onClick={handleSubmit} >
             Submit
           </Button>
+          <Link to={`/register`}>
+            <Button className="m-3" variant="info" type="link">Register</Button>
+          </Link>
         </Form>
       </Col>
     </Row >
@@ -59,6 +68,6 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-  regData: PropTypes.func.isRequired,
-  loggingIn: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired,
+  onRegister: PropTypes.func
 };

@@ -1,65 +1,145 @@
-import React from "react";
-import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Container from 'react-bootstrap/Container';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { Link } from "react-router-dom";
+
 import './registration-view.scss';
 
-
 export function RegistrationView() {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [birthday, setBirthday] = useState('')
 
-  const username = '';
-  const password = '';
-  const email = '';
-  const DOB = '';
-
-  function sendForm() {
-    alert('Thank you for Registration');
-    let reg = true
-    props.regData(reg);
+  const handleReg = () => {
+    ;
+    axios.post('https://mycinemoviedatabase.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+      .then(response => {
+        const data = response.data;
+        window.open('/', '_self');
+      })
+      .catch(e => {
+        console.log(e);
+        console.log('error registering the user');
+      });
   }
 
+  function hideError(input) {
+    const wrapper = input.parentElement;
+    const text = wrapper.querySelector('.error');
+    text.innerText = ' '
+  }
+
+  function showErrorMessage(input, message) {
+    const wrapper = input.parentElement;
+    const text = wrapper.querySelector('.error');
+
+    if (message) {
+      text.innerText = message;
+    }
+  }
+
+  function nameInput() {
+    const nameText = document.getElementById('user');
+    if (!username) {
+      showErrorMessage(nameText, 'Please provide a username');
+    } else {
+      hideError(nameText);
+      return true;
+    }
+  }
+
+  function passInput() {
+    const passText = document.getElementById('pass');
+    if (!password) {
+      showErrorMessage(passText, 'Please enter a password');
+    } else {
+      hideError(passText);
+      return true;
+    }
+  }
+
+  function emailInput() {
+    const emailText = document.getElementById('email-err');
+    if (!email) {
+      showErrorMessage(emailText, 'Please provide an email');
+    } else if (email.indexOf('@') === -1) {
+      showErrorMessage(emailText, 'Please provide a valid email');
+    } else if (email.indexOf('.') === -1) {
+      showErrorMessage(emailText, 'Please provide a valid email');
+    } else {
+      hideError(emailText);
+      return true;
+    }
+  }
+
+  function birthInput() {
+    const birthText = document.getElementById('Date');
+    if (!birthday) {
+      showErrorMessage(birthText, 'Please select a date');
+    } else {
+      hideError(birthText);
+      return true;
+    }
+  }
+
+  function validation() {
+    const valName = nameInput();
+    const valPass = passInput();
+    const valEmail = emailInput();
+    const valBirth = birthInput();
+    return valName && valPass && valEmail && valBirth;
+  }
+
+  const validate = (e) => {
+    if (validation()) {
+      return handleReg()
+    }
+    console.log('not submitted');
+  }
 
   return (
-    <Row className="registration-view justify-content-md-center">
-      <Col md={5}>
-        <Jumbotron fluid>
-          <Container>
-            <h1>Registration Form</h1>
-            <p>
-              To register please fill out this form...
-            </p>
-          </Container>
-        </Jumbotron>
-        <Form>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Enter username" />
-            </Form.Group>
+    <div className="center">
+      <h1 className="title">Create Account</h1>
+      <form noValidate className="form">
 
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-          </Form.Row>
+        <div className="input-wrap">
+          <label htmlFor="username"><span className="aster">*</span> Username:</label>
+          <input type="text" id="username" onChange={e => setUsername(e.target.value)} />
+          <div id="user" className="error"></div>
+        </div>
 
-          <Button variant="info" size="sm" block type="submit" onClick={sendForm}>Submit</Button>
-        </Form>
-      </Col>
-    </Row>
+        <div className="input-wrap">
+          <label htmlFor="password"><span className="aster">*</span> Password:</label>
+          <input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <div id="pass" className="error"></div>
+        </div>
+
+        <div className="input-wrap">
+          <label htmlFor="email"><span className="aster">*</span> Email:</label>
+          <input id="email" type="email" onChange={e => setEmail(e.target.value)} />
+          <div id="email-err" className="error"></div>
+        </div>
+
+        <div className="input-wrap">
+          <label htmlFor="birthday"><span className="aster">*</span> Date of Birth:</label>
+          <input id="birthday" type="Date" onChange={e => setBirthday(e.target.value)} />
+          <div id="Date" className="error"></div>
+        </div>
+
+        <div className="middle">
+          <Button className="m-3 bttn" variant="info" type="button" onClick={validate}>Create</Button>
+          <Link to={`/`}>
+            <Button className="m-3 bttn" variant="info" type="button">Login</Button>
+          </Link>
+        </div>
+      </form>
+    </div>
   );
 }
-
-RegistrationView.propTypes = {
-  regData: PropTypes.func.isRequired
-};

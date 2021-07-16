@@ -1,0 +1,9 @@
+header {
+  margin: 10px 0 15px 0;
+}
+
+#basic-nav-dropdown a, a:hover, a:active {
+  color: red;
+  text-decoration-color: white;
+  text-decoration: none;
+}

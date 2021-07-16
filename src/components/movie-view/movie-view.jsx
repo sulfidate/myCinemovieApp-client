@@ -7,14 +7,16 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 
+import { Link } from "react-router-dom";
+
 
 export class MovieView extends React.Component {
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, genre, onBackClick } = this.props;
 
     return (
-      <Col lg={10}>
+      <>
         <div className="movie-view justify-content-md-center">
           <Image className="movie-poster" src={movie.ImagePath} rounded fluid />
           <div className="movie-title">
@@ -23,9 +25,17 @@ export class MovieView extends React.Component {
           <div className="movie-description">
             <div className="value">{movie.Description}</div>
           </div>
-          <Button className="label" variant="info" size="lg" block style={{ margin: '15px 0 15px 0' }} onClick={() => { onBackClick(null); }}>Back</Button>{' '}
+          <Link to={`/genres/${genre}`}>
+            <Button className="label" variant="info" style={{ margin: '15px 10px 15px 0' }}>Genre</Button>
+          </Link>
+          {/* <Link to={`/directors/${Director.Name}`}> */}
+          <Button className="label" variant="info" style={{ margin: '15px 10px 15px 0' }}>Director</Button>
+          {/* </Link> */}
+
+
+          <Button className="label" variant="info" style={{ margin: '15px 0 15px 0' }} onClick={() => { onBackClick(null); }}>Back</Button>{' '}
         </div>
-      </Col>
+      </>
     );
   }
 }
