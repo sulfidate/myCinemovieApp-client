@@ -1,0 +1,4 @@
+.button {
+  margin: 15px;
+  min-width: 200px;
+}

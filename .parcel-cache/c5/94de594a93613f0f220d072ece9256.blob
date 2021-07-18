@@ -1,0 +1,85 @@
+.my-flix {
+  color: steelblue;
+}
+.card {
+  padding: 15px 15px 0 15px;
+  margin: 10px 0 5px 0;
+}
+.movie-view {
+  margin: 0px 100px;
+}
+
+.movie-view-card {
+  border: none;
+}
+
+.movie-poster {
+  width: 20%;
+  margin: 20px auto;
+}
+
+.movie-title {
+  font-size: 4em;
+  text-align: center;
+}
+
+.movie-body, .movie-info {
+  font-size: 1.5em;
+}
+
+.back-button {
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.addFavButton {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+
+
+
+
+.GenreView {
+  text-align: center;
+}
+
+.genre-name {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.genre-name, .genre-description {
+  padding: 5px;
+}
+
+.genre-description {
+  padding-bottom: 20px;
+}
+.DirectorView {
+  text-align: center;
+}
+
+.director-name {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.director-name, .director-bio, .director-birth {
+  padding: 5px;
+}
+
+.director-bio {
+  padding-bottom: 20px;
+}
+/*# sourceMappingURL=index.HASH_REF_83db45f702478847477d862cfaa115f8.css.map */

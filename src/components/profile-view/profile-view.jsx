@@ -1,158 +1,133 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
+
 
 import './profile-view.scss';
+import {
+  Button,
+  Container,
+  Card,
+  Tab,
+  Tabs
+} from 'react-bootstrap'
 
 export class ProfileView extends React.Component {
+  constructor() {
+    super();
+    (this.Username = null), (this.Password = null), (this.Email = null), (this.Birthday = null);
+    this.state = {
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
+      FavoriteMovies: [],
+      validated: null
+    };
+  }
+
+  componentDidMount() {
+    const accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.getUser(accessToken);
+    }
+  }
+
+
+  getUser(token) {
+    const username = localStorage.getItem('user');
+    axios
+      .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  handleRemoveFavorite(e, movie) {
+    e.preventDefault();
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+
+    axios
+      .delete(`https://mycinemoviedatabase.herokuapp.com/users/${username}/FavoritesDelete/${movie}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        alert('Movie was removed from your Favorites List.');
+        this.componentDidMount();
+      })
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => window.location.reload());
+  }
 
   render() {
-    let { user, token, history, userData, onNewUser, onSignOut } = this.props;
+    const { FavoriteMovies, validated } = this.state;
+    const username = localStorage.getItem('user');
+    const { movies } = this.props;
 
-    function updateInfo(token) {
-      const userInput = document.getElementById('username');
-      const passInput = document.getElementById('password');
-      const passVerInput = document.getElementById('passwordVer');
-      const emailInput = document.getElementById('email');
-      const dateInput = document.getElementById('birthday');
-
-      if (userInput.value.length > 12) {
-        const userErr = document.getElementById('user');
-        return userErr.innerText = "Username can only be 12 characters";
-      }
-
-      const nameChoice = userInput.value || userData.Username;
-      let passChoice = null;
-      if (passInput.value == "") {
-        passChoice = "";
-      } else {
-        passChoice = passInput.value;
-      }
-      const emailChoice = emailInput.value || userData.Email;
-      const dateChoice = dateInput.value || userData.Birthday;
-
-      if (passInput.value === passVerInput.value) {
-        axios.put(`https://filmquarry.herokuapp.com/users/${user}`,
-          {
-            Username: nameChoice, Password: passChoice, Email: emailChoice, Birthday: dateChoice
-          },
-          { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } }
-        )
-          .then(response => {
-            console.log('Success with updating account information');
-            let userData2 = response.data;
-            onNewUser(userData2);
-            if (userInput.value != "") {
-              window.location = `/users/${userData2.Username}`;
-            }
-            if (passChoice != "") {
-              window.location = `/users/${userData2.Username}`;
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      } else {
-        const passErr = document.getElementById('pass');
-        const passErrVer = document.getElementById('passVer');
-        passErr.innerText = "The passwords must match";
-        passErrVer.innerText = "The passwords must match";
-      }
-    }
-
-    function deleteAcc(token) {
-      console.log('Not deleted yet');
-      axios.delete(`https://filmquarry.herokuapp.com/users/${user}`,
-        { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } })
-        .then(response => {
-          console.log(response);
-          console.log(`${user} has been deleted`);
-        })
-        .catch(e => {
-          console.log('There is an error');
-          console.log(e);
-        })
-    }
-
-
-    function Date() {
-      const formDate = userData.Birthday;
-
-      return formDate.slice(0, 10);
-    }
-
-    if (userData.Username === 'testuser') {
-      return (
-        <>
-          <div className="centerProfile">
-            <h1 className="title my-4">Hello {`${userData.Username}`},</h1>
-            <h2 className="title-2 my-4">Current Information</h2>
-            <div className="align-text-left">
-              <div className=" my-2"><strong>Username:</strong> {`${userData.Username}`}</div>
-              <div className=" my-2"><strong>Email:</strong> {`${userData.Email}`}</div>
-              <div className=" my-2"><strong>Date of Birth:</strong> {`${Date()}`}</div>
-            </div>
-            <h2 className="title-2 my-4">Update Information</h2>
-            <div>The testuser account info cannot be updated!</div>
-          </div>
-        </>
-      );
-    }
     return (
-      <>
-        <div className="centerProfile">
-          <h1 className="title my-4">Hello {`${userData.Username}`},</h1>
-          <h2 className="title-2 my-4">Current Information</h2>
-          <div className="align-text-left">
-            <div className=" my-2"><strong>Username:</strong> {`${userData.Username}`}</div>
-            <div className=" my-2"><strong>Email:</strong> {`${userData.Email}`}</div>
-            <div className=" my-2"><strong>Date of Birth:</strong> {`${Date()}`}</div>
-          </div>
-          <h2 className="title-2 my-4">Update Information</h2>
-          <form noValidate className="form">
+      <Container className='profile-view'>
+        <Tabs defaultActiveKey='profile' transition={false} className='profile-tabs'>
 
-            <div className="input-wrap">
-              <label htmlFor="username">Username:</label>
-              <input type="text" id="username" placeholder="New Username" />
-              <div id="user" className="error"></div>
-            </div>
 
-            <div className="input-wrap">
-              <label htmlFor="password">Password:</label>
-              <input id="password" type="password" placeholder="New Password" />
-              <div id="pass" className="error"></div>
-            </div>
+          <Tab className='tab-item' eventKey='profile' title='Profile'>
+            <Card className='profile-card' border='info'>
+              <Card.Title className='profile-title'>{username}'s Favorite Movies</Card.Title>
+              {FavoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
 
-            <div className="input-wrap">
-              <label htmlFor="password Verification">Verify Password:</label>
-              <input id="passwordVer" type="password" placeholder="Verify Password Change" />
-              <div id="passVer" className="error"></div>
-            </div>
+              <div className='favorites-container'>
+                {FavoriteMovies.length > 0 &&
+                  movies.map((movie) => {
+                    if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
+                      return (
+                        <div key={movie._id}>
+                          <Card className='favorites-item card-content' style={{ width: '16rem', flex: 1 }}>
+                            <Link to={`/movies/${movie._id}`}>
+                              <Card.Img className='movie-card' variant="top" src={movie.ImagePath} />
+                            </Link>
+                            <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
+                            <Card.Body className='movie-card-body'>
+                              <Button size='sm' className='profile-button remove-favorite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+                                Remove
+                              </Button>
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      );
+                    }
+                  })}
+              </div>
+            </Card>
+          </Tab>
 
-            <div className="input-wrap">
-              <label htmlFor="email">Email:</label>
-              <input id="email" type="email" placeholder="New Email" />
-              <div id="email-err" className="error"></div>
-            </div>
-
-            <div className="input-wrap">
-              <label htmlFor="birthday">Date of Birth:</label>
-              <input id="birthday" type="Date" />
-              <div id="Date" className="error"></div>
-            </div>
-
-            <div className="middle">
-              <Button className="m-3 bttn" variant="info" type="button" onClick={() => { updateInfo(token) }}>Update</Button>
-              <Link to={`/`}>
-                <Button className="m-3 bttn" variant="info" type="button">Go Back</Button>
-              </Link>
-              <Button className="m-3 bttn" variant="info" type="button" onClick={() => { deleteAcc(token); onSignOut(null); history.push('/'); }}>Delete Account</Button>
-            </div>
-          </form>
-        </div>
-      </>
+        </Tabs>
+      </Container>
     );
   }
 }
+
+ProfileView.propTypes = {
+  user: propTypes.shape({
+    FavoriteMovies: propTypes.arrayOf(
+      propTypes.shape({
+        _id: propTypes.string.isRequired
+      })
+    ),
+    Username: propTypes.string.isRequired,
+    Email: propTypes.string.isRequired,
+    Birthday: propTypes.instanceOf(Date),
+  })
+};

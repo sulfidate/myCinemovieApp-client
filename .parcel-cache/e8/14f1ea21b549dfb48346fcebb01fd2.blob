@@ -1,0 +1,507 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView
+); // import React from 'react';
+ // import axios from 'axios';
+ // import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+ // import { LoginView } from '../login-view/login-view';
+ // import { ProfileView } from '../profile-view/profile-view';
+ // import { MovieCard } from '../movie-card/movie-card';
+ // import { MovieView } from '../movie-view/movie-view';
+ // // import { DirectorView } from '../director-view/director-view';
+ // import { GenreView } from '../genre-view/genre-view';
+ // import { RegistrationView } from '../registration-view/registration-view';
+ // import { Row, Col, Container, Navbar, NavDropdown, Button } from 'react-bootstrap';
+ // import './main-view.scss';
+ // export class MainView extends React.Component {
+ //   constructor() {
+ //     super();
+ //     // Initial state is set to null
+ //     this.state = {
+ //       movies: [],
+ //       token: null,
+ //       isLoaded: false,
+ //       isLoaded2: false,
+ //       selectedMovie: null,
+ //       user: null,
+ //       userData: null,
+ //       genres: [],
+ //       selectedGenre: null
+ //     };
+ //   }
+ //   componentDidMount() {
+ //     let accessToken = localStorage.getItem('token');
+ //     let userToken = localStorage.getItem('user');
+ //     if (accessToken !== null) {
+ //       this.setState({
+ //         user: localStorage.getItem('user'),
+ //         token: localStorage.getItem('token')
+ //       });
+ //       this.getUser(accessToken, userToken);
+ //       this.getMovies(accessToken);
+ //     }
+ //   }
+ //   newUser(newData) {
+ //     localStorage.setItem('user', newData.Username);
+ //     this.setState({
+ //       userData: newData,
+ //       user: newData.Username
+ //     });
+ //   }
+ //   setSelectedMovie(newSelectedMovie) {
+ //     this.setState({
+ //       selectedMovie: newSelectedMovie
+ //     });
+ //   }
+ //   setSelectedGenre(selectedGenre) {
+ //     this.setState({
+ //       selectedGenre: selectedGenre
+ //     });
+ //   }
+ //   getUser(token, user) {
+ //     axios.get(`https://mycinemoviedatabase.herokuapp.com/users/${user}`, {
+ //       headers: { Authorization: `Bearer ${token}` }
+ //     })
+ //       .then(response => {
+ //         console.log('Success with getUser');
+ //         this.setState({
+ //           userData: response.data
+ //         });
+ //       })
+ //       .catch(function (error) {
+ //         console.log(error);
+ //       });
+ //   }
+ //   getMovies(token) {
+ //     axios.get(`https://mycinemoviedatabase.herokuapp.com/movies`, {
+ //       headers: { Authorization: `Bearer ${token}` }
+ //     })
+ //       .then(response => {
+ //         // Assign the result to the state
+ //         this.setState({
+ //           movies: response.data
+ //         });
+ //       })
+ //       .catch(function (error) {
+ //         console.log(error);
+ //       });
+ //   }
+ //   getGenres(token) {
+ //     axios.get(`https://mycinemoviedatabase.herokuapp.com/genres`, {
+ //       headers: { Authorization: `Bearer ${token}` }
+ //     })
+ //       .then(response => {
+ //         // Assign the result to the state
+ //         this.setState({
+ //           genre: response.data
+ //         });
+ //       })
+ //       .catch(function (error) {
+ //         console.log(error);
+ //         console.log('testing');
+ //       });
+ //   }
+ //   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+ //   onLoggedIn(authData) {
+ //     console.log(authData);
+ //     this.setState({
+ //       user: authData.user.Username,
+ //       token: authData.token
+ //     });
+ //     localStorage.setItem('token', authData.token);
+ //     localStorage.setItem('user', authData.user.Username);
+ //     this.getUser(authData.token, authData.user.Username);
+ //     this.getMovies(authData.token);
+ //     this.getGenres(authData.token);
+ //   }
+ //   onLoggedOut(signState) {
+ //     localStorage.removeItem('token');
+ //     localStorage.removeItem('user');
+ //     this.setState({
+ //       user: signState,
+ //       token: null,
+ //       userData: null
+ //     });
+ //   }
+ //   render() {
+ //     const { movies, user, genres } = this.state;
+ //     return (
+ //       <Router>
+ //         <header>
+ //           <Container>
+ //             <Navbar expand="lg" variant="light" bg="light">
+ //               <Navbar.Brand href="#home">my Cinemovie database</Navbar.Brand>
+ //               <Navbar.Toggle />
+ //               <Navbar.Collapse className="justify-content-end">
+ //                 <NavDropdown title={user + "`s account"} id="basic-nav-dropdown">
+ //                   <NavDropdown.Item href="#add-favorites">add favorites</NavDropdown.Item>
+ //                   <NavDropdown.Item href="#edit-account">edit account</NavDropdown.Item>
+ //                   <NavDropdown.Divider />
+ //                   <NavDropdown.Item href="#logout-user">
+ //                     <Button variant="info" size="sm" block onClick={() => { this.onLoggedOut() }}>Logout user</Button>
+ //                   </NavDropdown.Item>
+ //                 </NavDropdown>
+ //               </Navbar.Collapse>
+ //             </Navbar>
+ //           </Container>
+ //         </header>
+ //         <Row className="main-view justify-content-md-center">
+ //           <Route exact path="/" render={() => {
+ //             if (!user) return <Col>
+ //               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+ //             </Col>
+ //             if (movies.length === 0) return <div className="main-view" />;
+ //             return movies.map(m => (
+ //               <Col md={3} key={m._id}>
+ //                 <MovieCard movie={m} />
+ //               </Col>
+ //             ))
+ //           }} />
+ //           <Route path="/register" render={() => {
+ //             if (user) return <Redirect to="/" />
+ //             return <Col>
+ //               <RegistrationView />
+ //             </Col>
+ //           }} />
+ //           <Route path="/movies/:movieId" render={({ match, history }) => {
+ //             if (!user) return <Col>
+ //               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+ //             </Col>
+ //             if (movies.length === 0) return <div className="main-view" />;
+ //             return <Col md={8}>
+ //               <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
+ //             </Col>
+ //           }} />
+ //           <Route path="/genres/:name" render={({ match, history }) => {
+ //             if (!user) return <Col>
+ //               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+ //             </Col>
+ //             if (movies.length === 0) return <div className="main-view" />;
+ //             return <Col md={8}>
+ //               <GenreView genre={genres.find(m => m._id === match.params.name)} onBackClick={() => history.goBack()} />
+ //             </Col>
+ //           }} />
+ //         </Row>
+ //       </Router>
+ //     );
+ //   }
+ // }
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRouterDom = require("react-router-dom");
+var _movieCard = require("../movie-card/movie-card");
+var _movieView = require("../movie-view/movie-view");
+var _loginView = require("../login-view/login-view");
+var _registrationView = require("../registration-view/registration-view");
+var _directorView = require("../director-view/director-view");
+var _genreView = require("../genre-view/genre-view");
+var _profileView = require("../profile-view/profile-view");
+var _reactBootstrap = require("react-bootstrap");
+var _mainViewScss = require("./main-view.scss");
+class MainView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.state = {
+            movies: [],
+            selectedMovie: "",
+            user: null
+        };
+    }
+    getMovies(token) {
+        _axiosDefault.default.get('https://mycinemoviedatabase.herokuapp.com/movies', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            // Assign the result to the state
+            this.setState({
+                movies: response.data
+            });
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+    componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.setState({
+                user: localStorage.getItem('user')
+            });
+            this.getMovies(accessToken);
+        }
+    }
+    onMovieClick(movie) {
+        this.setState({
+            selectedMovie: movie
+        });
+    }
+    onRegister(register) {
+        this.setState({
+            register
+        });
+    }
+    onLoggedIn(authData) {
+        console.log(authData);
+        this.setState({
+            user: authData.user.Username
+        });
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
+    }
+    onLogout() {
+        this.setState((state)=>({
+                user: null
+            })
+        );
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    }
+    onBackClick() {
+        this.setState({
+            selectedMovie: null
+        });
+    }
+    render() {
+        const { movies , user , register  } = this.state;
+        if (!movies) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "main-view",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 97
+            },
+            __self: this
+        }));
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 101
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "main-view",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 102
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("header", {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 104
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
+            bg: "dark",
+            expand: "lg",
+            fixed: "top",
+            variant: "dark",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 105
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
+            className: "home",
+            as: _reactRouterDom.Link,
+            to: `/`,
+            target: "_self",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 106
+            },
+            __self: this
+        }, "myFlix"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
+            "aria-controls": "basic-navbar-nav",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 107
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
+            id: "basic-navbar-nav",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 108
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
+            className: "mr-auto",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 109
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
+            className: "home",
+            as: _reactRouterDom.Link,
+            to: `/`,
+            target: "_self",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 110
+            },
+            __self: this
+        }, "Home"), user && /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
+            className: "profile",
+            as: _reactRouterDom.Link,
+            to: `/users/${user}`,
+            target: "_self",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 112
+            },
+            __self: this
+        }, "Profile")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+            inline: true,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 115
+            },
+            __self: this
+        }, user && /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+            to: `/`,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 117
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            variant: "dark",
+            className: "logout-button",
+            onClick: ()=>this.onLogout()
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 118
+            },
+            __self: this
+        }, "Logout")))))), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            exact: true,
+            path: "/",
+            render: ()=>{
+                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+                    onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                }));
+                return movies.map((m)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
+                        key: m._id,
+                        movie: m
+                    })
+                );
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 128
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            exact: true,
+            path: "/login",
+            render: ()=>{
+                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+                    onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                }));
+                return movies.map((m)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
+                        key: m._id,
+                        movie: m
+                    })
+                );
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 134
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            path: "/register",
+            render: ()=>{
+                if (!register) return(/*#__PURE__*/ _reactDefault.default.createElement(_registrationView.RegisterView, {
+                    onRegister: (register1)=>this.onRegister(register1)
+                }));
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 140
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            path: "/movies/:movieId",
+            render: ({ match  })=>/*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
+                    movie: movies.find((m)=>m._id === match.params.movieId
+                    )
+                })
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 146
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            path: "/director/:name",
+            render: ({ match  })=>{
+                if (!movies.length) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+                    className: "main-view"
+                }));
+                return(/*#__PURE__*/ _reactDefault.default.createElement(_directorView.DirectorView, {
+                    director: movies.find((m)=>m.Director.Name === match.params.name
+                    ),
+                    movies: movies
+                }));
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 148
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            path: "/genres/:name",
+            render: ({ match  })=>{
+                if (!movies.length) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+                    className: "main-view"
+                }));
+                return(/*#__PURE__*/ _reactDefault.default.createElement(_genreView.GenreView, {
+                    genre: genres.find((m)=>m.genre.Name === match.params.name
+                    ),
+                    movies: movies
+                }));
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 154
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            exact: true,
+            path: "/users/:username",
+            render: ({ history  })=>{
+                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+                    onLoggedIn: (data)=>this.onLoggedIn(data)
+                }));
+                if (movies.length === 0) return;
+                return(/*#__PURE__*/ _reactDefault.default.createElement(_profileView.ProfileView, {
+                    history: history,
+                    movies: movies
+                }));
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
+                lineNumber: 160
+            },
+            __self: this
+        }))));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
