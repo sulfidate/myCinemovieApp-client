@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import './registration-view.scss';
 
-export function RegisterView(props) {
+export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,23 +27,19 @@ export function RegisterView(props) {
         const data = response.data;
         console.log(data);
         window.open('/', '_self');
-        alert("You have sucessfully registered.");
       })
-      .catch(error => {
-        if (error.response && error.response.status === 400) {
-          alert('The value you entered is not valid.')
-        }
+      .catch(e => {
+        console.log('error registering the user')
       });
-    console.log(username, password, email, birthday);
   };
 
   return (
     <React.Fragment>
       <Form className='register-form'>
-        <h1 className='register-header' style={{ color: '#17a2b8' }}>Welcome to my CineMovie Database!</h1>
+        <h1 className='register-header' style={{ color: '#17a2b8' }}>Register to Database</h1>
         <p className="register-header" id="register-link">
           You want to log in:&nbsp;
-          <Link to={`/login`}>here</Link>
+          <Link to={`/`}>here</Link>
         </p>
         <Form.Group controlId='formBasicText'>
           <Form.Label size='lg'>Username</Form.Label>
@@ -52,7 +48,7 @@ export function RegisterView(props) {
             size='lg'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder='Enter usename'
+            placeholder='Enter username'
           />
         </Form.Group>
         <Form.Group controlId='formBasicEmail'>
@@ -72,10 +68,10 @@ export function RegisterView(props) {
             size='lg'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder='Enter new password'
+            placeholder='Enter password'
           />
         </Form.Group>
-        <Form.Group controlId='formBasicConfirmPassword'>
+        {/* <Form.Group controlId='formBasicConfirmPassword'>
           <Form.Label size='lg'>Confirm Password</Form.Label>
           <Form.Control
             type='password'
@@ -84,7 +80,7 @@ export function RegisterView(props) {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder='Confirm your password'
           />
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group controlId='formBasicDate'>
           <Form.Label size='lg'>Birthday</Form.Label>
           <Form.Control
@@ -100,18 +96,19 @@ export function RegisterView(props) {
             <Button onClick={handleRegister} className='button submit-button' variant='info' type='submit' size="sm" block >
               Submit
             </Button>
-            <Link to={`/`}>
+            {/* <Link to={`/`}>
               <Button className='button register-button' type='button' variant='secondary' size="sm" block  >
                 already registered ...
               </Button>
-            </Link>
+            </Link> */}
           </Form.Group>
         </Container>
       </Form>
     </React.Fragment>
   );
 }
-RegisterView.propTypes = {
+
+RegistrationView.propTypes = {
   register: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,

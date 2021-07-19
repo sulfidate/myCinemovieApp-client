@@ -1,17 +1,11 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
+import { Button, Container, Card } from 'react-bootstrap'
 
 import './profile-view.scss';
-import {
-  Button,
-  Container,
-  Card,
-  Tab,
-  Tabs
-} from 'react-bootstrap'
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -34,6 +28,14 @@ export class ProfileView extends React.Component {
     }
   }
 
+  onSignout() {
+    this.setState(state => ({
+      user: null
+    }));
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
 
   getUser(token) {
     const username = localStorage.getItem('user');
@@ -55,39 +57,29 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleRemoveFavorite(e, movie) {
-    e.preventDefault();
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-
-    axios
-      .delete(`https://mycinemoviedatabase.herokuapp.com/users/${username}/FavoritesDelete/${movie}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        alert('Movie was removed from your Favorites List.');
-        this.componentDidMount();
-      })
-      .catch(function (error) {
-        console.log(error);
-      }).then(() => window.location.reload());
-  }
-
   render() {
     const { FavoriteMovies, validated } = this.state;
     const username = localStorage.getItem('user');
     const { movies } = this.props;
 
     return (
-      <Container className='profile-view'>
-        <Tabs defaultActiveKey='profile' transition={false} className='profile-tabs'>
-
-
-          <Tab className='tab-item' eventKey='profile' title='Profile'>
-            <Card className='profile-card' border='info'>
-              <Card.Title className='profile-title'>{username}'s Favorite Movies</Card.Title>
-              {FavoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
-
+      <React.Fragment>
+        <Container>
+          <Card border="info" style={{ width: '18rem', margin: '1rem' }}>
+            <Card.Body>
+              <Card.Title style={{ color: '#17a2b8' }}>Profile</Card.Title>
+              <Card.Text>
+                display actually user information
+              </Card.Text>
+              <Card.Link>
+                <Button size='sm' className='profile-button' variant='info' /*onClick={() => { axios.delete(`https://mycinemoviedatabase.herokuapp.com/users/${username}`); }}*/>De-register user</Button>
+              </Card.Link>
+            </Card.Body>
+          </Card>
+          <Card border="info" style={{ width: '18rem', margin: '1rem' }}>
+            <Card.Body>
+              <Card.Title style={{ color: '#17a2b8' }}>Favorite Movies</Card.Title>
+              <div className='card-content'>There are no favorite movies yet!</div>
               <div className='favorites-container'>
                 {FavoriteMovies.length > 0 &&
                   movies.map((movie) => {
@@ -100,8 +92,8 @@ export class ProfileView extends React.Component {
                             </Link>
                             <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
                             <Card.Body className='movie-card-body'>
-                              <Button size='sm' className='profile-button remove-favorite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
-                                Remove
+                              <Button size='sm' className='profile-button' variant='outline-info' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+                                Remove movie
                               </Button>
                             </Card.Body>
                           </Card>
@@ -110,24 +102,24 @@ export class ProfileView extends React.Component {
                     }
                   })}
               </div>
-            </Card>
-          </Tab>
+            </Card.Body>
+          </Card>
+        </Container >
+      </React.Fragment >
 
-        </Tabs>
-      </Container>
     );
   }
 }
 
 ProfileView.propTypes = {
-  user: propTypes.shape({
-    FavoriteMovies: propTypes.arrayOf(
-      propTypes.shape({
-        _id: propTypes.string.isRequired
+  users: PropTypes.shape({
+    FavoriteMovies: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired
       })
     ),
-    Username: propTypes.string.isRequired,
-    Email: propTypes.string.isRequired,
-    Birthday: propTypes.instanceOf(Date),
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.instanceOf(Date),
   })
 };

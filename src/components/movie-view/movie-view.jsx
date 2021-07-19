@@ -37,32 +37,36 @@ export class MovieView extends React.Component {
 
     if (!movie) return null;
 
+    console.log('movie:', movie, 'director:', director);
     return (
       <Container className="movie-view " fluid style={{ maxWidth: '98%', marginTop: '20px' }}>
         <Card className='movie-view-card'>
-          <Card.Img className='movie-poster' variant="top" src={movie.ImagePath} style={{ width: '75%' }} />
+          <Card.Img className='movie-poster' variant="top" src={movie.ImagePath} style={{ width: '50%' }} />
           <Card.Title className='movie-title'>{movie.Title}</Card.Title>
           <Card.Body>
             <Card.Text className='movie-body'>{movie.Description}</Card.Text>
 
-            <Card.Text className='movie-body'>
-              <Button className='director-view-button' variant='secondary' >Director:</Button>
-              {/* <Link to={`/directors/${director.Name}`} style={{ textDecoration: 'none' }}> {director.Name}</Link> */}
+            <Card.Text>
+              <Button className='director-view-button' variant='outline-info' >
+                <Link to={`/directors/`} style={{ textDecoration: 'none' }}>Director</Link>
+              </Button>
             </Card.Text>
-            <Card.Text className='movie-body'>
-              <Button className='genre-view-button' variant='secondary' >Genre:</Button>
-              {/* <Link to={`/genres/${genre.Name}`} style={{ textDecoration: 'none' }}> {genre.Name}</Link> */}
+            <Card.Text>
+              <Button className='genre-view-button' variant='outline-info' >
+                <Link to={`/genres/`} style={{ textDecoration: 'none' }}>Genre</Link>
+              </Button>
             </Card.Text>
-
-            <Link to={``}>
-              <Button className='addFavButton' variant='info' style={{ margin: '10px 20px 10px 10px' }} onClick={this.addFavorite}> Add Movie to Favorites</Button>
-            </Link>
+            <Card.Text>
+              <Button className='addFavButton' variant='outline-info' onClick={this.addFavorite}>
+                <Link to={``}>Add Movie to Favorites</Link>
+              </Button>
+            </Card.Text>
             <Link to={`/`}>
               <Button className='back-button' variant='info' >Return to Movie List</Button>
             </Link>
           </Card.Body>
         </Card>
-      </Container>
+      </Container >
     );
   }
 }
@@ -80,6 +84,6 @@ MovieView.propTypes = {
         _id: PropTypes.string
       })
     ),
-    username: PropTypes.string
+    Username: PropTypes.string
   })
 };

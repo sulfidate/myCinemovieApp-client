@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -15,12 +13,12 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card className="card" border="info" >
+      <Card className="card" border="info" style={{ marginBottom: '2.7rem' }}>
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title className="movie-title" style={{ height: '3.9em' }}>{movie.Title}</Card.Title>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="info" size="sm" block>Open</Button>
+            <Button variant="info" size="sm" block>Open card</Button>
           </Link>
         </Card.Body>
       </Card>
