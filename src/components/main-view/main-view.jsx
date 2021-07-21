@@ -54,38 +54,6 @@ export class MainView extends React.Component {
       });
   }
 
-  getGenres(token) {
-    axios.get('https://mycinemoviedatabase.herokuapp.com/genres', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          genres: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  getDirectors(token) {
-    axios.get('https://mycinemoviedatabase.herokuapp.com/directors', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          directors: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(director);
-  }
-
-
   onRegister(register) {
     this.setState({
       register
@@ -107,7 +75,6 @@ export class MainView extends React.Component {
     this.setState(state => ({
       user: null
     }));
-
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   }

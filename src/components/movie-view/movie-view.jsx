@@ -21,11 +21,11 @@ export class MovieView extends React.Component {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
 
-    axios.post(`https://mycinemoviedatabase.herokuapp.com/users/${user}/movies/${this.props.movie._id}`, {}, {
+    axios.patch(`https://mycinemoviedatabase.herokuapp.com/users/${user}/Favorites/${this.props.movie._id}`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        alert(`${this.props.movie.Name} added to Favorites List`)
+        alert(`${this.props.movie._id} added to Favorites List`)
       })
       .catch(function (error) {
         console.log(error);
@@ -37,7 +37,7 @@ export class MovieView extends React.Component {
 
     if (!movie) return null;
 
-    console.log('movie:', movie, 'director:', director);
+    console.log('movie:', movie._id);
     return (
       <Container className="movie-view " fluid style={{ maxWidth: '98%', marginTop: '20px' }}>
         <Card className='movie-view-card'>
@@ -53,7 +53,7 @@ export class MovieView extends React.Component {
             </Card.Text>
             <Card.Text>
               <Button className='genre-view-button' variant='outline-info' >
-                <Link to={`/genres/`} style={{ textDecoration: 'none' }}>Genre</Link>
+                <Link to={`/genres/${genre}`} style={{ textDecoration: 'none' }}>Genre: {genre}</Link>
               </Button>
             </Card.Text>
             <Card.Text>
@@ -78,12 +78,22 @@ MovieView.propTypes = {
     Description: PropTypes.string,
     ImagePath: PropTypes.string.isRequired,
   }),
+  genre: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Description: PropTypes.string,
+  }),
+  director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string,
+    Birth: PropTypes.string,
+    Death: PropTypes.string,
+  }),
   user: PropTypes.shape({
     FavoriteMovies: PropTypes.arrayOf(
       PropTypes.shape({
         _id: PropTypes.string
       })
     ),
-    Username: PropTypes.string
+    Username: PropTypes.string.isRequired
   })
 };

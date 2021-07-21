@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
-import { Button, Container, Card } from 'react-bootstrap'
+import { Button, Container, Card, Form } from 'react-bootstrap'
 
 import './profile-view.scss';
 
@@ -39,10 +39,9 @@ export class ProfileView extends React.Component {
 
   getUser(token) {
     const username = localStorage.getItem('user');
-    axios
-      .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    axios.get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((response) => {
         this.setState({
           Username: response.data.Username,
@@ -55,6 +54,7 @@ export class ProfileView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+    console.log(username);
   }
 
   render() {
@@ -63,54 +63,25 @@ export class ProfileView extends React.Component {
     const { movies } = this.props;
 
     return (
-      <React.Fragment>
-        <Container>
-          <Card border="info" style={{ width: '18rem', margin: '1rem' }}>
-            <Card.Body>
-              <Card.Title style={{ color: '#17a2b8' }}>Profile</Card.Title>
-              <Card.Text>
-                display actually user information
-              </Card.Text>
-              <Card.Link>
-                <Button size='sm' className='profile-button' variant='info' /*onClick={() => { axios.delete(`https://mycinemoviedatabase.herokuapp.com/users/${username}`); }}*/>De-register user</Button>
-              </Card.Link>
-            </Card.Body>
-          </Card>
-          <Card border="info" style={{ width: '18rem', margin: '1rem' }}>
-            <Card.Body>
-              <Card.Title style={{ color: '#17a2b8' }}>Favorite Movies</Card.Title>
-              <div className='card-content'>There are no favorite movies yet!</div>
-              <div className='favorites-container'>
-                {FavoriteMovies.length > 0 &&
-                  movies.map((movie) => {
-                    if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
-                      return (
-                        <div key={movie._id}>
-                          <Card className='favorites-item card-content' style={{ width: '16rem', flex: 1 }}>
-                            <Link to={`/movies/${movie._id}`}>
-                              <Card.Img className='movie-card' variant="top" src={movie.ImagePath} />
-                            </Link>
-                            <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
-                            <Card.Body className='movie-card-body'>
-                              <Button size='sm' className='profile-button' variant='outline-info' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
-                                Remove movie
-                              </Button>
-                            </Card.Body>
-                          </Card>
-                        </div>
-                      );
-                    }
-                  })}
-              </div>
-            </Card.Body>
-          </Card>
-        </Container >
-      </React.Fragment >
 
+      <Container>
+        <h1 className='profile-header' style={{ color: '#17a2b8' }}>
+          <span style={{ fontSize: '1.6rem' }}>{username}'s</span> Profile
+        </h1>
+
+        <Card border="info" style={{ width: '18rem', margin: '1rem' }}>
+          <Card.Body>
+            <Card.Title style={{ color: '#17a2b8' }}>User information</Card.Title>
+            <Card.Link>
+              <Button size='sm' className='profile-button' variant='info'>De-register user</Button>
+            </Card.Link>
+          </Card.Body>
+        </Card >
+
+      </Container >
     );
   }
 }
-
 ProfileView.propTypes = {
   users: PropTypes.shape({
     FavoriteMovies: PropTypes.arrayOf(
@@ -118,8 +89,10 @@ ProfileView.propTypes = {
         _id: PropTypes.string.isRequired
       })
     ),
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
+    Username: PropTypes.string,
+    Password: PropTypes.string,
+    Email: PropTypes.string,
     Birthday: PropTypes.instanceOf(Date),
-  })
-};
+  }),
+}
+
