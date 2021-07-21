@@ -28,15 +28,6 @@ export class ProfileView extends React.Component {
     }
   }
 
-  onSignout() {
-    this.setState(state => ({
-      user: null
-    }));
-
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-  }
-
   getUser(token) {
     const username = localStorage.getItem('user');
     axios.get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
@@ -57,6 +48,16 @@ export class ProfileView extends React.Component {
     console.log(username);
   }
 
+  onSignout() {
+    this.setState(state => ({
+      user: null
+    }));
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
+
   render() {
     const { FavoriteMovies, validated } = this.state;
     const username = localStorage.getItem('user');
@@ -66,18 +67,15 @@ export class ProfileView extends React.Component {
 
       <Container>
         <h1 className='profile-header' style={{ color: '#17a2b8' }}>
-          <span style={{ fontSize: '1.6rem' }}>{username}'s</span> Profile
+          <span style={{ fontSize: '1.8rem' }}>{username}'s</span> Profile
         </h1>
 
-        <Card border="info" style={{ width: '18rem', margin: '1rem' }}>
+        <Card border="info" style={{ width: '18rem', margin: '1rem', padding: '1.8rem' }}>
+          <Card.Title style={{ color: '#17a2b8' }}>Current user information</Card.Title>
           <Card.Body>
-            <Card.Title style={{ color: '#17a2b8' }}>User information</Card.Title>
-            <Card.Link>
-              <Button size='sm' className='profile-button' variant='info'>De-register user</Button>
-            </Card.Link>
           </Card.Body>
         </Card >
-
+        <Button size='sm' className='profile-button' variant='info'>de-register user</Button>
       </Container >
     );
   }

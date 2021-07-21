@@ -39997,14 +39997,6 @@ class ProfileView extends _reactDefault.default.Component {
         const accessToken = localStorage.getItem('token');
         if (accessToken !== null) this.getUser(accessToken);
     }
-    onSignout() {
-        this.setState((state)=>({
-                user: null
-            })
-        );
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-    }
     getUser(token) {
         const username = localStorage.getItem('user');
         _axiosDefault.default.get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
@@ -40024,6 +40016,14 @@ class ProfileView extends _reactDefault.default.Component {
         });
         console.log(username);
     }
+    onSignout() {
+        this.setState((state)=>({
+                user: null
+            })
+        );
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    }
     render() {
         const { FavoriteMovies , validated  } = this.state;
         const username = localStorage.getItem('user');
@@ -40031,7 +40031,7 @@ class ProfileView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 67
+                lineNumber: 68
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
@@ -40041,30 +40041,25 @@ class ProfileView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 68
+                lineNumber: 69
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
             style: {
-                fontSize: '1.6rem'
+                fontSize: '1.8rem'
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 69
+                lineNumber: 70
             },
             __self: this
         }, username, "'s"), " Profile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
             border: "info",
             style: {
                 width: '18rem',
-                margin: '1rem'
+                margin: '1rem',
+                padding: '1.8rem'
             },
-            __source: {
-                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 72
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 73
@@ -40079,22 +40074,22 @@ class ProfileView extends _reactDefault.default.Component {
                 lineNumber: 74
             },
             __self: this
-        }, "User information"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Link, {
+        }, "Current user information"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 75
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+        })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
             size: "sm",
             className: "profile-button",
             variant: "info",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 76
+                lineNumber: 78
             },
             __self: this
-        }, "De-register user"))))));
+        }, "de-register user")));
     }
 }
 ProfileView.propTypes = {
