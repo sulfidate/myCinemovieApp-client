@@ -8,7 +8,7 @@ import { MovieView } from '../movie-view/movie-view';
 import './main-view.scss';
 import { Row, Col, Navbar, Nav, NavDropdown, Form, FormControl, Container, Button, Image } from 'react-bootstrap';
 
-export default class MainView extends React.Component {
+export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {

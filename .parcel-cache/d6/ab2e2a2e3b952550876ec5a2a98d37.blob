@@ -1,7 +1,0 @@
-.movie-view {
-  height: 100%;
-}
-
-.movie-poster {
-  width: 100%;
-}
