@@ -1,9 +1,0 @@
-header {
-  margin: 10px 0 15px 0;
-}
-
-NavDropDown#basic-nav-dropdown a, a:hover, a:active {
-  color: white;
-  text-decoration-color: white;
-  text-decoration: none;
-}
