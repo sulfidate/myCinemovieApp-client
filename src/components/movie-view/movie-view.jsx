@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import { GenreView } from '../genre-view/genre-view';
 
 
 import { Card, Button, Container } from 'react-bootstrap';
@@ -32,12 +33,29 @@ export class MovieView extends React.Component {
       });
   };
 
+  getGenres(token) {
+    axios.get('https://mycinemoviedatabase.herokuapp.com/genres/:Name', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          genre: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
   render() {
-    const { movie, director, genre } = this.props;
+    const { movie, genre } = this.props;
 
     if (!movie) return null;
 
     console.log('movie:', movie._id);
+
     return (
       <Container className="movie-view " fluid style={{ maxWidth: '98%', marginTop: '20px' }}>
         <Card className='movie-view-card'>
@@ -53,7 +71,7 @@ export class MovieView extends React.Component {
             </Card.Text>
             <Card.Text>
               <Button className='genre-view-button' variant='outline-info' >
-                <Link to={`/genres/${genre}`} style={{ textDecoration: 'none' }}>Genre: {genre}</Link>
+                <Link to={`/genres/${this.getGenres}`} style={{ textDecoration: 'none' }}>Genre:{this.probs}</Link>
               </Button>
             </Card.Text>
             <Card.Text>
@@ -79,8 +97,9 @@ MovieView.propTypes = {
     ImagePath: PropTypes.string.isRequired,
   }),
   genre: PropTypes.shape({
+    Description: PropTypes.string.isRequired,
     Name: PropTypes.string.isRequired,
-    Description: PropTypes.string,
+    _id: PropTypes.string.isRequired
   }),
   director: PropTypes.shape({
     Name: PropTypes.string.isRequired,

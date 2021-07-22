@@ -17,7 +17,6 @@ export class DirectorView extends React.Component {
   constructor() {
     super();
 
-    this.state = {};
   }
 
   render() {
