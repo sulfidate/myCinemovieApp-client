@@ -23,8 +23,9 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       directors: [],
-      genre: [],
-      selectedMovie: "",
+      genres: [],
+      selectedMovie: null,
+      selectedGenre: null,
       user: null
     };
   }
@@ -62,12 +63,16 @@ export class MainView extends React.Component {
       .then(response => {
         // Assign the result to the state
         this.setState({
-          genre: response.data
+          genres: response.data
         });
       })
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+  onGenresClick() {
+
   }
 
   onRegister(register) {
@@ -103,11 +108,14 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, directors, genre } = this.state;
+    const { movies, user, directors, genres, selectedGenre } = this.state;
 
+    // console.log('movies-mainv:', movies._id);
+    // console.log('user-mainv:', user);
+    // console.log('genres-mainv:', genres);
+    // console.log('directors-mainv:', directors);
 
     if (!movies) return <div className="main-view" />;
-
 
     return (
       <Router>
@@ -172,20 +180,26 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col md={8}>
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)} genre={genre} onBackClick={() => history.goBack()} />
+              <MovieView movie={movies.find(m => m._id === match.params.movieId)} genres={genres} onBackClick={() => history.goBack()} />
             </Col>
           }} />
 
-          <Route path="/genres/:genreId" render={({ match, history }) => {
+          <Route path="/genres/:Name" render={({ match, history }) => {
             if (!user) return <Col md={6} >
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
+
+            if (selectedGenre) return <GenreView genreData={selectedGenre} />
+
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={8}>
-              <GenreView genre={genre} onBackClick={() => history.goBack()} />
-            </Col>
-          }
-          } />
+
+            return genres.map(genre => (
+              <Col md={8} key={genre._id}>
+                <GenreView genreData={genre} onBackClick={() => history.goBack()} />
+              </Col>
+            ))
+          }} />
+
           <Route path="/directors/:directorId" render={({ match, history }) => {
             if (!user) return <Col md={6} >
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />

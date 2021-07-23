@@ -12,6 +12,11 @@ export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
 
+    // console.log('movie-moviecard:', movie._id);
+    // console.log('user-mainv:', user);
+    // console.log('genres-mainv:', genres);
+    // console.log('directors-mainv:', directors);
+
     return (
       <Card className="card" border="info" style={{ marginBottom: '2.7rem' }}>
         <Card.Img variant="top" src={movie.ImagePath} />

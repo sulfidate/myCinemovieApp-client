@@ -33,29 +33,13 @@ export class MovieView extends React.Component {
       });
   };
 
-  getGenres(token) {
-    axios.get('https://mycinemoviedatabase.herokuapp.com/genres/:Name', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          genre: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-
   render() {
-    const { movie, genre } = this.props;
+    const { movie } = this.props;
+
+    // console.log('genres-movieview:', genres);
+    console.log('movie-movieview:', movie);
 
     if (!movie) return null;
-
-    console.log('movie:', movie._id);
-    console.log('genre:', genre);
 
     return (
       <Container className="movie-view " fluid style={{ maxWidth: '98%', marginTop: '20px' }}>
@@ -71,8 +55,8 @@ export class MovieView extends React.Component {
               </Button>
             </Card.Text>
             <Card.Text>
-              <Button className='genre-view-button' variant='outline-info' >
-                <Link to={`/genres/${genre.Name}`} style={{ textDecoration: 'none' }}>Genre:{genre.Name}</Link>
+              <Button className='genre-view-button' variant='outline-info'>
+                <Link to={`/genres/`} style={{ textDecoration: 'none' }}>Genre:</Link>
               </Button>
             </Card.Text>
             <Card.Text>
@@ -95,20 +79,17 @@ MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string,
-    ImagePath: PropTypes.string.isRequired,
-  }),
-  genre: PropTypes.arrayOf(
-    PropTypes.shape({
-      Description: PropTypes.string.isRequired,
-      Name: PropTypes.string.isRequired,
-      _id: PropTypes.string.isRequired
-    })
-  ),
-  director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string,
-    Birth: PropTypes.string,
-    Death: PropTypes.string,
+    // Genre: PropTypes.objectOf(
+    //   PropTypes.shape({
+    //     _id: PropTypes.string.isRequired
+    //   })
+    // ),
+    // Director: PropTypes.arrayOf(
+    //   PropTypes.shape({
+    //     _id: PropTypes.string.isRequired
+    //   })
+    // ),
+    ImagePath: PropTypes.string.isRequired
   }),
   user: PropTypes.shape({
     FavoriteMovies: PropTypes.arrayOf(
@@ -117,5 +98,5 @@ MovieView.propTypes = {
       })
     ),
     Username: PropTypes.string.isRequired
-  })
+  }),
 };

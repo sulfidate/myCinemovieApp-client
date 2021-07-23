@@ -21883,8 +21883,9 @@ class MainView extends _reactDefault.default.Component {
         this.state = {
             movies: [],
             directors: [],
-            genre: [],
-            selectedMovie: "",
+            genres: [],
+            selectedMovie: null,
+            selectedGenre: null,
             user: null
         };
     }
@@ -21920,11 +21921,13 @@ class MainView extends _reactDefault.default.Component {
         }).then((response)=>{
             // Assign the result to the state
             this.setState({
-                genre: response.data
+                genres: response.data
             });
         }).catch(function(error) {
             console.log(error);
         });
+    }
+    onGenresClick() {
     }
     onRegister(register) {
         this.setState({
@@ -21955,31 +21958,35 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     render() {
-        const { movies , user , directors , genre  } = this.state;
+        const { movies , user , directors , genres , selectedGenre  } = this.state;
+        // console.log('movies-mainv:', movies._id);
+        // console.log('user-mainv:', user);
+        // console.log('genres-mainv:', genres);
+        // console.log('directors-mainv:', directors);
         if (!movies) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "main-view",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 109
+                lineNumber: 118
             },
             __self: this
         }));
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 113
+                lineNumber: 121
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("header", {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 114
+                lineNumber: 122
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 115
+                lineNumber: 123
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
@@ -21992,13 +21999,13 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 116
+                lineNumber: 124
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 117
+                lineNumber: 125
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
@@ -22008,7 +22015,7 @@ class MainView extends _reactDefault.default.Component {
             target: "_self",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 118
+                lineNumber: 126
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -22021,14 +22028,14 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 119
+                lineNumber: 127
             },
             __self: this
         }, "myCineMovieDatabase")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
             "aria-controls": "basic-navbar-nav",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 121
+                lineNumber: 129
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
@@ -22036,21 +22043,21 @@ class MainView extends _reactDefault.default.Component {
             className: "justify-content-end",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 122
+                lineNumber: 130
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
             className: "me-auto",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 123
+                lineNumber: 131
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
             className: "justify-content-end",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 124
+                lineNumber: 132
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -22062,13 +22069,13 @@ class MainView extends _reactDefault.default.Component {
             to: `/users/${user}`,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 125
+                lineNumber: 133
             },
             __self: this
         }, user, "`s Profile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Text, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 126
+                lineNumber: 134
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -22080,14 +22087,14 @@ class MainView extends _reactDefault.default.Component {
             ,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 127
+                lineNumber: 135
             },
             __self: this
         }, "Logout"))))))))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "main-view justify-content-md-center",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 136
+                lineNumber: 144
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22112,7 +22119,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 138
+                lineNumber: 146
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22133,7 +22140,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 150
+                lineNumber: 158
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22148,7 +22155,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 161
+                lineNumber: 169
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22167,36 +22174,41 @@ class MainView extends _reactDefault.default.Component {
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
                     movie: movies.find((m)=>m._id === match.params.movieId
                     ),
-                    genre: genre,
+                    genres: genres,
                     onBackClick: ()=>history.goBack()
                 })));
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 169
+                lineNumber: 177
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
-            path: "/genres/:genreId",
+            path: "/genres/:Name",
             render: ({ match , history  })=>{
                 if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
                     md: 6
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                 })));
+                if (selectedGenre) return(/*#__PURE__*/ _reactDefault.default.createElement(_genreView.GenreView, {
+                    genreData: selectedGenre
+                }));
                 if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
                     className: "main-view"
                 }));
-                return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-                    md: 8
-                }, /*#__PURE__*/ _reactDefault.default.createElement(_genreView.GenreView, {
-                    genre: genre,
-                    onBackClick: ()=>history.goBack()
-                })));
+                return genres.map((genre)=>/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                        md: 8,
+                        key: genre._id
+                    }, /*#__PURE__*/ _reactDefault.default.createElement(_genreView.GenreView, {
+                        genreData: genre,
+                        onBackClick: ()=>history.goBack()
+                    }))
+                );
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 179
+                lineNumber: 187
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22219,7 +22231,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/main-view/main-view.jsx",
-                lineNumber: 189
+                lineNumber: 203
             },
             __self: this
         }))));
@@ -26700,6 +26712,10 @@ var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends _reactDefault.default.Component {
     render() {
         const { movie  } = this.props;
+        // console.log('movie-moviecard:', movie._id);
+        // console.log('user-mainv:', user);
+        // console.log('genres-mainv:', genres);
+        // console.log('directors-mainv:', directors);
         return(/*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
             className: "card",
             border: "info",
@@ -26708,7 +26724,7 @@ class MovieCard extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 16
+                lineNumber: 21
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Img, {
@@ -26716,13 +26732,13 @@ class MovieCard extends _reactDefault.default.Component {
             src: movie.ImagePath,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 17
+                lineNumber: 22
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Body, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 18
+                lineNumber: 23
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Title, {
@@ -26732,14 +26748,14 @@ class MovieCard extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 19
+                lineNumber: 24
             },
             __self: this
         }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/movies/${movie._id}`,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 20
+                lineNumber: 25
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
@@ -26748,7 +26764,7 @@ class MovieCard extends _reactDefault.default.Component {
             block: true,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 21
+                lineNumber: 26
             },
             __self: this
         }, "Open card")))));
@@ -27478,25 +27494,11 @@ class MovieView extends _reactDefault.default.Component {
             console.log(error);
         });
     };
-    getGenres(token) {
-        _axiosDefault.default.get('https://mycinemoviedatabase.herokuapp.com/genres/:Name', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
-            // Assign the result to the state
-            this.setState({
-                genre: response.data
-            });
-        }).catch(function(error) {
-            console.log(error);
-        });
-    }
     render() {
-        const { movie , genre  } = this.props;
+        const { movie  } = this.props;
+        // console.log('genres-movieview:', genres);
+        console.log('movie-movieview:', movie);
         if (!movie) return null;
-        console.log('movie:', movie._id);
-        console.log('genre:', genre);
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             className: "movie-view ",
             fluid: true,
@@ -27506,14 +27508,14 @@ class MovieView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 61
+                lineNumber: 45
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
             className: "movie-view-card",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 62
+                lineNumber: 46
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
@@ -27525,33 +27527,33 @@ class MovieView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 63
+                lineNumber: 47
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
             className: "movie-title",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 64
+                lineNumber: 48
             },
             __self: this
         }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 65
+                lineNumber: 49
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             className: "movie-body",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 66
+                lineNumber: 50
             },
             __self: this
         }, movie.Description), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 68
+                lineNumber: 52
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -27559,7 +27561,7 @@ class MovieView extends _reactDefault.default.Component {
             variant: "outline-info",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 69
+                lineNumber: 53
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
@@ -27569,13 +27571,13 @@ class MovieView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 70
+                lineNumber: 54
             },
             __self: this
         }, "Director"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 73
+                lineNumber: 57
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -27583,23 +27585,23 @@ class MovieView extends _reactDefault.default.Component {
             variant: "outline-info",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 74
+                lineNumber: 58
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            to: `/genres/${genre.Name}`,
+            to: `/genres/`,
             style: {
                 textDecoration: 'none'
             },
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 75
+                lineNumber: 59
             },
             __self: this
-        }, "Genre:", genre.Name))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+        }, "Genre:"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 78
+                lineNumber: 62
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -27608,21 +27610,21 @@ class MovieView extends _reactDefault.default.Component {
             onClick: this.addFavorite,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 79
+                lineNumber: 63
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: ``,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 80
+                lineNumber: 64
             },
             __self: this
         }, "Add Movie to Favorites"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/`,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 83
+                lineNumber: 67
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -27630,7 +27632,7 @@ class MovieView extends _reactDefault.default.Component {
             variant: "info",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 84
+                lineNumber: 68
             },
             __self: this
         }, "Return to Movie List"))))));
@@ -27640,18 +27642,17 @@ MovieView.propTypes = {
     movie: _propTypesDefault.default.shape({
         Title: _propTypesDefault.default.string.isRequired,
         Description: _propTypesDefault.default.string,
+        // Genre: PropTypes.objectOf(
+        //   PropTypes.shape({
+        //     _id: PropTypes.string.isRequired
+        //   })
+        // ),
+        // Director: PropTypes.arrayOf(
+        //   PropTypes.shape({
+        //     _id: PropTypes.string.isRequired
+        //   })
+        // ),
         ImagePath: _propTypesDefault.default.string.isRequired
-    }),
-    genre: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
-        Description: _propTypesDefault.default.string.isRequired,
-        Name: _propTypesDefault.default.string.isRequired,
-        _id: _propTypesDefault.default.string.isRequired
-    })),
-    director: _propTypesDefault.default.shape({
-        Name: _propTypesDefault.default.string.isRequired,
-        Bio: _propTypesDefault.default.string,
-        Birth: _propTypesDefault.default.string,
-        Death: _propTypesDefault.default.string
     }),
     user: _propTypesDefault.default.shape({
         FavoriteMovies: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
@@ -27692,60 +27693,60 @@ class GenreView extends _reactDefault.default.Component {
         super();
     }
     render() {
-        const { genre  } = this.props;
-        console.log(genre);
+        const { genreData  } = this.props;
+        console.log('genreData-genreview', genreData._id);
         return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "genre-view",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 21
+                lineNumber: 23
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 22
+                lineNumber: 24
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
             className: "genre-card",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 23
+                lineNumber: 25
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 24
+                lineNumber: 26
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
             className: "genre-name",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 25
+                lineNumber: 27
             },
             __self: this
-        }, "Genre: ", genre.Name), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+        }, "Genre:", genreData.Name), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             className: "genre-description",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 26
+                lineNumber: 28
             },
             __self: this
-        }, "Description: ", genre.Description))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Footer, {
+        }, "Description:", genreData.Description))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Footer, {
             className: "genre-footer",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 29
+                lineNumber: 31
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/`,
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 30
+                lineNumber: 32
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -27753,18 +27754,18 @@ class GenreView extends _reactDefault.default.Component {
             variant: "info",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
-                lineNumber: 31
+                lineNumber: 33
             },
             __self: this
         }, "Return to Movie List"))))));
     }
 }
 GenreView.propTypes = {
-    genre: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
-        Description: _propTypesDefault.default.string.isRequired,
+    genre: _propTypesDefault.default.shape({
+        _id: _propTypesDefault.default.string.isRequired,
         Name: _propTypesDefault.default.string.isRequired,
-        _id: _propTypesDefault.default.string.isRequired
-    }))
+        Description: _propTypesDefault.default.string.isRequired
+    })
 };
 
   helpers.postlude(module);

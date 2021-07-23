@@ -15,15 +15,17 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { genre } = this.props;
-    console.log(genre);
+    const { genreData } = this.props;
+
+    console.log('genreData-genreview', genreData._id);
+
     return (
       <div className='genre-view'>
         <Container>
           <Card className='genre-card'>
             <Card.Body>
-              <Card.Title className='genre-name'>Genre: {genre.Name}</Card.Title>
-              <Card.Text className='genre-description'>Description: {genre.Description}</Card.Text>
+              <Card.Title className='genre-name'>Genre:{genreData.Name}</Card.Title>
+              <Card.Text className='genre-description'>Description:{genreData.Description}</Card.Text>
             </Card.Body>
           </Card>
           <Card.Footer className='genre-footer'>
@@ -38,20 +40,9 @@ export class GenreView extends React.Component {
 }
 
 GenreView.propTypes = {
-  genre: PropTypes.arrayOf(
-    PropTypes.shape({
-      Description: PropTypes.string.isRequired,
-      Name: PropTypes.string.isRequired,
-      _id: PropTypes.string.isRequired
-    })
-    // genre: PropTypes.shape({
-    //   Description: PropTypes.string.isRequired,
-    //   Name: PropTypes.string.isRequired,
-    //   _id: PropTypes.string.isRequired
-    // })
-    // genre: PropTypes.shape({
-    //     Name: PropTypes.string.isRequired,
-    //     Description: PropTypes.string.isRequired,
-    //   }),
-  )
-}
+  genre: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    Name: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired
+  })
+};
