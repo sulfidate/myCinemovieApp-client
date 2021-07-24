@@ -56,7 +56,7 @@ export class MovieView extends React.Component {
             </Card.Text>
             <Card.Text>
               <Button className='genre-view-button' variant='outline-info'>
-                <Link to={`/genres/`} style={{ textDecoration: 'none' }}>Genre:</Link>
+                <Link to={`/genres/${movie.Genre}`} style={{ textDecoration: 'none' }}>Genre:{movie.Genre}</Link>
               </Button>
             </Card.Text>
             <Card.Text>
@@ -79,18 +79,15 @@ MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string,
-    // Genre: PropTypes.objectOf(
-    //   PropTypes.shape({
-    //     _id: PropTypes.string.isRequired
-    //   })
-    // ),
-    // Director: PropTypes.arrayOf(
-    //   PropTypes.shape({
-    //     _id: PropTypes.string.isRequired
-    //   })
-    // ),
-    ImagePath: PropTypes.string.isRequired
-  }),
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.array.isRequired
+
+    // PropTypes.shape({
+    //   _id: PropTypes.string.isRequired,
+    //   Name: PropTypes.string.isRequired,
+    //   Descrition: PropTypes.string.isRequired
+
+  }).isRequired,
   user: PropTypes.shape({
     FavoriteMovies: PropTypes.arrayOf(
       PropTypes.shape({

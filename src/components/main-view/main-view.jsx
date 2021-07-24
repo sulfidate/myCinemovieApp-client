@@ -180,11 +180,11 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col md={8}>
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)} genres={genres} onBackClick={() => history.goBack()} />
+              <MovieView movie={movies.find(m => m._id === match.params.movieId)} genre={genres.find(genres => genres._id === match.params.genreId)} onBackClick={() => history.goBack()} />
             </Col>
           }} />
 
-          <Route path="/genres/:Name" render={({ match, history }) => {
+          <Route path="/genres/:genreId" render={({ match, history }) => {
             if (!user) return <Col md={6} >
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>

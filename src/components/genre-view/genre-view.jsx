@@ -25,7 +25,7 @@ export class GenreView extends React.Component {
           <Card className='genre-card'>
             <Card.Body>
               <Card.Title className='genre-name'>Genre:{genreData.Name}</Card.Title>
-              <Card.Text className='genre-description'>Description:{genreData.Description}</Card.Text>
+              <Card.Text className='genre-description'>{genreData.Description}</Card.Text>
             </Card.Body>
           </Card>
           <Card.Footer className='genre-footer'>

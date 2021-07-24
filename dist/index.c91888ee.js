@@ -22174,7 +22174,8 @@ class MainView extends _reactDefault.default.Component {
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
                     movie: movies.find((m)=>m._id === match.params.movieId
                     ),
-                    genres: genres,
+                    genre: genres.find((genres1)=>genres1._id === match.params.genreId
+                    ),
                     onBackClick: ()=>history.goBack()
                 })));
             },
@@ -22184,7 +22185,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
-            path: "/genres/:Name",
+            path: "/genres/:genreId",
             render: ({ match , history  })=>{
                 if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
                     md: 6
@@ -27589,7 +27590,7 @@ class MovieView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            to: `/genres/`,
+            to: `/genres/${movie.Genre}`,
             style: {
                 textDecoration: 'none'
             },
@@ -27598,7 +27599,7 @@ class MovieView extends _reactDefault.default.Component {
                 lineNumber: 59
             },
             __self: this
-        }, "Genre:"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+        }, "Genre:", movie.Genre))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
                 lineNumber: 62
@@ -27642,18 +27643,9 @@ MovieView.propTypes = {
     movie: _propTypesDefault.default.shape({
         Title: _propTypesDefault.default.string.isRequired,
         Description: _propTypesDefault.default.string,
-        // Genre: PropTypes.objectOf(
-        //   PropTypes.shape({
-        //     _id: PropTypes.string.isRequired
-        //   })
-        // ),
-        // Director: PropTypes.arrayOf(
-        //   PropTypes.shape({
-        //     _id: PropTypes.string.isRequired
-        //   })
-        // ),
-        ImagePath: _propTypesDefault.default.string.isRequired
-    }),
+        ImagePath: _propTypesDefault.default.string.isRequired,
+        Genre: _propTypesDefault.default.array.isRequired
+    }).isRequired,
     user: _propTypesDefault.default.shape({
         FavoriteMovies: _propTypesDefault.default.arrayOf(_propTypesDefault.default.shape({
             _id: _propTypesDefault.default.string
@@ -27735,7 +27727,7 @@ class GenreView extends _reactDefault.default.Component {
                 lineNumber: 28
             },
             __self: this
-        }, "Description:", genreData.Description))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Footer, {
+        }, genreData.Description))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Footer, {
             className: "genre-footer",
             __source: {
                 fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/genre-view/genre-view.jsx",
