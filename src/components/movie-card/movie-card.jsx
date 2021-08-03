@@ -1,35 +1,46 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import './movie-card.scss';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
+import { PropTypes } from 'prop-types';
+import { Card, Button, Image } from 'react-bootstrap';
+
+import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
+
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movieData } = this.props;
+
+    console.log(
+      'movies-moviecard:', movieData,
+      // 'genres-moviecard:', genres,
+      // 'directors-moviecard:', directors
+    );
+
+
 
     return (
-      <Col lg={3}>
-        <Card className="card" border="info">
-          <Card.Img variant="top" src={movie.ImagePath} />
-          <Card.Body>
-            <Card.Title style={{ height: '3.9rem' }}>{movie.Title}</Card.Title>
-            <Button onClick={() => onMovieClick(movie)} variant="info" size="sm" block>Open</Button>
-          </Card.Body>
-        </Card >
-      </Col>
+      <Card style={{ marginTop: '25px', padding: '5px' }} border="info" >
+        <Image rounded variant="top"
+          src={movieData.ImagePath} />
+        <Card.Body>
+          <Card.Title style={{ minHeight: '4.5rem', fontSize: '1.3rem' }}>{movieData.Title}</Card.Title>
+          <Link to={`/movies/${movieData._id}`}>
+            <Button variant="outline-info">open card</Button>
+          </Link>
+        </Card.Body>
+      </Card>
     );
   }
 }
 
 MovieCard.propTypes = {
-  movie: PropTypes.shape({
+  movieData: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+    Featured: PropTypes.boolean,
+    Genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+    Director: PropTypes.arrayOf(PropTypes.string).isRequired,
+    Actors: PropTypes.arrayOf(PropTypes.string)
+  }).isRequired
 };
