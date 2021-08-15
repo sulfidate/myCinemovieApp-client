@@ -11,10 +11,6 @@ export class GenreView extends React.Component {
   render() {
     const { genreData, onBackClick, movies } = this.props;
     const genreMovies = movies.filter(m => m.Genre[1] === genreData[1]);
-    console.log(
-      'genreData-genreview:', genreData,
-      'genreMovies-genreview:', genreMovies
-    );
 
     return (
 

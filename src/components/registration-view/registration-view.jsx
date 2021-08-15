@@ -11,24 +11,59 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
+  const [usernameError, setUsernameError] = useState({});
+  const [passwordError, setPasswordError] = useState({});
+  const [emailError, setEmailError] = useState({});
+
+
   const handleRegister = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
-    /* Send a request to the server for authentication */
-    axios.post('https://mycinemoviedatabase.herokuapp.com/users', {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-    })
-      .then(response => {
-        const data = response.data;
-        console.log(data);
-        window.open('/', '_self'); // second argument _self is necessary to open page in current tab
+
+    const isValid = formValidation();
+    if (isValid) {
+
+      /* Send a request to the server for authentication */
+      axios.post('https://mycinemoviedatabase.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
       })
-      .catch(e => {
-        console.log('error registering user')
-      });
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          window.open('/', '_self'); // second argument _self is necessary to open page in current tab
+        })
+        .catch(e => {
+          console.log('error registering user')
+        });
+    }
+  }
+
+  const formValidation = () => {
+    const usernameError = {};
+    const passwordError = {};
+    const emailError = {};
+    let isValid = true;
+
+    if (username.length < 4 || username === '') {
+      usernameError.UsernameToShort = "Username must be more than 4 characters.";
+      isValid = false;
+    }
+    if (password.length < 6 || password === '') {
+      passwordError.noPassword = "You must enter a password at least 6 characters long.";
+      isValid = false;
+    }
+    if (!email || email.indexOf('@') === -1) {
+      emailError.notValidEmail = "Your email doesn't look quite right.";
+      isValid = false;
+    }
+
+    setUsernameError(usernameError);
+    setPasswordError(passwordError);
+    setEmailError(emailError);
+    return isValid;
   };
 
   return (
@@ -55,39 +90,61 @@ export function RegistrationView(props) {
         </Container>
       </header>
 
-      <Form style={{ marginTop: '25px', padding: '5px' }}>
-        <Form.Group controlId="formUsername">
+      <Form style={{ marginTop: '25px', padding: '5px' }} className="register-form" noValidate >
+        <Form.Group>
           <Form.Label>Username:</Form.Label>
-          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+          <Form.Control type="text" name="username" required value={username} onChange={e => setUsername(e.target.value)} />
         </Form.Group>
+        {Object.keys(usernameError).map((key) => {
+          return (
+            <div className="form-validation-error" style={{ color: 'red' }} key={key}>
+              {usernameError[key]}
+            </div>
+          );
+        })}
 
-        <Form.Group controlId="formPassword">
+        <Form.Group>
           <Form.Label>Password:</Form.Label>
-          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+          <Form.Control type="password" name="password" required value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
+        {Object.keys(passwordError).map((key) => {
+          return (
+            <div className="form-validation-error" style={{ color: 'red' }} key={key}>
+              {passwordError[key]}
+            </div>
+          );
+        })}
 
-        <Form.Group controlId="formEmail">
+        <Form.Group>
           <Form.Label>Email:</Form.Label>
-          <Form.Control type="email" onChange={e => setEmail(e.target.value)} />
+          <Form.Control type="email" name="email" required value={email} onChange={e => setEmail(e.target.value)} />
         </Form.Group>
+        {Object.keys(emailError).map((key) => {
+          return (
+            <div className="form-validation-error" style={{ color: 'red' }} key={key}>
+              {emailError[key]}
+            </div>
+          );
+        })}
 
-        <Form.Group controlId="formBirthday">
+        <Form.Group>
           <Form.Label>Birthday:</Form.Label>
-          <Form.Control type="date" onChange={e => setBirthday(e.target.value)} />
+          <Form.Control type="date" name="birthday" value={birthday} onChange={e => setBirthday(e.target.value)} />
         </Form.Group>
 
         <Button variant="outline-info" type="button" style={{ margin: '20px 0 0 0' }} onClick={handleRegister}>register</Button>
       </Form>
     </>
-  )
+  );
 }
+
 
 RegistrationView.propTypes = {
   register: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string.isRequired
+    Birthday: PropTypes.date
   }),
   onRegister: PropTypes.func
-};
+}

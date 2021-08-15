@@ -9,14 +9,6 @@ export class MovieCard extends React.Component {
   render() {
     const { movieData } = this.props;
 
-    console.log(
-      'movies-moviecard:', movieData,
-      // 'genres-moviecard:', genres,
-      // 'directors-moviecard:', directors
-    );
-
-
-
     return (
       <Card style={{ marginTop: '25px', padding: '5px' }} border="info" >
         <Image rounded variant="top"
@@ -32,15 +24,15 @@ export class MovieCard extends React.Component {
   }
 }
 
-MovieCard.propTypes = {
-  movieData: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Featured: PropTypes.boolean,
-    Genre: PropTypes.arrayOf(PropTypes.string).isRequired,
-    Director: PropTypes.arrayOf(PropTypes.string).isRequired,
-    Actors: PropTypes.arrayOf(PropTypes.string)
-  }).isRequired
-};
+// MovieCard.propTypes = {
+//   movieData: PropTypes.shape({
+//     _id: PropTypes.string.isRequired,
+//     Title: PropTypes.string.isRequired,
+//     ImagePath: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     Featured: PropTypes.boolean,
+//     Genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+//     Director: PropTypes.arrayOf(PropTypes.string).isRequired,
+//     Actors: PropTypes.arrayOf(PropTypes.string)
+//   }).isRequired
+// };

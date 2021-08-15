@@ -11,8 +11,6 @@ export class DirectorView extends React.Component {
     const { directorData, onBackClick, movies } = this.props;
     const directorMovies = movies.filter(m => m.Director[1] === directorData[1]);
 
-    console.log('directorData-directorview:', directorData);
-
     return (
 
       <Card style={{ marginTop: '25px', padding: '5px' }} border="info" >
