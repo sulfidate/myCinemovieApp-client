@@ -1,0 +1,354 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ProfileView", ()=>ProfileView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRouterDom = require("react-router-dom");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _profileUpdate = require("./profile-update");
+class ProfileView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.Username = null, this.Password = null, this.Email = null, this.Birthday = null;
+        this.state = {
+            Username: null,
+            Password: null,
+            Email: null,
+            Birthday: null,
+            FavoriteMovies: [],
+            validated: null
+        };
+    }
+    componentDidMount() {
+        const accessToken = localStorage.getItem('token');
+        if (accessToken !== null) this.getUser(accessToken);
+    }
+    getUser(token) {
+        const username = localStorage.getItem('user');
+        _axiosDefault.default.get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            this.setState({
+                Username: response.data.Username,
+                Password: response.data.Password,
+                Email: response.data.Email,
+                Birthday: response.data.Birthday,
+                FavoriteMovies: response.data.FavoriteMovies
+            });
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+    handleRemoveFavorite(e, movie) {
+        e.preventDefault();
+        const username = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+        _axiosDefault.default.delete(`https://mycinemoviedatabase.herokuapp.com/users/${username}/FavoritesDelete/${movie}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })// .then(() => {
+        //   alert('Movie was removed from your Favorites List.');
+        //   this.componentDidMount();
+        // })
+        .catch(function(error) {
+            console.log(error);
+        }).then(()=>window.location.reload()
+        );
+    }
+    handleDelete() {
+        const answer = window.confirm("This cannot be undone, are you sure?");
+        if (answer) {
+            const token = localStorage.getItem("token");
+            const user = localStorage.getItem("user");
+            _axiosDefault.default.delete(`https://mycinemoviedatabase.herokuapp.com/users/${user}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(()=>{
+                alert(user + "'s user-data has been deleted. Register again if you wan't to come back :)");
+                localStorage.removeItem("user");
+                localStorage.removeItem("token");
+                window.location.pathname = "/register";
+            }).catch(function(error) {
+                console.log(error);
+            });
+        } else console.log("Good bye!");
+    }
+    render() {
+        const { FavoriteMovies , validated  } = this.state;
+        const user = localStorage.getItem('user');
+        const { movies  } = this.props;
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+            className: "user-information",
+            style: {
+                marginTop: '2rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 103
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 104
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 105
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 106
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("h4", {
+            style: {
+                color: '#0dcaf0',
+                margin: '0.8rem 0 .1rem 0',
+                border: 'solid #0dcaf0 .1rem',
+                borderRadius: '5px',
+                padding: '.5rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 107
+            },
+            __self: this
+        }, "User Information"), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            style: {
+                margin: '.4rem 0 0 0',
+                border: 'solid #0dcaf0 .1rem',
+                padding: '.3rem 0 .4rem .3rem',
+                borderRadius: '5px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 117
+            },
+            __self: this
+        }, "Username: ", `${this.state.Username}`), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            style: {
+                margin: '.4rem 0 0 0',
+                border: 'solid #0dcaf0 .1rem',
+                padding: '.3rem 0 .4rem .3rem',
+                borderRadius: '5px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 126
+            },
+            __self: this
+        }, "Email: ", `${this.state.Email}`), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            style: {
+                margin: '.4rem 0 0 0',
+                border: 'solid #0dcaf0 .1rem',
+                padding: '.3rem 0 .4rem .3rem',
+                borderRadius: '5px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 135
+            },
+            __self: this
+        }, "Birthday: ", `${this.state.Birthday}`), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            style: {
+                margin: '.4rem 0 1.8rem 0',
+                border: 'solid #0dcaf0 .1rem',
+                padding: '.3rem 0 .4rem .2rem',
+                borderRadius: '5px',
+                maxWidth: '330px',
+                overflow: 'hidden'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 144
+            },
+            __self: this
+        }, "Password: ", `${this.state.Password}`)), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 157
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            className: "",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 158
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            style: {
+                color: 'red'
+            },
+            variant: "outline-info",
+            type: "submit",
+            size: "md",
+            onClick: ()=>this.handleDelete()
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 159
+            },
+            __self: this
+        }, "Delete Account"), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            style: {
+                fontSize: '12px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 170
+            },
+            __self: this
+        }, "...will remove all your user data!")))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 179
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_profileUpdate.ProfileUpdate, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 180
+            },
+            __self: this
+        })))), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 187
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("h4", {
+            style: {
+                color: '#0dcaf0',
+                margin: '4rem 0 2rem 0',
+                border: 'solid #0dcaf0 .1rem',
+                padding: '.6rem',
+                borderRadius: '5px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 188
+            },
+            __self: this
+        }, "Favorite Movies List")), FavoriteMovies.length === 0 && /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "card-content",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 202
+            },
+            __self: this
+        }, "No Favorite Movies in Your List!"), FavoriteMovies.length > 0 && movies.map((movie)=>{
+            if (movie._id === FavoriteMovies.find((favMovie)=>favMovie === movie._id
+            )) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                md: 3,
+                key: movie._id,
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 217
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
+                className: "favorites-item card-content",
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 218
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+                to: `/movies/${movie._id}`,
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 222
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
+                className: "movie-card",
+                variant: "top",
+                src: movie.ImagePath,
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 223
+                },
+                __self: this
+            })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
+                className: "movie-card-title",
+                style: {
+                    minHeight: '4.5rem',
+                    fontSize: '1.3rem'
+                },
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 229
+                },
+                __self: this
+            }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
+                className: "movie-card-body",
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 237
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+                size: "sm",
+                className: "profile-button remove-favorite",
+                variant: "info",
+                style: {
+                    color: 'white'
+                },
+                onClick: (e)=>this.handleRemoveFavorite(e, movie._id)
+                ,
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 238
+                },
+                __self: this
+            }, "Remove")))));
+        })));
+    }
+}
+// Style
+const cardStyle = {
+    marginTop: '25px',
+    padding: '2rem'
+};
+const btnStyle = {
+    padding: '.3rem 1rem',
+    color: 'white',
+    borderRadius: '10%'
+};
+// PropTypes
+ProfileView.propTypes = {
+    users: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.string,
+        Favorites: _propTypesDefault.default.array
+    }),
+    movies: _propTypesDefault.default.array.isRequired
+};
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

@@ -7,6 +7,10 @@ import { Card, Button, Image, Link, Nav, Container } from 'react-bootstrap';
 
 
 export class MovieView extends React.Component {
+  constructor() {
+    super();
+    this.state = { value: '' };
+  }
 
   handleAdd() {
     const token = localStorage.getItem("token");
@@ -21,6 +25,7 @@ export class MovieView extends React.Component {
         alert(this.props.movieData.Title + " has been added to your favorites!");
       })
   }
+
   handleDelete() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -38,7 +43,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movieData, directorData, genreData, onBackClick } = this.props;
+    const { movieData, directorData, genreData, onBackClick, addFavMov, FavoriteMovies } = this.props;
 
     return (
 
@@ -59,14 +64,16 @@ export class MovieView extends React.Component {
             <Nav.Link href={`/genres/${movieData.Genre[1]}`}>
               <Button variant="outline-info" size="lg" style={{ margin: '.1rem', width: '30rem' }}>Genre: {`${movieData.Genre[1]}`} </Button>
             </Nav.Link>
-            <Button
-              variant="outline-info"
-              size="lg"
-              style={{ margin: '2rem 0 0 1rem', width: '14.5rem' }}
-              onClick={() => this.handleAdd(movieData)}
-            >
-              add movie to my favorites
-            </Button>
+            <div>
+              <Button
+                id="add-favorite-btn"
+                variant="outline-info"
+                size="lg"
+                style={{ margin: '2rem 0 0 1rem', width: '14.5rem' }}
+                onClick={() => this.handleAdd(movieData)}              >
+                add movie to my favorites
+              </Button>
+            </div>
 
           </Container>
           <Container>

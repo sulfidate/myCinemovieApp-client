@@ -1,0 +1,221 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieView", ()=>MovieView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _reactRouterDom = require("react-router-dom");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactBootstrap = require("react-bootstrap");
+class MovieView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.state = {
+            value: ''
+        };
+    }
+    handleAdd() {
+        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user");
+        _axiosDefault.default.patch(`https://mycinemoviedatabase.herokuapp.com/users/${user}/Favorites/` + this.props.movieData._id, {
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            console.log(token);
+            console.log(response);
+            alert(this.props.movieData.Title + " has been added to your favorites!");
+        });
+    }
+    handleDelete() {
+        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user");
+        _axiosDefault.default.delete(`https://mycinemoviedatabase.herokuapp.com/users/${user}/FavoritesDelete/` + this.props.movieData._id, {
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            console.log(response);
+            alert(this.props.movieData.Title + " has been deleted to your favorites!");
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+    render() {
+        const { movieData , directorData , genreData , onBackClick , addFavMov , FavoriteMovies  } = this.props;
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
+            style: {
+                marginTop: '25px',
+                padding: '5px'
+            },
+            border: "info",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 50
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Image, {
+            rounded: true,
+            variant: "top",
+            src: movieData.ImagePath,
+            style: {
+                width: '100%',
+                maxWidth: '360px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 51
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 57
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
+            style: {
+                fontSize: '1.7rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 58
+            },
+            __self: this
+        }, movieData.Title), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+            style: {
+                fontSize: '1.3rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 59
+            },
+            __self: this
+        }, movieData.Description), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 60
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
+            href: `/directors/${movieData.Director[1]}`,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 61
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            variant: "outline-info",
+            size: "lg",
+            style: {
+                margin: '.1rem',
+                width: '30rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 62
+            },
+            __self: this
+        }, "Director: ", `${movieData.Director[1]}`, " ")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
+            href: `/genres/${movieData.Genre[1]}`,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 64
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            variant: "outline-info",
+            size: "lg",
+            style: {
+                margin: '.1rem',
+                width: '30rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 65
+            },
+            __self: this
+        }, "Genre: ", `${movieData.Genre[1]}`, " ")), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 67
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            id: "add-favorite-btn",
+            disabled: !this.state.value,
+            variant: "outline-info",
+            size: "lg",
+            style: {
+                margin: '2rem 0 0 1rem',
+                width: '14.5rem'
+            },
+            onClick: ()=>this.handleAdd(movieData)
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 68
+            },
+            __self: this
+        }, "add movie to my favorites"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 80
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            variant: "info",
+            size: "lg",
+            style: {
+                margin: '3rem 0 0 1rem',
+                color: 'white',
+                width: '10rem'
+            },
+            onClick: ()=>onBackClick(null, "")
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 81
+            },
+            __self: this
+        }, "back")))));
+    }
+}
+MovieView.propTypes = {
+    movieData: _propTypes.PropTypes.shape({
+        _id: _propTypes.PropTypes.string.isRequired,
+        Title: _propTypes.PropTypes.string.isRequired,
+        ImagePath: _propTypes.PropTypes.string.isRequired,
+        Description: _propTypes.PropTypes.string.isRequired,
+        Featured: _propTypes.PropTypes.boolean,
+        // Genre: PropTypes.arrayOf(PropTypes.arrayOf(
+        //   PropTypes.shape({
+        //     _id: PropTypes.string.isRequired,
+        //     Name: PropTypes.string.isRequired,
+        //     Description: PropTypes.string.isRequired
+        //   }))),
+        // Director: PropTypes.arrayOf(
+        //   PropTypes.shape({
+        //     _id: PropTypes.string.isRequired,
+        //     Name: PropTypes.string.isRequired,
+        //     Bio: PropTypes.string.isRequired
+        //   })),
+        Actors: _propTypes.PropTypes.arrayOf(_propTypes.PropTypes.string)
+    }).isRequired
+};
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

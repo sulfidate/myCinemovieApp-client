@@ -1,0 +1,100 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NavBtn", ()=>NavBtn
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+class NavBtn extends _reactDefault.default.Component {
+    state = {
+    };
+    render() {
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 7
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(Dropdown, {
+            as: ButtonGroup,
+            size: "sm",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 8
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(Button, {
+            variant: "info",
+            style: {
+                color: 'white'
+            },
+            size: "sm",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 11
+            },
+            __self: this
+        }, `signed in as: ${user}`), /*#__PURE__*/ _reactDefault.default.createElement(Dropdown.Toggle, {
+            split: true,
+            variant: "outline-info",
+            id: "dropdown-split-basic",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 16
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(Dropdown.Menu, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 17
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(Dropdown.Item, {
+            href: "/profile",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 18
+            },
+            __self: this
+        }, "edit user profile"), /*#__PURE__*/ _reactDefault.default.createElement(Dropdown.Item, {
+            href: "/",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 19
+            },
+            __self: this
+        }, "go to movies"), /*#__PURE__*/ _reactDefault.default.createElement(Dropdown.Divider, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 20
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(Dropdown.Item, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 21
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
+            onClick: ()=>{
+                this.onLoggedOut();
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/header-view/nav-btn.jsx",
+                lineNumber: 22
+            },
+            __self: this
+        }, "logout"))))));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

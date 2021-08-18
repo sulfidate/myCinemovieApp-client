@@ -29,25 +29,54 @@ export function LoginView(props) {
     <>
       <header>
         <Container>
-          <Navbar bg="light" collapseOnSelect expand="lg" sticky="top" style={{ marginTop: '25px' }} >
+          <Navbar bg="light" collapseOnSelect expand="lg" fixed="top" style={{ marginTop: '35px' }} >
             <Container>
-              <Navbar.Brand href="#home"><h1 style={{ color: '#0dcaf0' }}>Login</h1></Navbar.Brand>
+              <Navbar.Brand href="https://github.com/sulfidate" target='_blank' >
+                <img
+                  src="https://avatars.githubusercontent.com/u/78739948?v=4"
+                  width="30"
+                  height="30"
+                  className="d-inline-block align-top"
+                  alt="logo sulfidate"
+                />
+              </Navbar.Brand>
+              <Navbar.Brand href="/"><h1 style={{ color: '#0dcaf0' }}>myCineMovieDatabase</h1></Navbar.Brand>
             </Container>
-            <Container fluid>
+            <Container fluid id='signed-nav-btn'>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <Nav className="me-auto" className="justify-content-end">
-                  <Nav.Link href="/register">
-                    <Button variant="info" style={{ color: 'white' }} size="sm" >
-                      Not registered yet...
-                    </Button>
-                  </Nav.Link>
+
+                  {/* <NavBtn user={user} /> */}
+
                 </Nav>
               </Navbar.Collapse>
             </Container>
+
+
           </Navbar>
         </Container>
       </header>
+
+      <Container>
+        <Navbar bg="light" collapseOnSelect expand="lg" sticky="top" style={{ marginTop: '25px' }} >
+          <Container>
+            <Navbar.Brand href="#home"><h1 style={{ color: '#0dcaf0' }}>Login</h1></Navbar.Brand>
+          </Container>
+          <Container fluid>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+              <Nav className="me-auto" className="justify-content-end">
+                <Nav.Link href="/register">
+                  <Button variant="info" style={{ color: 'white' }} size="sm" >
+                    Not registered yet...
+                  </Button>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </Container>
 
 
       <Form style={{ marginTop: '25px', padding: '5px' }}>

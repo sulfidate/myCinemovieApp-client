@@ -29,7 +29,9 @@ export class MainView extends React.Component {
       userPassword: null,
       userEmail: null,
       userBirthday: null,
-      userFavMov: []
+      userFavMov: [],
+      signedIn: false,
+      FavoriteMovies: [],
     };
   }
 
@@ -39,14 +41,33 @@ export class MainView extends React.Component {
       this.setState({
         user: localStorage.getItem('user'),
         userPassword: localStorage.getItem('userPassword'),
-        // userEmail: localStorage.getItem('userEmail'),
-        // userBirthday: localStorage.getItem('userBirthday'),
-        // userFavMov: localStorage.getItem('userFavMov')
+        signedIn: localStorage.getItem('signedIn'),
+        FavoriteMovies: localStorage.getItem('FavoriteMovies'),
       });
+      this.getUser(accessToken);
       this.getMovies(accessToken);
       this.getGenres(accessToken);
       this.getDirectors(accessToken);
     }
+  }
+
+  getUser(token) {
+    const username = localStorage.getItem('user');
+    axios.get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        this.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
 
@@ -98,18 +119,12 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     this.setState({
       user: authData.user.Username,
-      // userPassword: authData.user.Password,
-      // userEmail: authData.user.Email,
-      // userBirthday: authData.user.Birthday,
-      // userFavMov: authData.user.FavoriteMovies,
+      signedIn: true
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    // localStorage.setItem('userPassword', authData.user.Password);
-    // localStorage.setItem('userEmail', authData.user.Email);
-    // localStorage.setItem('userBirthday', authData.user.Birthday);
-    // localStorage.setItem('userFavMov', authData.user.FavoriteMovies);
+    localStorage.setItem('signedIn', true);
 
     this.getMovies(authData.token);
     this.getGenres(authData.token);
@@ -120,37 +135,27 @@ export class MainView extends React.Component {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
-      user: null
+      user: null,
+      signedIn: false
     });
   }
 
   render() {
     const {
       user,
-      // userPassword,
-      // userEmail,
-      // userBirthday,
       userFavMov = userFavMov,
       movies,
-      // genres,
-      // directors
+      signedIn,
+      FavoriteMovies,
     } = this.state;
 
-    console.log(
-      //   'Main-View Render',
-      //   'user:', user,
-      //   'userPassword: ', userPassword,
-      //   'userEmail: ', userEmail,
-      //   'userBirthday: ', userBirthday,
-      //   'userFavMov: ', userFavMov,
-    )
 
     return (
 
       <Router>
         <Row className="main-view justify-content-md-center" style={{ marginTop: '150px', padding: '15px' }}>
 
-          <HeaderView user={user} />
+          {/* <HeaderView signedIn={signedIn} user={user} /> */}
 
           <Route exact path="/" render={() => {
             if (!user) return <Col md={6}>
@@ -159,6 +164,7 @@ export class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return movies.map(movie => (
               <Col sm={7} md={6} lg={3} xl={2} key={movie._id}>
+                <HeaderView signedIn={signedIn} user={user} />
                 <MovieCard movieData={movie} />
               </Col>
             ))
@@ -178,6 +184,8 @@ export class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
 
             return <Col md={7}>
+              <HeaderView signedIn={signedIn} user={user} />
+
               <Row>
                 <Button
                   variant='info'
@@ -206,10 +214,13 @@ export class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
 
             return <Col md={6}>
+              <HeaderView signedIn={signedIn} user={user} />
+
               <MovieView
                 movieData={movies.find(movie => movie._id === match.params.movieId)}
                 userData={user}
                 movie={movies}
+                FavoriteMovies={FavoriteMovies}
                 onBackClick={() => history.goBack()}
               />
             </Col>
@@ -221,6 +232,8 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col md={6}>
+              <HeaderView signedIn={signedIn} user={user} />
+
               <GenreView genreData={movies.find(m => m.Genre[1] === match.params.name).Genre} movies={movies} onBackClick={() => history.goBack()} />
             </Col>
           }
@@ -232,6 +245,8 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col md={6}>
+              <HeaderView signedIn={signedIn} user={user} />
+
               <DirectorView directorData={movies.find(m => m.Director[1] === match.params.name).Director} movies={movies} onBackClick={() => history.goBack()} />
             </Col>
           }
@@ -248,5 +263,6 @@ MainView.propTypes = {
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
     Birthday: PropTypes.date
-  })
+  }),
+
 }

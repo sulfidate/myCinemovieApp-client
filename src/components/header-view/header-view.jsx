@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 import { Row, Col, Navbar, Nav, NavDropdown, Dropdown, Button, ButtonGroup, Container, Form, FormControl } from 'react-bootstrap';
 
-export class HeaderView extends React.Component {
+import { NavBtn } from './nav-btn';
 
-  onLoggedOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
-    window.open('/', '_self');
+export class HeaderView extends Component {
+  constructor() {
+    super();
+    this.state = {
+    };
   }
 
-
   render() {
-    const { user } = this.props;
+    const { user, signedIn } = this.props;
 
     return (
       <>
@@ -25,7 +22,7 @@ export class HeaderView extends React.Component {
           <Container>
             <Navbar bg="light" collapseOnSelect expand="lg" fixed="top" style={{ marginTop: '35px' }} >
               <Container>
-                <Navbar.Brand href="https://github.com/sulfidate">
+                <Navbar.Brand href="https://github.com/sulfidate" target='_blank' >
                   <img
                     src="https://avatars.githubusercontent.com/u/78739948?v=4"
                     width="30"
@@ -36,37 +33,18 @@ export class HeaderView extends React.Component {
                 </Navbar.Brand>
                 <Navbar.Brand href="/"><h1 style={{ color: '#0dcaf0' }}>myCineMovieDatabase</h1></Navbar.Brand>
               </Container>
-              {/* <Container>
-                <Form className="d-flex">
-                  <FormControl size="sm" as="textarea" rows={1} style={{ borderColor: '#0dcaf0' }}
-                    type="search"
-                    placeholder="search..."
-                    className="mr-2"
-                    aria-label="Search"
-                  />
-                  <Button size="sm" variant="info" style={{ color: 'white', marginLeft: '-.5rem' }}>pushTbtn</Button>
-                </Form>
-              </Container> */}
-              <Container fluid>
+              <Container fluid id='signed-nav-btn'>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                   <Nav className="me-auto" className="justify-content-end">
-                    <Dropdown as={ButtonGroup} size="sm" >
-                      <Button variant="info" style={{ color: 'white' }} size="sm" >
-                        {`signed in as: ${user}`}
-                      </Button>
-                      <Dropdown.Toggle split variant="outline-info" id="dropdown-split-basic" />
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="/profile">edit user profile</Dropdown.Item>
-                        <Dropdown.Item href="/">go to movies</Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item>
-                          <button onClick={() => { this.onLoggedOut() }}>logout</button></Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+
+                    <NavBtn user={user} />
+
                   </Nav>
                 </Navbar.Collapse>
               </Container>
+
+
             </Navbar>
           </Container>
         </header>

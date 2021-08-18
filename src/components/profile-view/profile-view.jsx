@@ -150,7 +150,7 @@ export class ProfileView extends React.Component {
                     maxWidth: '330px',
                     overflow: 'hidden'
                   }}>
-                  Password: {`${this.state.Password}`}
+                  Password: *****
                 </p>
 
               </div>

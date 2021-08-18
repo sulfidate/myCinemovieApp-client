@@ -1,0 +1,437 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RegistrationView", ()=>RegistrationView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _reactBootstrap = require("react-bootstrap");
+var _registrationViewScss = require("./registration-view.scss");
+var _s = $RefreshSig$();
+function RegistrationView(props) {
+    _s();
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const [email, setEmail] = _react.useState('');
+    const [birthday, setBirthday] = _react.useState('');
+    const [usernameError, setUsernameError] = _react.useState({
+    });
+    const [passwordError, setPasswordError] = _react.useState({
+    });
+    const [emailError, setEmailError] = _react.useState({
+    });
+    const handleRegister = (e)=>{
+        e.preventDefault();
+        console.log(username, password, email, birthday);
+        const isValid = formValidation();
+        if (isValid) /* Send a request to the server for authentication */ _axiosDefault.default.post('https://mycinemoviedatabase.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        }).then((response)=>{
+            const data = response.data;
+            console.log(data);
+            window.open('/', '_self'); // second argument _self is necessary to open page in current tab
+        }).catch((e1)=>{
+            console.log('error registering user');
+        });
+    };
+    const formValidation = ()=>{
+        const usernameError1 = {
+        };
+        const passwordError1 = {
+        };
+        const emailError1 = {
+        };
+        let isValid = true;
+        if (username.length < 4 || username === '') {
+            usernameError1.UsernameToShort = "Username must be more than 4 characters.";
+            isValid = false;
+        }
+        if (password.length < 6 || password === '') {
+            passwordError1.noPassword = "You must enter a password at least 6 characters long.";
+            isValid = false;
+        }
+        if (!email || email.indexOf('@') === -1) {
+            emailError1.notValidEmail = "Your email doesn't look quite right.";
+            isValid = false;
+        }
+        setUsernameError(usernameError1);
+        setPasswordError(passwordError1);
+        setEmailError(emailError1);
+        return isValid;
+    };
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/ _reactDefault.default.createElement("header", {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 71
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 72
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
+        bg: "light",
+        collapseOnSelect: true,
+        expand: "lg",
+        fixed: "top",
+        style: {
+            marginTop: '35px'
+        },
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 73
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 74
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
+        href: "https://github.com/sulfidate",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 75
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
+        src: "https://avatars.githubusercontent.com/u/78739948?v=4",
+        width: "30",
+        height: "30",
+        className: "d-inline-block align-top",
+        alt: "logo sulfidate",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 76
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
+        href: "/",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 84
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
+        style: {
+            color: '#0dcaf0'
+        },
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 84
+        },
+        __self: this
+    }, "myCineMovieDatabase"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        fluid: true,
+        id: "signed-nav-btn",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 86
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
+        "aria-controls": "basic-navbar-nav",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 87
+        },
+        __self: this
+    }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
+        id: "basic-navbar-nav",
+        className: "justify-content-end",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 88
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
+        className: "me-auto",
+        className: "justify-content-end",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 89
+        },
+        __self: this
+    })))))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 102
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
+        bg: "light",
+        collapseOnSelect: true,
+        expand: "lg",
+        sticky: "top",
+        style: {
+            marginTop: '25px'
+        },
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 103
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 104
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
+        href: "#home",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 105
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
+        style: {
+            color: '#0dcaf0'
+        },
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 105
+        },
+        __self: this
+    }, "Registration"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        fluid: true,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 107
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
+        "aria-controls": "basic-navbar-nav",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 108
+        },
+        __self: this
+    }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
+        id: "basic-navbar-nav",
+        className: "justify-content-end",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 109
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
+        className: "me-auto",
+        className: "justify-content-end",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 110
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "/",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 111
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+        variant: "info",
+        style: {
+            color: 'white'
+        },
+        size: "sm",
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 112
+        },
+        __self: this
+    }, "you want to login ..?"))))))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+        style: {
+            marginTop: '25px',
+            padding: '5px'
+        },
+        className: "register-form",
+        noValidate: true,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 122
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 123
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 124
+        },
+        __self: this
+    }, "Username:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "text",
+        name: "username",
+        required: true,
+        value: username,
+        onChange: (e)=>setUsername(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 125
+        },
+        __self: this
+    })), Object.keys(usernameError).map((key)=>{
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "form-validation-error",
+            style: {
+                color: 'red'
+            },
+            key: key,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+                lineNumber: 129
+            },
+            __self: this
+        }, usernameError[key]));
+    }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 135
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 136
+        },
+        __self: this
+    }, "Password:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "password",
+        name: "password",
+        required: true,
+        value: password,
+        onChange: (e)=>setPassword(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 137
+        },
+        __self: this
+    })), Object.keys(passwordError).map((key)=>{
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "form-validation-error",
+            style: {
+                color: 'red'
+            },
+            key: key,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+                lineNumber: 141
+            },
+            __self: this
+        }, passwordError[key]));
+    }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 147
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 148
+        },
+        __self: this
+    }, "Email:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "email",
+        name: "email",
+        required: true,
+        value: email,
+        onChange: (e)=>setEmail(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 149
+        },
+        __self: this
+    })), Object.keys(emailError).map((key)=>{
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "form-validation-error",
+            style: {
+                color: 'red'
+            },
+            key: key,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+                lineNumber: 153
+            },
+            __self: this
+        }, emailError[key]));
+    }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 159
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 160
+        },
+        __self: this
+    }, "Birthday:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "date",
+        name: "birthday",
+        value: birthday,
+        onChange: (e)=>setBirthday(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 161
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+        variant: "outline-info",
+        type: "button",
+        style: {
+            margin: '20px 0 0 0'
+        },
+        onClick: handleRegister,
+        __source: {
+            fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 164
+        },
+        __self: this
+    }, "register"))));
+}
+_s(RegistrationView, "/Tsqoa7lX1FidQNnj1LoUhpVFGs=");
+_c = RegistrationView;
+RegistrationView.propTypes = {
+    register: _propTypesDefault.default.shape({
+        Username: _propTypesDefault.default.string.isRequired,
+        Password: _propTypesDefault.default.string.isRequired,
+        Email: _propTypesDefault.default.string.isRequired,
+        Birthday: _propTypesDefault.default.date
+    }),
+    onRegister: _propTypesDefault.default.func
+};
+var _c;
+$RefreshReg$(_c, "RegistrationView");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
