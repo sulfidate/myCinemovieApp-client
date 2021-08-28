@@ -1,10 +1,21 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
+// #0
+import { setMovies } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
+import { setUser } from '../../actions/actions';
+import { setDirectors } from '../../actions/actions';
+
+// #1
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
+// MovieCard delete...
+// import { MovieCard } from '../movie-card/movie-card';
+//    -> will be imported and used in MoviesList */
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -16,22 +27,23 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 import './main-view.scss';
 
+//#2 export keyword removed from here
 export class MainView extends React.Component {
 
   constructor() {
     super();
-    // Initial state is set to null
+    // #3 user, movies, genres, directors, FavoriteMovies state removed from here
     this.state = {
-      movies: [],
-      user: null,
-      genres: [],
-      directors: [],
-      userPassword: null,
-      userEmail: null,
-      userBirthday: null,
-      userFavMov: [],
-      signedIn: false,
-      FavoriteMovies: [],
+      // movies: [],
+      // user: null,
+      // genres: [],
+      // directors: [],
+      // userPassword: null,
+      // userEmail: null,
+      // userBirthday: null,
+      // userFavMov: [],
+      // signedIn: false,
+      // FavoriteMovies: [],
     };
   }
 
@@ -40,9 +52,9 @@ export class MainView extends React.Component {
     if (accessToken !== null) {
       this.setState({
         user: localStorage.getItem('user'),
-        userPassword: localStorage.getItem('userPassword'),
-        signedIn: localStorage.getItem('signedIn'),
-        FavoriteMovies: localStorage.getItem('FavoriteMovies'),
+        // userPassword: localStorage.getItem('userPassword'),
+        // signedIn: localStorage.getItem('signedIn'),
+        // FavoriteMovies: localStorage.getItem('FavoriteMovies'),
       });
       this.getUser(accessToken);
       this.getMovies(accessToken);
@@ -57,13 +69,15 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
+        // #4 
+        this.props.setUser(response.data);
+        // this.setState({
+        //   Username: response.data.Username,
+        //   Password: response.data.Password,
+        //   Email: response.data.Email,
+        //   Birthday: response.data.Birthday,
+        //   FavoriteMovies: response.data.FavoriteMovies,
+        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -76,10 +90,12 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
+        // #4 
+        this.props.setMovies(response.data);
         // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        // this.setState({
+        //   movies: response.data
+        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -105,9 +121,11 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        this.setState({
-          directors: response.data
-        });
+        // #4 
+        this.props.setDirectors(response.data);
+        // this.setState({
+        //   directors: response.data
+        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -119,7 +137,7 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     this.setState({
       user: authData.user.Username,
-      signedIn: true
+      // signedIn: true
     });
 
     localStorage.setItem('token', authData.token);
@@ -136,41 +154,50 @@ export class MainView extends React.Component {
     localStorage.removeItem('user');
     this.setState({
       user: null,
-      signedIn: false
+      // signedIn: false
     });
   }
 
   render() {
-    const {
-      user,
-      userFavMov = userFavMov,
-      movies,
-      signedIn,
+    let {
+      // user,
+      // movies,
+      // signedIn,
       FavoriteMovies,
     } = this.state;
-
+    // #5 user, movies are extracted from this.props rather than from the this.state
+    let {
+      user,
+      movies,
+      directors
+    } = this.props;
 
     return (
 
       <Router>
         <Row className="main-view justify-content-md-center" style={{ marginTop: '150px', padding: '15px' }}>
 
-          {/* <HeaderView signedIn={signedIn} user={user} /> */}
+          <HeaderView user={user} />
 
           <Route exact path="/" render={() => {
             if (!user) return <Col md={6}>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
+            // #6
+            return <MoviesList movies={movies} user={user} />;
+          }} />
+          {/* /*
             return movies.map(movie => (
               <Col sm={7} md={6} lg={3} xl={2} key={movie._id}>
-                <HeaderView signedIn={signedIn} user={user} />
+                <HeaderView user={user} />
                 <MovieCard movieData={movie} />
               </Col>
             ))
           }} />
+        */}
 
-          <Route path="/register" render={() => {
+          < Route path="/register" render={() => {
             if (user) return <Redirect to='/' />
             return <Col md={6}>
               <RegistrationView user={user} />
@@ -184,7 +211,7 @@ export class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
 
             return <Col md={7}>
-              <HeaderView signedIn={signedIn} user={user} />
+              <HeaderView user={user} />
 
               <Row>
                 <Button
@@ -214,7 +241,7 @@ export class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
 
             return <Col md={6}>
-              <HeaderView signedIn={signedIn} user={user} />
+              <HeaderView user={user} />
 
               <MovieView
                 movieData={movies.find(movie => movie._id === match.params.movieId)}
@@ -232,7 +259,7 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col md={6}>
-              <HeaderView signedIn={signedIn} user={user} />
+              <HeaderView user={user} />
 
               <GenreView genreData={movies.find(m => m.Genre[1] === match.params.name).Genre} movies={movies} onBackClick={() => history.goBack()} />
             </Col>
@@ -245,7 +272,7 @@ export class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <Col md={6}>
-              <HeaderView signedIn={signedIn} user={user} />
+              <HeaderView user={user} />
 
               <DirectorView directorData={movies.find(m => m.Director[1] === match.params.name).Director} movies={movies} onBackClick={() => history.goBack()} />
             </Col>
@@ -257,12 +284,20 @@ export class MainView extends React.Component {
     );
   }
 }
-MainView.propTypes = {
-  userData: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.date
-  }),
-
+// #7
+let mapStateToProps = state => {
+  return { movies: state.movies, user: state.user }
 }
+// #8 
+export default connect(mapStateToProps, { setMovies, setUser })
+  (MainView);
+
+// MainView.propTypes = {
+//   userData: PropTypes.shape({
+//     Username: PropTypes.string.isRequired,
+//     Password: PropTypes.string.isRequired,
+//     Email: PropTypes.string.isRequired,
+//     Birthday: PropTypes.date
+//   }),
+
+// }

@@ -59,10 +59,10 @@ export class ProfileView extends React.Component {
       .delete(`https://mycinemoviedatabase.herokuapp.com/users/${username}/FavoritesDelete/${movie}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      // .then(() => {
-      //   alert('Movie was removed from your Favorites List.');
-      //   this.componentDidMount();
-      // })
+      .then(() => {
+        alert('Movie was removed from your Favorites List.');
+        this.componentDidMount();
+      })
       .catch(function (error) {
         console.log(error);
       }).then(() => window.location.reload());

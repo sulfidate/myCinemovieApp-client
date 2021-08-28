@@ -149,7 +149,7 @@ export class ProfileUpdate extends React.Component {
         </Form>
         <Row>
           <Col className="reg-btns mt-1">
-            <Link to={`/profile`}><Button variant="info" style={{ color: 'white' }}>Cancel</Button></Link>
+            <Link to={`/profile`}><Button variant="info" onClick={() => window.location.reload()} style={{ color: 'white' }}>Cancel</Button></Link>
           </Col>
           <Col className="reg-btns mt-1">
             <Button size="md" variant="info" style={{ color: 'white' }} type="submit" ml="4" onClick={() => this.handleUpdate()} >Update</Button>

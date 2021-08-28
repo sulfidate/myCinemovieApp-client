@@ -14,7 +14,7 @@ export class HeaderView extends Component {
   }
 
   render() {
-    const { user, signedIn } = this.props;
+    const { user } = this.props;
 
     return (
       <>
@@ -38,7 +38,7 @@ export class HeaderView extends Component {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                   <Nav className="me-auto" className="justify-content-end">
 
-                    <NavBtn user={user} />
+                    <NavBtn user={user.Username} />
 
                   </Nav>
                 </Navbar.Collapse>
