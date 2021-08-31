@@ -41,8 +41,9 @@ export class DirectorView extends React.Component {
             </Card.Link>
           )
           )}
-          <Button variant="info" size="lg" style={{ marginLeft: '50px', color: 'white' }} onClick={() => onBackClick(null, "")}>back</Button>
         </Container>
+        <Button variant="info" size="lg" style={{ marginTop: '50px', color: 'white' }} onClick={() => onBackClick(null, "")}>back</Button>
+
       </Card >
     );
   }

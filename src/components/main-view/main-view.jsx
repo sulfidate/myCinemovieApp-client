@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { setMovies } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 import { setUser } from '../../actions/actions';
-import { setDirectors } from '../../actions/actions';
+
 
 // #1
 import { LoginView } from '../login-view/login-view';
@@ -122,7 +122,7 @@ export class MainView extends React.Component {
     })
       .then(response => {
         // #4 
-        this.props.setDirectors(response.data);
+        // this.props.setDirectors(response.data);
         // this.setState({
         //   directors: response.data
         // });

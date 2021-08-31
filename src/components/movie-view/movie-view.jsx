@@ -59,17 +59,17 @@ export class MovieView extends React.Component {
           <Card.Text style={{ fontSize: '1.3rem' }} >{movieData.Description}</Card.Text>
           <Container>
             <Nav.Link href={`/directors/${movieData.Director[1]}`}>
-              <Button variant="outline-info" size="lg" style={{ margin: '.1rem', width: '30rem' }}>Director: {`${movieData.Director[1]}`} </Button>
+              <Button variant="outline-info" size="lg" style={{ margin: '.1rem' }}>Director: {`${movieData.Director[1]}`} </Button>
             </Nav.Link>
             <Nav.Link href={`/genres/${movieData.Genre[1]}`}>
-              <Button variant="outline-info" size="lg" style={{ margin: '.1rem', width: '30rem' }}>Genre: {`${movieData.Genre[1]}`} </Button>
+              <Button variant="outline-info" size="lg" style={{ margin: '.1rem' }}>Genre: {`${movieData.Genre[1]}`} </Button>
             </Nav.Link>
             <div>
               <Button
                 id="add-favorite-btn"
                 variant="outline-info"
                 size="lg"
-                style={{ margin: '2rem 0 0 1rem', width: '14.5rem' }}
+                style={{ margin: '2rem 0 0 1rem' }}
                 onClick={() => this.handleAdd(movieData)}              >
                 add movie to my favorites
               </Button>
@@ -80,7 +80,7 @@ export class MovieView extends React.Component {
             <Button
               variant="info"
               size="lg"
-              style={{ margin: '3rem 0 0 1rem', color: 'white', width: '10rem' }}
+              style={{ margin: '3rem 0 0 1rem', color: 'white' }}
               onClick={() => onBackClick(null, "")}
             >
               back
