@@ -38,7 +38,7 @@ export class HeaderView extends Component {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                   <Nav className="me-auto" className="justify-content-end">
 
-                    <NavBtn user={user.Username} />
+                    <NavBtn Username={user} />
 
                   </Nav>
                 </Navbar.Collapse>

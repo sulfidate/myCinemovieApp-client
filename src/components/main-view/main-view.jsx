@@ -135,7 +135,7 @@ export class MainView extends React.Component {
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(authData) {
-    this.setState({
+    this.props.setUser({
       user: authData.user.Username,
       // signedIn: true
     });
@@ -152,7 +152,7 @@ export class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({
+    this.props.setUser({
       user: null,
       // signedIn: false
     });
@@ -294,9 +294,9 @@ export default connect(mapStateToProps, { setMovies, setUser })
 
 // MainView.propTypes = {
 //   userData: PropTypes.shape({
-//     Username: PropTypes.string.isRequired,
-//     Password: PropTypes.string.isRequired,
-//     Email: PropTypes.string.isRequired,
+//     Username: PropTypes.string,
+//     Password: PropTypes.string,
+//     Email: PropTypes.string,
 //     Birthday: PropTypes.date
 //   }),
 
