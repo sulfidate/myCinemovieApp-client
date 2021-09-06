@@ -34,16 +34,6 @@ export class MainView extends React.Component {
     super();
     // #3 user, movies, genres, directors, FavoriteMovies state removed from here
     this.state = {
-      // movies: [],
-      // user: null,
-      // genres: [],
-      // directors: [],
-      // userPassword: null,
-      // userEmail: null,
-      // userBirthday: null,
-      // userFavMov: [],
-      // signedIn: false,
-      // FavoriteMovies: [],
     };
   }
 
@@ -52,14 +42,11 @@ export class MainView extends React.Component {
     if (accessToken !== null) {
       this.setState({
         user: localStorage.getItem('user'),
-        // userPassword: localStorage.getItem('userPassword'),
-        // signedIn: localStorage.getItem('signedIn'),
-        // FavoriteMovies: localStorage.getItem('FavoriteMovies'),
       });
       this.getUser(accessToken);
       this.getMovies(accessToken);
-      this.getGenres(accessToken);
-      this.getDirectors(accessToken);
+      // this.getGenres(accessToken);
+      // this.getDirectors(accessToken);
     }
   }
 
