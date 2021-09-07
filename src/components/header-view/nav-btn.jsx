@@ -28,7 +28,7 @@ export class NavBtn extends Component {
 
 
           <Button variant="info" style={{ color: 'white' }} size="sm" >
-            {`signed in as: ${user}`}
+            signed in as: {user}
           </Button>
 
 

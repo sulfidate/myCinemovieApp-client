@@ -13,9 +13,6 @@ import { setUser } from '../../actions/actions';
 
 // #1
 import { LoginView } from '../login-view/login-view';
-// MovieCard delete...
-// import { MovieCard } from '../movie-card/movie-card';
-//    -> will be imported and used in MoviesList */
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -32,7 +29,7 @@ export class MainView extends React.Component {
 
   constructor() {
     super();
-    // #3 user, movies, genres, directors, FavoriteMovies state removed from here
+    // #3 user, movies state removed from here
     this.state = {
     };
   }
@@ -45,8 +42,6 @@ export class MainView extends React.Component {
       });
       this.getUser(accessToken);
       this.getMovies(accessToken);
-      // this.getGenres(accessToken);
-      // this.getDirectors(accessToken);
     }
   }
 
@@ -58,13 +53,6 @@ export class MainView extends React.Component {
       .then((response) => {
         // #4 
         this.props.setUser(response.data);
-        // this.setState({
-        //   Username: response.data.Username,
-        //   Password: response.data.Password,
-        //   Email: response.data.Email,
-        //   Birthday: response.data.Birthday,
-        //   FavoriteMovies: response.data.FavoriteMovies,
-        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -79,40 +67,6 @@ export class MainView extends React.Component {
       .then(response => {
         // #4 
         this.props.setMovies(response.data);
-        // Assign the result to the state
-        // this.setState({
-        //   movies: response.data
-        // });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  getGenres(token) {
-    axios.get('https://mycinemoviedatabase.herokuapp.com/genres', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        this.setState({
-          genres: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  getDirectors(token) {
-    axios.get('https://mycinemoviedatabase.herokuapp.com/directors', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // #4 
-        // this.props.setDirectors(response.data);
-        // this.setState({
-        //   directors: response.data
-        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -124,16 +78,12 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     this.props.setUser({
       user: authData.user.Username,
-      // signedIn: true
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    localStorage.setItem('signedIn', true);
 
     this.getMovies(authData.token);
-    this.getGenres(authData.token);
-    this.getDirectors(authData.token);
   }
 
   onLoggedOut() {
@@ -141,22 +91,15 @@ export class MainView extends React.Component {
     localStorage.removeItem('user');
     this.props.setUser({
       user: null,
-      // signedIn: false
     });
   }
 
   render() {
-    let {
-      // user,
-      // movies,
-      // signedIn,
-      FavoriteMovies,
-    } = this.state;
     // #5 user, movies are extracted from this.props rather than from the this.state
     let {
       user,
       movies,
-      directors
+      FavoriteMovies,
     } = this.props;
 
     return (
@@ -174,15 +117,6 @@ export class MainView extends React.Component {
             // #6
             return <MoviesList movies={movies} user={user} />;
           }} />
-          {/* /*
-            return movies.map(movie => (
-              <Col sm={7} md={6} lg={3} xl={2} key={movie._id}>
-                <HeaderView user={user} />
-                <MovieCard movieData={movie} />
-              </Col>
-            ))
-          }} />
-        */}
 
           < Route path="/register" render={() => {
             if (user) return <Redirect to='/' />
@@ -278,13 +212,3 @@ let mapStateToProps = state => {
 // #8 
 export default connect(mapStateToProps, { setMovies, setUser })
   (MainView);
-
-// MainView.propTypes = {
-//   userData: PropTypes.shape({
-//     Username: PropTypes.string,
-//     Password: PropTypes.string,
-//     Email: PropTypes.string,
-//     Birthday: PropTypes.date
-//   }),
-
-// }

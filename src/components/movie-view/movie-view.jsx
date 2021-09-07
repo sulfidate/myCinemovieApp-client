@@ -2,14 +2,24 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useState } from 'react';
+
+import './movie-view.scss';
 
 import { Card, Button, Image, Link, Nav, Container } from 'react-bootstrap';
 
 
 export class MovieView extends React.Component {
-  constructor() {
-    super();
-    this.state = { value: '' };
+  constructor(props) {
+    super(props);
+    this.state = { value: '', isToggleOn: 'hide-fav-btn' };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
   }
 
   handleAdd() {
@@ -64,17 +74,18 @@ export class MovieView extends React.Component {
             <Nav.Link href={`/genres/${movieData.Genre[1]}`}>
               <Button variant="outline-info" size="lg" style={{ margin: '.1rem' }}>Genre: {`${movieData.Genre[1]}`} </Button>
             </Nav.Link>
-            <div>
+            <Container>
               <Button
-                id="add-favorite-btn"
+                className="btn"
+                id={this.state.isToggleOn ? "add-fav-btn" : "hide-fav-btn"}
                 variant="outline-info"
                 size="lg"
                 style={{ margin: '2rem 0 0 1rem' }}
-                onClick={() => this.handleAdd(movieData)}              >
+                onClick={() => { this.handleAdd(movieData); this.handleClick() }}>
                 add movie to my favorites
               </Button>
-            </div>
 
+            </Container>
           </Container>
           <Container>
             <Button
@@ -93,33 +104,3 @@ export class MovieView extends React.Component {
   }
 }
 
-MovieView.propTypes = {
-  movieData: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Featured: PropTypes.boolean,
-    // Genre: PropTypes.arrayOf(PropTypes.arrayOf(
-    //   PropTypes.shape({
-    //     _id: PropTypes.string.isRequired,
-    //     Name: PropTypes.string.isRequired,
-    //     Description: PropTypes.string.isRequired
-    //   }))),
-    // Director: PropTypes.arrayOf(
-    //   PropTypes.shape({
-    //     _id: PropTypes.string.isRequired,
-    //     Name: PropTypes.string.isRequired,
-    //     Bio: PropTypes.string.isRequired
-    //   })),
-    Actors: PropTypes.arrayOf(PropTypes.string)
-  }).isRequired,
-  // directorData: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     _id: PropTypes.string.isRequired,
-  //     Name: PropTypes.string.isRequired,
-  //     Bio: PropTypes.string.isRequired
-  //   })
-  // )
-
-};

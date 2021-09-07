@@ -23,16 +23,3 @@ export class MovieCard extends React.Component {
     );
   }
 }
-
-// MovieCard.propTypes = {
-//   movieData: PropTypes.shape({
-//     _id: PropTypes.string.isRequired,
-//     Title: PropTypes.string.isRequired,
-//     ImagePath: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     Featured: PropTypes.boolean,
-//     Genre: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     Director: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     Actors: PropTypes.arrayOf(PropTypes.string)
-//   }).isRequired
-// };

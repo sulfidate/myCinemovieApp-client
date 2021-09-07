@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Form, Button, Container, Col, Nav, Navbar } from 'react-bootstrap';
-
+import { NavBtnLogIn } from '../header-view/nav-btn-login';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -88,7 +88,7 @@ export function RegistrationView(props) {
               <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <Nav className="me-auto" className="justify-content-end">
 
-                  {/* <NavBtn user={user} /> */}
+                  <NavBtnLogIn />
 
                 </Nav>
               </Navbar.Collapse>

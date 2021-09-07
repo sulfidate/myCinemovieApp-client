@@ -1,28 +1,58 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 import { Form, Button, Container, Navbar, Nav } from 'react-bootstrap';
 import './login-view.scss'
+import { NavBtnLogIn } from '../header-view/nav-btn-login';
+import { useState } from 'react';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const [usernameError, setUsernameError] = useState({});
+  const [passwordError, setPasswordError] = useState({});
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
-    /* Send a request to the server for authentication */
-    axios.post('https://mycinemoviedatabase.herokuapp.com/login', {
-      Username: username,
-      Password: password
-    })
-      .then(response => {
-        const data = response.data;
-        props.onLoggedIn(data);
+
+    const isValid = formValidation();
+    if (isValid) {
+
+      /* Send a request to the server for authentication */
+      axios.post('https://mycinemoviedatabase.herokuapp.com/login', {
+        Username: username,
+        Password: password
       })
-      .catch(e => {
-        console.log('no such user', e)
-      });
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(e => {
+          console.log('no such user', e);
+          alert(username + " is not registered");
+        }).then(() => window.location.reload());
+    }
+  };
+
+  const formValidation = () => {
+    const usernameError = {};
+    const passwordError = {};
+    let isValid = true;
+
+    if (username.length < 4 || username === '') {
+      usernameError.UsernameToShort = "Username must be more than 4 characters.";
+      isValid = false;
+    }
+    if (password.length < 6 || password === '') {
+      passwordError.noPassword = "You must enter a password at least 6 characters long.";
+      isValid = false;
+    }
+
+    setUsernameError(usernameError);
+    setPasswordError(passwordError);
+    return isValid;
   };
 
   return (
@@ -47,7 +77,7 @@ export function LoginView(props) {
               <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <Nav className="me-auto" className="justify-content-end">
 
-                  {/* <NavBtn user={user} /> */}
+                  <NavBtnLogIn />
 
                 </Nav>
               </Navbar.Collapse>
@@ -78,20 +108,42 @@ export function LoginView(props) {
         </Navbar>
       </Container>
 
-
-      <Form style={{ marginTop: '25px', padding: '5px' }}>
+      <Form style={{ marginTop: '25px', padding: '5px' }} className="register-form" noValidate >
         <Form.Group controlId="formUsername">
           <Form.Label>Username:</Form.Label>
-          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+          <Form.Control type="text" name="username" required value={username} onChange={e => setUsername(e.target.value)} />
         </Form.Group>
+        {Object.keys(usernameError).map((key) => {
+          return (
+            <div className="form-validation-error" style={{ color: 'red' }} key={key}>
+              {usernameError[key]}
+            </div>
+          );
+        })}
+
 
         <Form.Group controlId="formPassword">
           <Form.Label>Password:</Form.Label>
-          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+          <Form.Control type="password" name="password" required value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
+        {Object.keys(passwordError).map((key) => {
+          return (
+            <div className="form-validation-error" style={{ color: 'red' }} key={key}>
+              {passwordError[key]}
+            </div>
+          );
+        })}
+
 
         <Button variant="outline-info" type="submit" style={{ margin: '20px 0 0 0' }} onClick={handleSubmit}>login</Button>
       </Form >
     </>
   );
+}
+
+LoginView.propTypes = {
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+  })
 }

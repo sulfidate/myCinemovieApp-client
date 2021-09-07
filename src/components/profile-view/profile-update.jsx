@@ -104,7 +104,6 @@ export class ProfileUpdate extends React.Component {
   }
 
 
-
   render() {
     // const { user } = this.props;
     const user = localStorage.getItem('user');

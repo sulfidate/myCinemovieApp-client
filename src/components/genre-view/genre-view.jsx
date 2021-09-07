@@ -26,7 +26,6 @@ export class GenreView extends React.Component {
               <Card.Link
                 href={`/movies/${m._id}`}
                 key={i}>
-                {/* {m.Title} */}
                 <Image rounded thumbnail
                   variant="bottom"
                   src={m.ImagePath}
@@ -43,10 +42,3 @@ export class GenreView extends React.Component {
     );
   }
 }
-
-// GenreView.propTypes = {
-//   genreMovies: PropTypes.shape({
-//     Name: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired
-//   })
-// };

@@ -31,7 +31,6 @@ export class DirectorView extends React.Component {
             <Card.Link
               href={`/movies/${m._id}`}
               key={i}>
-              {/* {m.Title} */}
               <Image rounded thumbnail
                 variant="bottom"
                 src={m.ImagePath}
@@ -48,10 +47,3 @@ export class DirectorView extends React.Component {
     );
   }
 }
-
-// DirectorView.propTypes = {
-//   directorData: PropTypes.shape({
-//     Name: PropTypes.string.isRequired,
-//     Bio: PropTypes.string.isRequired
-//   })
-// };
