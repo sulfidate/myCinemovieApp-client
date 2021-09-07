@@ -1,0 +1,149 @@
+var helpers = require("../../../../../../../.nvm/versions/node/v14.17.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DirectorView", ()=>DirectorView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _reactBootstrap = require("react-bootstrap");
+class DirectorView extends _reactDefault.default.Component {
+    render() {
+        const { directorData , onBackClick , movies  } = this.props;
+        const directorMovies = movies.filter((m)=>m.Director[1] === directorData[1]
+        );
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
+            style: {
+                marginTop: '25px',
+                padding: '5px'
+            },
+            border: "info",
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 16
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Image, {
+            rounded: true,
+            variant: "top",
+            src: directorData[5],
+            style: {
+                width: '100%',
+                maxWidth: '360px'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 17
+            },
+            __self: this
+        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 22
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
+            style: {
+                fontSize: '2rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 23
+            },
+            __self: this
+        }, directorData[1], " "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+            style: {
+                fontSize: '1.3rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 24
+            },
+            __self: this
+        }, "Birthday: ", directorData[3], " "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+            style: {
+                fontSize: '1.3rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 25
+            },
+            __self: this
+        }, "Deathday: ", directorData[4], " "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+            style: {
+                fontSize: '1.1rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 26
+            },
+            __self: this
+        }, directorData[2], " ")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+            style: {
+                fontSize: '1.3rem'
+            },
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 28
+            },
+            __self: this
+        }, "More movies from ", directorData[1], ": "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+            fluid: true,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 29
+            },
+            __self: this
+        }, directorMovies.map((m, i)=>/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Link, {
+                href: `/movies/${m._id}`,
+                key: i,
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                    lineNumber: 31
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Image, {
+                rounded: true,
+                thumbnail: true,
+                variant: "bottom",
+                src: m.ImagePath,
+                style: {
+                    width: '100%',
+                    maxWidth: '10rem',
+                    float: 'left',
+                    marginRight: '.9rem'
+                },
+                __source: {
+                    fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                    lineNumber: 34
+                },
+                __self: this
+            }))
+        )), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            variant: "info",
+            size: "lg",
+            style: {
+                marginTop: '50px',
+                color: 'white'
+            },
+            onClick: ()=>onBackClick(null, "")
+            ,
+            __source: {
+                fileName: "/Users/marcuskrause/Documents/WebDev/GitHub/myCinemovieApp-client/src/components/director-view/director-view.jsx",
+                lineNumber: 44
+            },
+            __self: this
+        }, "back")));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
