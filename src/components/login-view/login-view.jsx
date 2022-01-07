@@ -4,7 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import './login-view.scss';
 
@@ -28,17 +27,15 @@ export function LoginView(props) {
   return (
     <Row className="login-view justify-content-md-center">
       <Col md={12}>
-        <Jumbotron fluid>
-          <Container>
-            <h1>my Cinemovie database</h1>
-            <p>
-              This pretty little database gives you, as a registered user, the possibility to get information about films, such as their directors or their genres.
-            </p>
-            <p>
-              To login please fill in you're username and password...
-            </p>
-          </Container>
-        </Jumbotron>
+        <Container>
+          <h1>my Cinemovie database</h1>
+          <p>
+            This pretty little database gives you, as a registered user, the possibility to get information about films, such as their directors or their genres.
+          </p>
+          <p>
+            To login please fill in you're username and password...
+          </p>
+        </Container>
         <Form>
           <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
@@ -49,7 +46,7 @@ export function LoginView(props) {
             <Form.Label>Password:</Form.Label>
             <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
           </Form.Group>
-          <Button variant="info" size="sm" block type="submit" onClick={handleSubmit} >
+          <Button variant="info" size="sm" type="submit" onClick={handleSubmit} >
             Submit
           </Button>
         </Form>
