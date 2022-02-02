@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Form, Button, Container, Row, Col, Card, CardGroup, Navbar } from "react-bootstrap";
-import { HeaderView } from "../HeaderView/header-view";
 import { FooterView } from "../FooterView/footer-view";
 import './login-view.scss';
 import axios from "axios";
-import { Redirect, Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // Declare hook for each input
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
-
-  // Input Validation
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message1, setMessage1] = useState('');
   const [message2, setMessage2] = useState('');
@@ -52,17 +48,17 @@ export default function LoginView(props) {
   const validate = () => {
     let isReq = true;
     if (!username) {
-      // setUsernameErr('Username Required');
+      setUsernameErr('Username Required');
       isReq = false;
     } else if (username.length < 8) {
-      // setUsernameErr('Username must be at least 8 characters long');
+      setUsernameErr('Username must be at least 8 characters long');
       isReq = false;
     }
     if (!password) {
-      // setPasswordErr('Password Required');
+      setPasswordErr('Password Required');
       isReq = false;
     } else if (password.length < 6) {
-      // setPasswordErr('Password must be at least 6 characters long');
+      setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
     return isReq;
@@ -80,11 +76,9 @@ export default function LoginView(props) {
         .then(response => {
           const data = response.data;
           props.onLoggedIn(data);
-          console.log("handlesubmit:", data);
         })
         .catch(e => {
-          console.log('no such user');
-          alert('User is not registered -> please register or try again with correct user information. Thanks for using our App!')
+          alert('User is not registered or password is wrong! -> please register or try again with correct user information. Thanks for using our App!')
         });
     }
   };

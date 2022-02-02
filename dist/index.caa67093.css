@@ -82,6 +82,10 @@
   text-align: center;
 }
 
+
+.colorInfo {
+  color: #17a2b8;
+}
 .dropdown-toggle::after {
   color: #17a2b8;
 }
@@ -100,10 +104,6 @@
 
 #basic-nav-dropdown:focus {
   box-shadow: none !important;
-}
-
-.colorInfo {
-  color: #17a2b8;
 }
 .img {
   display: block;

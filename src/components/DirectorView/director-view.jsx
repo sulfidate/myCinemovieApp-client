@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Card, Button, ButtonGroup, Row, Container } from "react-bootstrap";
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
 import './director-view.scss';
 
 export default class DirectorView extends React.Component {

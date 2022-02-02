@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Navbar, Row, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './header-view.scss';
-import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
 
 export class HeaderView extends Component {
   render() {
@@ -58,7 +57,11 @@ export class HeaderView extends Component {
             title={<Button
               variant='none'
               size='md'
-              style={{ color: '#17A2B8', fontSize: 'small', backgroundColor: '#17a2b8' }}
+              style={{
+                color: '#17A2B8',
+                fontSize: 'small',
+                backgroundColor: '#17a2b8'
+              }}
             >
               <Container
                 className="justify-content-center"
@@ -76,23 +79,35 @@ export class HeaderView extends Component {
               </Container>
             </Button>}
             id="basic-nav-dropdown"
-            style={{ backgroundColor: '#17a2b8', marginLeft: '5rem' }}
+            style={{
+              backgroundColor: '#17a2b8',
+              marginLeft: '5rem'
+            }}
           >
 
 
             <NavDropdown.Item
               href="#logout"
-              style={{ backgroundColor: '#17a2b8' }}
+              style={{
+                backgroundColor: '#17a2b8'
+              }}
             >
 
               <Button
                 onClick={onLoggedOut}
                 variant='light'
                 size='sm'
-                style={{ marginLeft: '1rem', color: '#17A2B8', fontSize: 'small', width: '85%' }}
+                style={{
+                  marginLeft: '1rem',
+                  color: '#17A2B8',
+                  fontSize: 'small',
+                  width: '85%'
+                }}
               >
                 <Redirect
-                  to="/" />Logout
+                  to="/"
+                />
+                Logout
               </Button>
             </NavDropdown.Item>
           </NavDropdown>

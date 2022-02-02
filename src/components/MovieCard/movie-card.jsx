@@ -53,11 +53,6 @@ export default class MovieCard extends React.Component {
 
           </Card.Title>
 
-          {/* <Card.Text
-            style={{ color: '#17A2B8', height: '1rem' }}
-          >{movie.Genre[1]}
-          </Card.Text>
- */}
           <Link to={`/movies/${movie._id}`}>
             <Button
               variant="outline-info">more...

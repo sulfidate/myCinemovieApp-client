@@ -15,13 +15,6 @@ export default class MovieView extends React.Component {
     };
   }
 
-  // handleToggle = (favMovId) => {
-  //   this.setState({ isActive: !this.state.isActive });
-  //   this.setState({ isSelected: this.state.isActive });
-  //   console.log(favMovId);
-
-  // };
-
 
   addFavMovie() {
     const username = localStorage.getItem('user');
@@ -32,7 +25,6 @@ export default class MovieView extends React.Component {
       method: 'PATCH'
     })
       .then(response => {
-        // alert(`${this.props.movie.Title} was added to Favorite Movies`);
         this.setState({ isActive: true });
         this.setState({ isSelected: true });
       })
@@ -50,8 +42,6 @@ export default class MovieView extends React.Component {
 
     )
       .then((response) => {
-        console.log(response, movie._id);
-        // alert(`${this.props.movie.Title} was removed from Favorite Movies`);
         this.setState({ isActive: false });
         this.setState({ isSelected: false });
       })
@@ -87,7 +77,7 @@ export default class MovieView extends React.Component {
           >
             <Container>
               <Row className="justify-content-center" >
-                <Card.Title className="card-title" >
+                <Card.Title className="card-title">
                   <span>
                     {movie.Title}
                   </span>

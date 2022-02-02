@@ -46,33 +46,6 @@ export default class GenreView extends React.Component {
                   className="img"
                 />
 
-                <div className="overlay d-flex align-items-center justify-content-center" >
-                  {/* <>
-                    <Button
-                      key='birth'
-                      variant='info'
-                      size="sm"
-                      disabled
-                    >
-                      birth:<br />{director[3]}
-
-                    </Button>
-                  </>
-                  <>
-                    <Button
-                      key='death'
-                      className='mr-2'
-                      variant='info'
-                      size="sm"
-                      disabled
-                    >
-                      death:<br />{director[4]}
-                    </Button>
-
-
-                  </> */}
-                </div>
-
               </Col>
             </Container>
             <Card.Body>
@@ -82,7 +55,14 @@ export default class GenreView extends React.Component {
                 {genre[2]}
               </Card.Text>
             </Card.Body>
-            <Button className="movie-button" bg="dark" variant="info" onClick={() => { onBackClick(null); }} value={this.setState.movieId}>Back</Button>
+            <Button className="movie-button"
+              bg="dark"
+              variant="info"
+              onClick={() => { onBackClick(null); }}
+              value={this.setState.movieId}
+            >
+              Back
+            </Button>
 
           </Card>
         </Col>

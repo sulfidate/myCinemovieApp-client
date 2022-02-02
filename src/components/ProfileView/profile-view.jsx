@@ -36,7 +36,6 @@ export default class ProfileView extends React.Component {
 
     )
       .then((response) => {
-        console.log(response, m._id);
         this.componentDidMount();
         window.location.reload();
       })
@@ -45,7 +44,6 @@ export default class ProfileView extends React.Component {
       });
 
   }
-
 
 
   onLoggedOut() {
@@ -76,7 +74,7 @@ export default class ProfileView extends React.Component {
         console.log(error);
       });
   };
-  // Allow user to edit or update profile
+
   editUser = (e) => {
     e.preventDefault();
     const username = localStorage.getItem("user");
@@ -105,8 +103,6 @@ export default class ProfileView extends React.Component {
 
         localStorage.setItem("user", this.state.Username);
         const data = response.data;
-        console.log(data);
-        console.log(this.state.Username);
         alert("Profile is updated!");
         window.open(`/users/${Username}`, "_self");
       })
@@ -115,7 +111,6 @@ export default class ProfileView extends React.Component {
       });
   };
 
-  // Deregister
   onDeleteUser() {
     const confirmed = window.confirm("Are you sure you want to delete your account?");
     if (confirmed) {

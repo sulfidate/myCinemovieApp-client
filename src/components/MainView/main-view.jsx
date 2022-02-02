@@ -31,7 +31,6 @@ export default class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        // Assign the result to the state
         this.setState({
           movies: response.data
         });
@@ -53,7 +52,6 @@ export default class MainView extends React.Component {
 
 
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({
       user: authData.user.Username
     });

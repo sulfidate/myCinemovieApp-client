@@ -13,7 +13,6 @@ export default function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  // Validation
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
@@ -48,9 +47,9 @@ export default function RegistrationView(props) {
   const validateEmail = (e) => {
     if (!email) {
       setBtnDisabled(true);
-      setEmailErr('Password Required');
+      setEmailErr('Email Required');
     } else if ((email.length <= 5) || (email.indexOf('@') === -1)) {
-      setEmailErr(`Email seems not to be in valid format - at least 11 characters or missing @character`);
+      setEmailErr(`Email seems not to be in valid format - missing @ or . character (xxx@xxx.xxx)`);
       setBtnDisabled(true);
     } else {
       setEmailErr(null);
@@ -60,28 +59,27 @@ export default function RegistrationView(props) {
   }
 
 
-  // validate user inputs
   const validate = () => {
     let isReq = true;
     if (!username) {
-      // setUsernameErr('Username Required');
+      setUsernameErr('Username Required');
       isReq = false;
     } else if (username.length < 8) {
-      // setUsernameErr('Username must be at least 8 characters long');
+      setUsernameErr('Username must be at least 8 characters long');
       isReq = false;
     }
     if (!password) {
-      // setPasswordErr('Password Required');
+      setPasswordErr('Password Required');
       isReq = false;
     } else if (password.length < 6) {
-      // setPasswordErr('Password must be at least 6 characters long');
+      setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
     if (!email) {
-      // setEmailErr('Email Required');
+      setEmailErr('Email Required');
       isReq = false;
-    } else if (email.indexOf('@') === -1) {
-      // setEmailErr('Email seems not to be in valid format - missing @ character');
+    } else if (email.indexOf('@') === -1 && email.indexOf('.') === -1) {
+      setEmailErr('Email seems not to be in valid format - missing @ or . character (xxx@xxx.xxx)');
       isReq = false;
     }
     return isReq;
@@ -91,7 +89,6 @@ export default function RegistrationView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
-      /* Send a request to the server for authentication */
       axios.post('https://mycinemoviedatabase.herokuapp.com/users', {
         Username: username,
         Password: password,
@@ -100,20 +97,17 @@ export default function RegistrationView(props) {
       })
         .then(response => {
           const data = response.data;
-          console.log(data);
           alert('Registration successful, please login!');
-          window.open('/', '_self');// _self is necessary that page opens in current tab
+          window.open('/', '_self');
         })
         .catch(response => {
           console.error(response);
-          alert('unable to register');
+          alert('unable to register - fill information in right format!');
         });
     }
   };
 
-
   return (
-
     <Container>
       <Container>
         <Navbar
@@ -123,7 +117,6 @@ export default function RegistrationView(props) {
           fixed='top'
         >
           <Container>
-
             <Navbar.Brand>
               myCineMovieApp
             </Navbar.Brand>
@@ -131,7 +124,9 @@ export default function RegistrationView(props) {
           </Container>
 
           <Navbar.Text>
-            <Link to={"/"}>
+            <Link
+              to={"/"}
+            >
               <Button
                 variant="light link"
                 style={{ color: '#17A2B8' }}
