@@ -18,14 +18,13 @@ export default class ProfileView extends React.Component {
       Email: null,
       Birthday: null,
       FavoriteMovies: [],
-      col: 12,
     };
   }
 
-  componentDidMount() {
-    const accessToken = localStorage.getItem("token");
-    this.getUser(accessToken);
-  }
+  // componentDidMount() {
+  //   const accessToken = localStorage.getItem("token");
+  //   this.getUser(accessToken);
+  // }
 
   onRemoveFavorite = (m) => {
     const user = localStorage.getItem('user');
@@ -36,7 +35,7 @@ export default class ProfileView extends React.Component {
 
     )
       .then((response) => {
-        this.componentDidMount();
+        // this.componentDidMount();
         window.location.reload();
       })
       .catch(function (error) {
@@ -46,34 +45,34 @@ export default class ProfileView extends React.Component {
   }
 
 
-  onLoggedOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    this.setState({
-      user: null,
-    });
-    window.open("/", "_self");
-  }
+  // onLoggedOut() {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   this.setState({
+  //     user: null,
+  //   });
+  //   window.open("/", "_self");
+  // }
 
-  getUser = (token) => {
-    const username = localStorage.getItem("user");
-    axios
-      .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // getUser = (token) => {
+  //   const username = localStorage.getItem("user");
+  //   axios
+  //     .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((response) => {
+  //       this.setState({
+  //         Username: response.data.Username,
+  //         Password: response.data.Password,
+  //         Email: response.data.Email,
+  //         Birthday: response.data.Birthday,
+  //         FavoriteMovies: response.data.FavoriteMovies,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   editUser = (e) => {
     e.preventDefault();
@@ -161,23 +160,16 @@ export default class ProfileView extends React.Component {
 
   render() {
     const { movies, user } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday } = this.state;
+    const { FavoriteMovies, Username, Email, Birthday } = this.props;
 
     return (
       <Container>
         <Row
-          className="profile-view"
-          style={{ margin: '7rem 1rem 7rem 1rem' }}
+          className="profile-view mt-7 mb-7"
+          style={{ minWidth: '400px' }}
+
         >
-          <Col></Col>
-          <Col
-            xs={12}
-            sm={12}
-            md={12}
-            lg={12}
-            xl={12}
-            xxl={12}
-          >
+          <Col>
             <CardGroup>
               <Card
                 bg='light'
@@ -213,6 +205,7 @@ export default class ProfileView extends React.Component {
                   <Card
                     style={{
                       border: '0.1rem solid #17a2b8',
+
                     }}
                   >
 
@@ -230,10 +223,10 @@ export default class ProfileView extends React.Component {
                               return (
                                 <Col
                                   sm={6}
-                                  md={4}
-                                  lg={3}
-                                  xl={3}
-                                  xxl={3}
+                                  md={6}
+                                  lg={4}
+                                  xl={4}
+                                  xxl={2}
                                   key={movie._id}
                                 >
                                   <Card>
@@ -391,8 +384,8 @@ export default class ProfileView extends React.Component {
               </Card>
             </CardGroup>
           </Col>
-          <Col></Col>
         </Row>
+
       </Container >
     );
   }

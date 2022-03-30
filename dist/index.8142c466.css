@@ -1,9 +1,61 @@
-
 .main-view {
   margin-top: 7rem;
   margin-bottom: 7rem;
 }
+.dropdown-toggle::after {
+  color: #17a2b8;
+}
 
+.dropdown-menu.show {
+  background-color: #17a2b8;
+  border: #17a2b8 1px solid;
+  left: 10%;
+  width: 75%;
+}
+
+.btn.focus,
+.btn:focus {
+  box-shadow: 0 0 0 0 !important;
+}
+
+#basic-nav-dropdown:focus {
+  box-shadow: none !important;
+}
+
+
+.colorInfo {
+  color: #17a2b8;
+}
+.text-muted p {
+  color: red;
+}
+
+.colorInfo {
+  color: #17a2b8;
+}
+
+.form-btn {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.form-btn-sbm {
+  margin: 1rem 5rem;
+}
+
+.form-label Button {
+  padding: 0.45rem 3.5rem;
+  border-radius: 3rem;
+  margin-left: 2rem;
+  float: left;
+}
+
+.form-label Button {
+  padding: 0.45rem 3.5rem;
+  border-radius: 3rem;
+  margin-left: 2rem;
+  float: left;
+}
 .card-title span {
   color: #17a2b8;
   font-size: 2.5rem;
@@ -80,30 +132,6 @@
   font-size: 10rem;
   padding: 10px 0;
   text-align: center;
-}
-
-
-.colorInfo {
-  color: #17a2b8;
-}
-.dropdown-toggle::after {
-  color: #17a2b8;
-}
-
-.dropdown-menu.show {
-  background-color: #17a2b8;
-  border: #17a2b8 1px solid;
-  left: 10%;
-  width: 75%;
-}
-
-.btn.focus,
-.btn:focus {
-  box-shadow: 0 0 0 0 !important;
-}
-
-#basic-nav-dropdown:focus {
-  box-shadow: none !important;
 }
 .img {
   display: block;
@@ -188,33 +216,5 @@
   padding: 10px 0;
   text-align: center;
 }
-.text-muted p {
-  color: red;
-}
 
-.colorInfo {
-  color: #17a2b8;
-}
-
-.form-btn {
-  margin-top: 1rem;
-  margin-bottom: 3rem;
-}
-
-.form-btn-sbm {
-  margin: 1rem 5rem;
-}
-
-.form-label Button {
-  padding: 0.45rem 3.5rem;
-  border-radius: 3rem;
-  margin-left: 2rem;
-  float: left;
-}
-.form-label Button {
-  padding: 0.45rem 3.5rem;
-  border-radius: 3rem;
-  margin-left: 2rem;
-  float: left;
-}
-/*# sourceMappingURL=index.caa67093.css.map */
+/*# sourceMappingURL=index.8142c466.css.map */

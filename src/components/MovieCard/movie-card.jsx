@@ -19,7 +19,7 @@ export default class MovieCard extends React.Component {
 
         key={movie._id}
         text='light'
-        className="mb-2"
+        className="mb-5 mt-3"
         style={{ border: 'solid #17A2B8 0.1rem', padding: '0.05rem' }}
 
       >

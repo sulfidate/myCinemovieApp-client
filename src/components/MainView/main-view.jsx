@@ -22,9 +22,17 @@ export default class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
+      FavoriteMovies: [],
       user: null,
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
+
     };
   }
+
+  // Functions for all Components
 
   getMovies(token) {
     axios.get('https://mycinemoviedatabase.herokuapp.com/movies', {
@@ -40,6 +48,27 @@ export default class MainView extends React.Component {
       });
   }
 
+  getUser = (token) => {
+    const username = localStorage.getItem("user");
+    axios
+      .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
@@ -47,9 +76,10 @@ export default class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getUser(accessToken);
+
     }
   }
-
 
   onLoggedIn(authData) {
     this.setState({
@@ -67,10 +97,39 @@ export default class MainView extends React.Component {
     this.setState({
       user: null
     });
+    window.open("/", "_self");
+
   }
 
+  onRemoveFavorite = (movie) => {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios.delete(`https://mycinemoviedatabase.herokuapp.com/users/${user}/FavoritesDelete/${movie._id}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+
+
+    )
+      .then((response) => {
+        // this.componentDidMount();
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+
   render() {
-    const { movies, user } = this.state;
+    const {
+      movies,
+      user,
+      FavoriteMovies,
+      Username,
+      Password,
+      Email,
+      Birthday,
+    } = this.state;
 
     return (
       <Router>
@@ -239,13 +298,25 @@ export default class MainView extends React.Component {
 
                   if (!user) return <Redirect to={'/'} />
 
-                  return <Col>
-                    <ProfileView
-                      movies={movies}
-                      user={user}
-                      onBackClick={() => history.goBack()}
-                    />
-                  </Col>
+                  return (
+                    <>
+                      <Col
+                        key={'rofile-view'}
+                      >
+                        <ProfileView
+                          movies={movies}
+                          user={user}
+                          FavoriteMovies={FavoriteMovies}
+                          Username={Username}
+                          Password={Password}
+                          Email={Email}
+                          Birthday={Birthday}
+                          onRemoveFavorite={(movie) => { this.onRemoveFavorite(movie) }}
+                          onBackClick={() => history.goBack()}
+                        />
+                      </Col>
+                    </>
+                  )
                 }}
               />
 
