@@ -55,7 +55,7 @@ export default class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick } = this.props
+    const { movie, onBackClick, FavoriteMovies } = this.props
     const { isActive, isSelected, movieId } = this.state
     return (
       <Row>

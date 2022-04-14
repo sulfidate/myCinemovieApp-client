@@ -32911,7 +32911,7 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     getUser = (token)=>{
-        const username = localStorage.getItem("user");
+        const username = localStorage.getItem('user');
         _axiosDefault.default.get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -32952,7 +32952,7 @@ class MainView extends _reactDefault.default.Component {
         this.setState({
             user: null
         });
-        window.open("/", "_self");
+        window.open('/', '_self');
     }
     onRemoveFavorite = (movie)=>{
         const user = localStorage.getItem('user');
@@ -32991,17 +32991,17 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 146,
+                                    lineNumber: 133,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/MainView/main-view.jsx",
-                                lineNumber: 139,
+                                lineNumber: 132,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/MainView/main-view.jsx",
-                            lineNumber: 138,
+                            lineNumber: 131,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Row, {
@@ -33034,7 +33034,7 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 155,
+                                    lineNumber: 143,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -33052,7 +33052,7 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 185,
+                                    lineNumber: 167,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -33079,6 +33079,8 @@ class MainView extends _reactDefault.default.Component {
                                                         movie: movies.find((movie)=>movie._id === match.params.movieId
                                                         ),
                                                         onBackClick: ()=>history.goBack()
+                                                        ,
+                                                        FavoriteMovies: FavoriteMovies
                                                     }, void 0, false, void 0, void 0)
                                                 }, void 0, false, void 0, void 0),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Col, {
@@ -33088,7 +33090,7 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 202,
+                                    lineNumber: 183,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -33123,7 +33125,7 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 233,
+                                    lineNumber: 216,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -33158,7 +33160,7 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 264,
+                                    lineNumber: 250,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -33187,36 +33189,36 @@ class MainView extends _reactDefault.default.Component {
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/MainView/main-view.jsx",
-                                    lineNumber: 295,
+                                    lineNumber: 284,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/MainView/main-view.jsx",
-                            lineNumber: 154,
+                            lineNumber: 142,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_footerViewDefault.default, {
                             className: "footer-view"
                         }, void 0, false, {
                             fileName: "src/components/MainView/main-view.jsx",
-                            lineNumber: 324,
+                            lineNumber: 311,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/MainView/main-view.jsx",
-                    lineNumber: 137,
+                    lineNumber: 130,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/MainView/main-view.jsx",
-                lineNumber: 136,
+                lineNumber: 129,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "src/components/MainView/main-view.jsx",
-            lineNumber: 135,
+            lineNumber: 128,
             columnNumber: 7
         }, this));
     }
@@ -39119,7 +39121,7 @@ class MovieView extends _reactDefault.default.Component {
         });
     };
     render() {
-        const { movie , onBackClick  } = this.props;
+        const { movie , onBackClick , FavoriteMovies  } = this.props;
         const { isActive , isSelected , movieId  } = this.state;
         return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Row, {
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Col, {
