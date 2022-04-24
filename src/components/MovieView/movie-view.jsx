@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { Col, Card, Button, ButtonGroup, Row, Container } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import './movie-view.scss'
 
 export default class MovieView extends React.Component {
@@ -11,7 +10,37 @@ export default class MovieView extends React.Component {
     this.state = {
       isSelected: false,
       isActive: false,
+      favouriteMovies: [],
     }
+  }
+
+  // check if movie is in favorites
+  checkIfMovieIsInFavorites() {
+    let movieID = this.props.movie._id
+    let username = localStorage.getItem('user')
+    let token = localStorage.getItem('token')
+    let favouriteMovies = localStorage.getItem('favMovies')
+    // if favouriteMvies is null
+    if (favouriteMovies == null) {
+      axios
+      .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        favouriteMovies = JSON.stringify(response.data.FavoriteMovies)
+        localStorage.setItem('favMovies', favouriteMovies) 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+    return favouriteMovies.includes(movieID)
+  }
+
+  componentDidMount() {
+    const isInFavorites = this.checkIfMovieIsInFavorites()
+    this.setState({ isSelected: isInFavorites })
+    this.setState({ isActive: isInFavorites })
   }
 
   addFavMovie() {
@@ -28,9 +57,10 @@ export default class MovieView extends React.Component {
         }
       )
       .then((response) => {
-        this.setState({ isActive: true })
+        localStorage.setItem('favMovies', JSON.stringify(response.data.FavoriteMovies))
         this.setState({ isSelected: true })
-        localStorage.setItem('isActive', true)
+        this.setState({ isActive: true })
+        this.checkIfMovieIsInFavorites()
       })
       .catch(function (error) {
         console.log(error)
@@ -46,8 +76,10 @@ export default class MovieView extends React.Component {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
+        localStorage.setItem('favMovies', JSON.stringify(response.data.FavoriteMovies))
         this.setState({ isActive: false })
         this.setState({ isSelected: false })
+        this.checkIfMovieIsInFavorites()
       })
       .catch(function (error) {
         console.log(error)
