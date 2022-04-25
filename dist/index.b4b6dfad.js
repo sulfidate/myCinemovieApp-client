@@ -38399,7 +38399,7 @@ class ProfileView extends _reactDefault.default.Component {
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_currentUserdataDefault.default, {
                                     name: Username,
                                     email: Email,
-                                    birthday: Birthday
+                                    Birthday: Birthday
                                 }, void 0, false, {
                                     fileName: "src/components/ProfileView/profile-view.jsx",
                                     lineNumber: 159,
@@ -38936,16 +38936,6 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _currentUserdataScss = require("./current-userdata.scss");
 function CurrentUserData({ name , email , birthday  }) {
-    function formatDate(date) {
-        var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-        return [
-            month,
-            day,
-            year
-        ].join('-');
-    }
     return(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
         children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Card.Body, {
             className: "current-profile-data",
@@ -38954,7 +38944,7 @@ function CurrentUserData({ name , email , birthday  }) {
                     as: "h5"
                 }, void 0, false, {
                     fileName: "src/components/ProfileView/current-userdata.jsx",
-                    lineNumber: 29,
+                    lineNumber: 10,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.FormGroup, {
@@ -38970,7 +38960,7 @@ function CurrentUserData({ name , email , birthday  }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/ProfileView/current-userdata.jsx",
-                                lineNumber: 34,
+                                lineNumber: 13,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Button, {
@@ -38982,37 +38972,24 @@ function CurrentUserData({ name , email , birthday  }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/ProfileView/current-userdata.jsx",
-                                lineNumber: 39,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Button, {
-                                id: "birth-date",
-                                variant: "outline-info",
-                                disabled: true,
-                                children: [
-                                    "Birthday: ",
-                                    formatDate(birthday)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/ProfileView/current-userdata.jsx",
-                                lineNumber: 44,
+                                lineNumber: 16,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/ProfileView/current-userdata.jsx",
-                        lineNumber: 33,
+                        lineNumber: 12,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/ProfileView/current-userdata.jsx",
-                    lineNumber: 32,
+                    lineNumber: 11,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/ProfileView/current-userdata.jsx",
-            lineNumber: 25,
+            lineNumber: 9,
             columnNumber: 7
         }, this)
     }, void 0, false));

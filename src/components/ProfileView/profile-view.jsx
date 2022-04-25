@@ -159,7 +159,7 @@ export default class ProfileView extends React.Component {
                 <CurrentUserData
                   name={Username}
                   email={Email}
-                  birthday={Birthday}
+                  Birthday={Birthday}
                 />
 
                 {/* favorites-movies */}
