@@ -26,6 +26,8 @@ export default class MainView extends React.Component {
       Password: null,
       Email: null,
       Birthday: null,
+      isSelected: false,
+      isActive: false,
     }
   }
 
@@ -105,12 +107,86 @@ export default class MainView extends React.Component {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
-        // this.componentDidMount();
+        this.componentDidMount()
+        // window.location.reload()
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  addFavMovie(movie) {
+    const username = localStorage.getItem('user')
+    const token = localStorage.getItem('token')
+
+    axios
+      .patch(
+        `https://mycinemoviedatabase.herokuapp.com/users/${username}/Favorites/${movie._id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          method: 'PATCH',
+        }
+      )
+      .then((response) => {
+        localStorage.setItem(
+          'favMovies',
+          JSON.stringify(response.data.FavoriteMovies)
+        )
+        this.setState({ isActive: true })
+        this.setState({ isSelected: true })
+        this.checkIfMovieIsInFavorites(movie)
         window.location.reload()
       })
       .catch(function (error) {
         console.log(error)
       })
+  }
+
+  removeFavMovie = (movie) => {
+    const user = localStorage.getItem('user')
+    const token = localStorage.getItem('token')
+    axios
+      .delete(
+        `https://mycinemoviedatabase.herokuapp.com/users/${user}/FavoritesDelete/${movie._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        localStorage.setItem(
+          'favMovies',
+          JSON.stringify(response.data.FavoriteMovies)
+        )
+        this.setState({ isActive: false })
+        this.setState({ isSelected: false })
+        this.checkIfMovieIsInFavorites(movie)
+        window.location.reload()
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  // check if movie is in favorites
+  checkIfMovieIsInFavorites(movie) {
+    let movieID = movie._id
+    let username = localStorage.getItem('user')
+    let token = localStorage.getItem('token')
+    let favouriteMovies = localStorage.getItem('favMovies')
+    // if favouriteMvies is null
+    if (favouriteMovies == null) {
+      axios
+        .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          favouriteMovies = JSON.stringify(response.data.FavoriteMovies)
+          localStorage.setItem('favMovies', favouriteMovies)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+    return favouriteMovies.includes(movieID)
   }
 
   render() {
@@ -204,7 +280,11 @@ export default class MainView extends React.Component {
                             (movie) => movie._id === match.params.movieId
                           )}
                           onBackClick={() => history.goBack()}
-                          FavoriteMovies={FavoriteMovies}
+                          removeFavMovie={this.removeFavMovie}
+                          checkIfMovieIsInFavorites={
+                            this.checkIfMovieIsInFavorites
+                          }
+                          addFavMovie={this.addFavMovie.bind(this)}
                         />
                       </Col>
                       <Col />

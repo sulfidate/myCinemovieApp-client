@@ -14,81 +14,15 @@ export default class MovieView extends React.Component {
     }
   }
 
-  // check if movie is in favorites
-  checkIfMovieIsInFavorites() {
-    let movieID = this.props.movie._id
-    let username = localStorage.getItem('user')
-    let token = localStorage.getItem('token')
-    let favouriteMovies = localStorage.getItem('favMovies')
-    // if favouriteMvies is null
-    if (favouriteMovies == null) {
-      axios
-      .get(`https://mycinemoviedatabase.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        favouriteMovies = JSON.stringify(response.data.FavoriteMovies)
-        localStorage.setItem('favMovies', favouriteMovies) 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
-    return favouriteMovies.includes(movieID)
-  }
-
   componentDidMount() {
-    const isInFavorites = this.checkIfMovieIsInFavorites()
+    const isInFavorites = this.props.checkIfMovieIsInFavorites(this.props.movie)
     this.setState({ isSelected: isInFavorites })
     this.setState({ isActive: isInFavorites })
   }
 
-  addFavMovie() {
-    const username = localStorage.getItem('user')
-    const token = localStorage.getItem('token')
-
-    axios
-      .patch(
-        `https://mycinemoviedatabase.herokuapp.com/users/${username}/Favorites/${this.props.movie._id}`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          method: 'PATCH',
-        }
-      )
-      .then((response) => {
-        localStorage.setItem('favMovies', JSON.stringify(response.data.FavoriteMovies))
-        this.setState({ isSelected: true })
-        this.setState({ isActive: true })
-        this.checkIfMovieIsInFavorites()
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
-
-  removeFavMovie = (movie) => {
-    const user = localStorage.getItem('user')
-    const token = localStorage.getItem('token')
-    axios
-      .delete(
-        `https://mycinemoviedatabase.herokuapp.com/users/${user}/FavoritesDelete/${movie._id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((response) => {
-        localStorage.setItem('favMovies', JSON.stringify(response.data.FavoriteMovies))
-        this.setState({ isActive: false })
-        this.setState({ isSelected: false })
-        this.checkIfMovieIsInFavorites()
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
-
   render() {
-    const { movie, onBackClick, FavoriteMovies } = this.props
-    const { isActive, isSelected, movieId } = this.state
+    const { movie, onBackClick } = this.props
+    const { isActive, isSelected } = this.state
     return (
       <Row>
         <Col
@@ -124,7 +58,7 @@ export default class MovieView extends React.Component {
                       type='submit'
                       className='mr-2'
                       value={movie._id}
-                      onClick={() => this.addFavMovie(movie)}
+                      onClick={() => this.props.addFavMovie(movie)}
                       variant='info'
                       size='sm'
                       style={{
@@ -141,7 +75,7 @@ export default class MovieView extends React.Component {
                       type='submit'
                       className='mr-2'
                       value={movie._id}
-                      onClick={() => this.removeFavMovie(movie)}
+                      onClick={() => this.props.removeFavMovie(movie)}
                       variant='warning'
                       size='sm'
                       style={{
