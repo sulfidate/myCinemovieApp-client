@@ -30,6 +30,13 @@ export default class ProfileView extends React.Component {
     }
   }
 
+  /**
+   * function to remove movie from favorites
+   * @memberof MovieView
+   * @param {object} movie
+   * @param {string} movieId
+   * @param {string} userId
+   */
   onRemoveFavorite = (m) => {
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -50,6 +57,14 @@ export default class ProfileView extends React.Component {
       })
   }
 
+  /**
+   * function to edit user data
+   * @memberof ProfileView
+   * @param {object} event
+   *
+   * @returns {object}
+   * @memberof ProfileView
+   */
   editUser = (e) => {
     e.preventDefault()
     const username = localStorage.getItem('user')
@@ -86,6 +101,12 @@ export default class ProfileView extends React.Component {
       })
   }
 
+  /**
+   * function to delete user
+   * @memberof ProfileView
+   * @param {object} event
+   * @returns {object}
+   */
   onDeleteUser() {
     const confirmed = window.confirm(
       'Are you sure you want to delete your account?'
@@ -109,6 +130,12 @@ export default class ProfileView extends React.Component {
     }
   }
 
+  /**
+   * function to set username
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
   setUsername(value) {
     this.setState({
       Username: value,
@@ -116,6 +143,12 @@ export default class ProfileView extends React.Component {
     this.Username = value
   }
 
+  /**
+   * function to set password
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
   setPassword(value) {
     this.setState({
       Password: value,
@@ -123,6 +156,12 @@ export default class ProfileView extends React.Component {
     this.Password = value
   }
 
+  /**
+   * function to set email
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
   setEmail(value) {
     this.setState({
       Email: value,
@@ -130,6 +169,12 @@ export default class ProfileView extends React.Component {
     this.Email = value
   }
 
+  /**
+   * function to set birthday
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
   setBirthday(value) {
     this.setState({
       Birthday: value,

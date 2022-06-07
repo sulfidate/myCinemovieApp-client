@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "<h1>Project Achievement 3 - myMovieApp (React)</h1> <h5>Start 08.01.2022</h5>",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.3.2",
+    "jsdoc": "^3.6.10",
+    "minami": "^1.2.3",
     "process": "^0.11.10"
   }
 }

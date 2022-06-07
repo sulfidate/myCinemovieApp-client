@@ -31,7 +31,27 @@ export default class MainView extends React.Component {
     }
   }
 
-  // Functions for all Components
+  /**
+   * initialize variables for the main view
+   * @state {movies}
+   * @state {FavoriteMovies}
+   * @state {user}
+   * @state {Username}
+   * @state {Password}
+   * @state {Email}
+   * @state {Birthday}
+   * @state {isSelected}
+   * @state {isActive}
+     
+   */
+
+  /**
+   * function to get movies from database and set them to state
+   * @param {*} token  - token from localStorage
+   * @returns {movies} - movies from database
+   * @state {movies}
+   * @function {getMovies}
+   */
 
   getMovies(token) {
     axios
@@ -47,6 +67,16 @@ export default class MainView extends React.Component {
         console.log(error)
       })
   }
+
+  /**
+   * fuction to get user from database and set it to state
+   * @param {*} token
+   * @param {*} username
+   * @state {Username, Password, Email, Birthday} - user data
+   * @state {FavoriteMovies} - user favorite movies data
+   * @function {getUser}
+   * @returns {user} - user from database
+   */
 
   getUser = (token) => {
     const username = localStorage.getItem('user')
@@ -68,6 +98,12 @@ export default class MainView extends React.Component {
       })
   }
 
+  /**
+   * function to componentDidMount and set user to state
+   * @function {componentDidMount}
+   * @returns {user} - user from localStorage
+   * @state {user}
+   */
   componentDidMount() {
     let accessToken = localStorage.getItem('token')
     if (accessToken !== null) {
@@ -79,6 +115,12 @@ export default class MainView extends React.Component {
     }
   }
 
+  /**
+   * function to login user and set user to localStorage and set user to state and get movies from database
+   * @param {*} username
+   * @param {*} password
+   * @function {login}
+   */
   onLoggedIn(authData) {
     this.setState({
       user: authData.user.Username,
@@ -89,6 +131,12 @@ export default class MainView extends React.Component {
     this.getMovies(authData.token)
   }
 
+  /**
+   * function to logout user and remove user from localStorage and set user to null
+   * @function {logout}
+   * @returns {user} - null
+   * @state {user}
+   */
   onLoggedOut() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
@@ -98,6 +146,14 @@ export default class MainView extends React.Component {
     window.open('/', '_self')
   }
 
+  /**
+   *  function to remove movie from favorites
+   *  @param {*} movie
+   * @function {removeFavMovie}
+   * @returns {FavoriteMovies} - user favorite movies data
+   * @state {FavoriteMovies}
+   *
+   */
   onRemoveFavorite = (movie) => {
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -115,6 +171,14 @@ export default class MainView extends React.Component {
       })
   }
 
+  /**
+   *  function to add movie to favorites
+   * @param {*} movie
+   * @function {addFavMovie}
+   * @returns {FavoriteMovies} - user favorite movies data
+   * @state {FavoriteMovies}
+   *
+   */
   addFavMovie(movie) {
     const username = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -143,6 +207,14 @@ export default class MainView extends React.Component {
       })
   }
 
+  /**
+   *  function to remove movie from favorites
+   *  @param {*} movie
+   * @function {removeFavMovie}
+   * @returns {FavoriteMovies} - user favorite movies data
+   * @state {FavoriteMovies}
+   *
+   */
   removeFavMovie = (movie) => {
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -166,7 +238,15 @@ export default class MainView extends React.Component {
       })
   }
 
-  // check if movie is in favorites
+  /** check if movie is in favorites
+   *  @param {*} movie
+   * @function {checkIfMovieIsInFavorites}
+   * @returns {FavoriteMovies} - user favorite movies data
+   * @state {FavoriteMovies}
+   * @state {isActive}
+   * @state {isSelected}
+   * @state {isInFavorites}
+   */
   checkIfMovieIsInFavorites(movie) {
     let movieID = movie._id
     let username = localStorage.getItem('user')

@@ -14,11 +14,21 @@ export default class MovieView extends React.Component {
     }
   }
 
+  /**
+   * function to check if component is mounted
+   * @returns {boolean}
+   * @memberof MovieView
+   */
   componentDidMount() {
     const isInFavorites = this.props.checkIfMovieIsInFavorites(this.props.movie)
     this.setState({ isSelected: isInFavorites })
     this.setState({ isActive: isInFavorites })
   }
+
+  /**
+   * function to add movie to favorites
+   * @memberof MovieView
+   */
   addFavMovie() {
     const username = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -42,6 +52,11 @@ export default class MovieView extends React.Component {
       })
   }
 
+  /**
+   *  function to remove movie from favorites
+   * @memberof MovieView
+   * @param {object} movie
+   */
   removeFavMovie = (movie) => {
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -178,7 +193,14 @@ export default class MovieView extends React.Component {
   }
 }
 
-// PropTypes
+/**
+ * PropTypes
+ * @param {object} props
+ * @returns {object}
+ * @memberof MovieView
+ * @static
+ *
+ */
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
