@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { Col, Card, Button, ButtonGroup, Row, Container } from 'react-bootstrap'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import './movie-view.scss'
 
 export default class MovieView extends React.Component {
@@ -10,14 +11,54 @@ export default class MovieView extends React.Component {
     this.state = {
       isSelected: false,
       isActive: false,
-      favouriteMovies: [],
     }
   }
+
 
   componentDidMount() {
     const isInFavorites = this.props.checkIfMovieIsInFavorites(this.props.movie)
     this.setState({ isSelected: isInFavorites })
     this.setState({ isActive: isInFavorites })
+
+  addFavMovie() {
+    const username = localStorage.getItem('user')
+    const token = localStorage.getItem('token')
+
+    axios
+      .patch(
+        `https://mycinemoviedatabase.herokuapp.com/users/${username}/Favorites/${this.props.movie._id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          method: 'PATCH',
+        }
+      )
+      .then((response) => {
+        this.setState({ isActive: true })
+        this.setState({ isSelected: true })
+        localStorage.setItem('isActive', true)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  removeFavMovie = (movie) => {
+    const user = localStorage.getItem('user')
+    const token = localStorage.getItem('token')
+    axios
+      .delete(
+        `https://mycinemoviedatabase.herokuapp.com/users/${user}/FavoritesDelete/${movie._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        this.setState({ isActive: false })
+        this.setState({ isSelected: false })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
   }
 
   render() {
