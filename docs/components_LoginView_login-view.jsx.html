@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/LoginView/login-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/LoginView/login-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Card,
+  CardGroup,
+  Navbar,
+} from 'react-bootstrap'
+import { FooterView } from '../FooterView/footer-view'
+import './login-view.scss'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+
+export default function LoginView(props) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [usernameErr, setUsernameErr] = useState('')
+  const [passwordErr, setPasswordErr] = useState('')
+  const [btnDisabled, setBtnDisabled] = useState(true)
+  const [message1, setMessage1] = useState('')
+  const [message2, setMessage2] = useState('')
+
+  /**
+   *  function to validate username input change and set error message if needed and set button disabled if needed and set username state to new value if needed and set usernameErr state to new value if needed and set btnDisabled state to new value if needed
+   * @memberof LoginView
+   * @param {string} username
+   * @param {*} e
+   * @returns {boolean}
+   */
+  const handleTextChange1 = (e) => {
+    if (!username) {
+      setBtnDisabled(true)
+      setUsernameErr('Username Required')
+    } else if (username.length &lt; 7) {
+      setUsernameErr('Username must be at least 8 characters long')
+      setBtnDisabled(true)
+    } else {
+      setUsernameErr(null)
+    }
+    setUsername(e.target.value)
+  }
+
+  /**
+   * function to validate password input change and set error message if needed and set button disabled if needed and set password state to new value if needed and set passwordErr state to new value if needed and set btnDisabled state to new value if needed
+   * @memberof LoginView
+   * @param {string} password
+   * @param {*} e
+   * @returns {boolean}
+   */
+  const handleTextChange2 = (e) => {
+    if (!password) {
+      setBtnDisabled(true)
+      setPasswordErr('Password Required')
+    } else if (password.length &lt; 5) {
+      setPasswordErr('Password must be at least 6 characters long')
+      setBtnDisabled(true)
+    } else {
+      setUsernameErr(null)
+      setPasswordErr(null)
+      setBtnDisabled(false)
+    }
+    setPassword(e.target.value)
+  }
+
+  /**
+   *  function to handle submit button click and set error message if needed and set button disabled if needed and set username state to new value if needed and set usernameErr state to new value if needed and set btnDisabled state to new value if needed
+   *
+   * @memberof LoginView
+   * @param {*} e
+   * @returns {boolean}
+   */
+  const validate = () => {
+    let isReq = true
+    if (!username) {
+      setUsernameErr('Username Required')
+      isReq = false
+    } else if (username.length &lt; 8) {
+      setUsernameErr('Username must be at least 8 characters long')
+      isReq = false
+    }
+    if (!password) {
+      setPasswordErr('Password Required')
+      isReq = false
+    } else if (password.length &lt; 6) {
+      setPasswordErr('Password must be at least 6 characters long')
+      isReq = false
+    }
+    return isReq
+  }
+
+  /**
+   * function to handle submit button click and set error message if needed and set button disabled if needed and set username state to new value if needed and set usernameErr state to new value if needed and set btnDisabled state to new value if needed
+   * @memberof LoginView
+   * @param {*} e
+   * @returns {boolean}
+   */
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const isReq = validate()
+    if (isReq) {
+      /* Send a request to the server for authentication */
+      axios
+        .post('https://mycinemoviedatabase.herokuapp.com/login', {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data
+          props.onLoggedIn(data)
+        })
+        .catch((e) => {
+          alert(
+            'User is not registered or password is wrong! -> please register or try again with correct user information. Thanks for using our App!'
+          )
+        })
+    }
+  }
+
+  return (
+    &lt;Container>
+      &lt;Container>
+        &lt;Navbar className='header-view' variant='dark' bg='info' fixed='top'>
+          &lt;Container>
+            &lt;Navbar.Brand>myCineMovieApp&lt;/Navbar.Brand>
+          &lt;/Container>
+
+          &lt;Navbar.Text>
+            &lt;Link to={'/register'}>
+              &lt;Button variant='light link' style={{ color: '#17A2B8' }}>
+                Register
+              &lt;/Button>
+            &lt;/Link>
+          &lt;/Navbar.Text>
+        &lt;/Navbar>
+      &lt;/Container>
+
+      &lt;Row
+        className='login-view justify-content-center'
+        style={{ margin: '7rem 1rem 7rem 1rem' }}
+      >
+        &lt;Col>&lt;/Col>
+        &lt;Col xs={11} sm={11} md={8} lg={6} xl={6} xxl={6}>
+          &lt;CardGroup>
+            &lt;Card bg='light' key='' text='info' className='mb-2' border='info'>
+              &lt;Card.Header as='h3'>Login&lt;/Card.Header>
+
+              &lt;Card.Body>
+                &lt;Form>
+                  &lt;Form.Group className='mb-3' controlId='formLoginUsername'>
+                    &lt;Form.Label className='form-label colorInfo'>
+                      Username
+                    &lt;/Form.Label>
+                    &lt;Form.Control
+                      style={{ fontSize: 'small' }}
+                      type='text'
+                      placeholder='Please login with username'
+                      value={username}
+                      onBlur={handleTextChange1}
+                      onChange={handleTextChange1}
+                      required
+                      minLength={8}
+                    />
+                    &lt;Form.Text className='text-muted'>
+                      {usernameErr &amp;&amp; (
+                        &lt;p style={{ color: 'red' }}>{usernameErr}&lt;/p>
+                      )}
+                    &lt;/Form.Text>
+                  &lt;/Form.Group>
+
+                  &lt;Form.Group className='mb-3' controlId='formLoginPassword'>
+                    &lt;Form.Label className='form-label colorInfo'>
+                      Password
+                    &lt;/Form.Label>
+                    &lt;Form.Control
+                      style={{ fontSize: 'small' }}
+                      type='password'
+                      placeholder='Enter your password'
+                      value={password}
+                      onBlur={handleTextChange2}
+                      onChange={handleTextChange2}
+                      required
+                      minLength={6}
+                    />
+                    &lt;Form.Text>&lt;/Form.Text>
+                    &lt;Form.Text className='text-muted'>
+                      {passwordErr &amp;&amp; (
+                        &lt;p style={{ color: 'red' }}>{passwordErr}&lt;/p>
+                      )}
+                    &lt;/Form.Text>
+                  &lt;/Form.Group>
+
+                  &lt;Button
+                    variant='info'
+                    type='submit'
+                    onClick={handleSubmit}
+                    disabled={btnDisabled}
+                  >
+                    Log in
+                  &lt;/Button>
+                &lt;/Form>
+              &lt;/Card.Body>
+            &lt;/Card>
+          &lt;/CardGroup>
+        &lt;/Col>
+        &lt;Col>&lt;/Col>
+      &lt;/Row>
+
+      &lt;FooterView />
+    &lt;/Container>
+  )
+}
+
+// PropTypes
+LoginView.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  onLoggedIn: PropTypes.func.isRequired,
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FooterView.html">FooterView</a></li><li><a href="HeaderView.html">HeaderView</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="MyFlixApplication.html">MyFlixApplication</a></li></ul><h3>Global</h3><ul><li><a href="global.html#accessToken">accessToken</a></li><li><a href="global.html#addFavMovie">addFavMovie</a></li><li><a href="global.html#Authorization">Authorization</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#Birthday">Birthday</a></li><li><a href="global.html#birthday">birthday</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#checkIfMovieIsInFavorites">checkIfMovieIsInFavorites</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#confirmed">confirmed</a></li><li><a href="global.html#container">container</a></li><li><a href="global.html#CurrentUserData">CurrentUserData</a></li><li><a href="global.html#data">data</a></li><li><a href="global.html#Description">Description</a></li><li><a href="global.html#director">director</a></li><li><a href="global.html#Director">Director</a></li><li><a href="global.html#editUser">editUser</a></li><li><a href="global.html#Email">Email</a></li><li><a href="global.html#email">email</a></li><li><a href="global.html#FavoriteMovies">FavoriteMovies</a></li><li><a href="global.html#favouriteMovies">favouriteMovies</a></li><li><a href="global.html#Featured">Featured</a></li><li><a href="global.html#fontSize">fontSize</a></li><li><a href="global.html#genre">genre</a></li><li><a href="global.html#Genre">Genre</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleTextChange1">handleTextChange1</a></li><li><a href="global.html#handleTextChange2">handleTextChange2</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#history">history</a></li><li><a href="global.html#ImagePath">ImagePath</a></li><li><a href="global.html#isActive">isActive</a></li><li><a href="global.html#isInFavorites">isInFavorites</a></li><li><a href="global.html#isReq">isReq</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#marginLeft">marginLeft</a></li><li><a href="global.html#match">match</a></li><li><a href="global.html#method">method</a></li><li><a href="global.html#minWidth">minWidth</a></li><li><a href="global.html#movie">movie</a></li><li><a href="global.html#movieID">movieID</a></li><li><a href="global.html#movies">movies</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#onBackClick">onBackClick</a></li><li><a href="global.html#onDeleteUser">onDeleteUser</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#onRegister">onRegister</a></li><li><a href="global.html#onRemoveFavorite">onRemoveFavorite</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#Password">Password</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavMovie">removeFavMovie</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#setBirthday">setBirthday</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setPassword">setPassword</a></li><li><a href="global.html#setUsername">setUsername</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#token">token</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#Username">Username</a></li><li><a href="global.html#username">username</a></li><li><a href="global.html#users">users</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validateUsername">validateUsername</a></li><li><a href="global.html#width">width</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 07 2022 17:52:40 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,4 +1,32 @@
-import React, { useState } from 'react'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: MovieView/movie-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: MovieView/movie-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'
 import axios from 'axios'
 import { Col, Card, Button, ButtonGroup, Row, Container } from 'react-bootstrap'
 import PropTypes from 'prop-types'
@@ -82,8 +110,8 @@ export default class MovieView extends React.Component {
     const { movie, onBackClick } = this.props
     const { isActive, isSelected } = this.state
     return (
-      <Row>
-        <Col
+      &lt;Row>
+        &lt;Col
           sm={12}
           md={12}
           lg={12}
@@ -91,27 +119,27 @@ export default class MovieView extends React.Component {
           xxl={12}
           key={this.props.movie._id}
         >
-          <Card className='movie-view justify-content-center' bg='light'>
-            <Container>
-              <Row className='justify-content-center'>
-                <Card.Title className='card-title'>
-                  <span>{movie.Title}</span>
-                  <span
+          &lt;Card className='movie-view justify-content-center' bg='light'>
+            &lt;Container>
+              &lt;Row className='justify-content-center'>
+                &lt;Card.Title className='card-title'>
+                  &lt;span>{movie.Title}&lt;/span>
+                  &lt;span
                     className={`btn-star-fav ${isActive ? 'toggle' : null} `}
                   >
-                    &#x2605;
-                  </span>
-                </Card.Title>
-              </Row>
-              <Row className='justify-content-center'></Row>
-            </Container>
-            <Container>
-              <Col className='image-container d-flex justify-content-center mt-5 mb-5'>
-                <Card.Img variant='top' src={movie.ImagePath} className='img' />
+                    &amp;#x2605;
+                  &lt;/span>
+                &lt;/Card.Title>
+              &lt;/Row>
+              &lt;Row className='justify-content-center'>&lt;/Row>
+            &lt;/Container>
+            &lt;Container>
+              &lt;Col className='image-container d-flex justify-content-center mt-5 mb-5'>
+                &lt;Card.Img variant='top' src={movie.ImagePath} className='img' />
 
-                <div className='overlay d-flex align-items-center justify-content-center'>
-                  <>
-                    <Button
+                &lt;div className='overlay d-flex align-items-center justify-content-center'>
+                  &lt;>
+                    &lt;Button
                       key='addFavMov'
                       type='submit'
                       className='mr-2'
@@ -125,10 +153,10 @@ export default class MovieView extends React.Component {
                       disabled={isSelected ? true : false}
                     >
                       Add to Favorites
-                    </Button>
-                  </>
-                  <>
-                    <Button
+                    &lt;/Button>
+                  &lt;/>
+                  &lt;>
+                    &lt;Button
                       key='remFavMov'
                       type='submit'
                       className='mr-2'
@@ -142,44 +170,44 @@ export default class MovieView extends React.Component {
                       disabled={isSelected ? false : true}
                     >
                       Remove from Favorites
-                    </Button>
-                  </>
-                </div>
-              </Col>
-            </Container>
-            <Row className='justify-content-center'>
-              <ButtonGroup style={{ margin: '0 20% 0 20%' }}>
-                <Button
+                    &lt;/Button>
+                  &lt;/>
+                &lt;/div>
+              &lt;/Col>
+            &lt;/Container>
+            &lt;Row className='justify-content-center'>
+              &lt;ButtonGroup style={{ margin: '0 20% 0 20%' }}>
+                &lt;Button
                   type='button'
                   href={`/directors/${movie.Director[1]}`}
                   variant='outline-info'
                 >
                   Director:
-                  <br /> {movie.Director[1]}
-                </Button>
-                <Button
+                  &lt;br /> {movie.Director[1]}
+                &lt;/Button>
+                &lt;Button
                   variant='outline-info'
                   disabled
                   style={{
                     borderTop: '1px solid white',
                     borderBottom: '1px solid white',
                   }}
-                ></Button>
-                <Button
+                >&lt;/Button>
+                &lt;Button
                   href={`/genres/${movie.Genre[1]}`}
                   variant='outline-info'
                 >
                   Genre:
-                  <br /> {movie.Genre[1]}
-                </Button>
-              </ButtonGroup>
-            </Row>
-            <Card.Body>
-              <Card.Text style={{ color: '#17A2B8' }}>
+                  &lt;br /> {movie.Genre[1]}
+                &lt;/Button>
+              &lt;/ButtonGroup>
+            &lt;/Row>
+            &lt;Card.Body>
+              &lt;Card.Text style={{ color: '#17A2B8' }}>
                 {movie.Description}
-              </Card.Text>
-            </Card.Body>
-            <Button
+              &lt;/Card.Text>
+            &lt;/Card.Body>
+            &lt;Button
               className='movie-button'
               bg='dark'
               variant='info'
@@ -189,10 +217,10 @@ export default class MovieView extends React.Component {
               value={this.setState.movieId}
             >
               Back
-            </Button>
-          </Card>
-        </Col>
-      </Row>
+            &lt;/Button>
+          &lt;/Card>
+        &lt;/Col>
+      &lt;/Row>
     )
   }
 }
@@ -211,3 +239,26 @@ MovieView.propTypes = {
     Featured: PropTypes.bool,
   }).isRequired,
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:handleSubmit">handleSubmit</a></li><li><a href="global.html#event:handleSubmit-registrationform">handleSubmit - registration form</a></li><li><a href="global.html#event:%257BaddFavMovie%257D">{addFavMovie}</a></li><li><a href="global.html#event:%257BcheckIfMovieIsInFavorites%257D">{checkIfMovieIsInFavorites}</a></li><li><a href="global.html#event:%257BdeleteUser%257D">{deleteUser}</a></li><li><a href="global.html#event:%257BeditUserData%257D">{editUserData}</a></li><li><a href="global.html#event:%257BremoveFavMovie%257D">{removeFavMovie}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFavMovie">addFavMovie</a></li><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSubmit-loginformsubmitpassword">handleSubmit - login form submit password</a></li><li><a href="global.html#handleSubmit-loginformsubmitusername">handleSubmit - login form submit username</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#setBirthday">setBirthday</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setPassword">setPassword</a></li><li><a href="global.html#setUsername">setUsername</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 07 2022 21:29:13 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

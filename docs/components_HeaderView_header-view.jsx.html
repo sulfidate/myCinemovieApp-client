@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/HeaderView/header-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/HeaderView/header-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import {
+  Container,
+  Row,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Button,
+} from 'react-bootstrap'
+import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
+import './header-view.scss'
+
+export class HeaderView extends Component {
+  render() {
+    const { user, onLoggedOut } = this.props
+    return (
+      &lt;Row className='' style={{}}>
+        &lt;Navbar
+          className='header-view'
+          collapseOnSelect
+          expand='md'
+          variant='dark'
+          bg='info'
+          fixed='top'
+        >
+          &lt;Navbar.Brand href='/'>myCineMovieApp&lt;/Navbar.Brand>
+
+          &lt;Navbar.Toggle aria-controls='responsive-navbar-nav' />
+
+          &lt;Navbar.Collapse
+            id='responsive-navbar-nav'
+            className='me-auto justify-content-end'
+          >
+            &lt;Nav className='me-auto'>
+              &lt;Nav.Link href='/'>movies&lt;/Nav.Link>
+
+              &lt;Nav.Link href={`/users/${user}`}>profile&lt;/Nav.Link>
+            &lt;/Nav>
+          &lt;/Navbar.Collapse>
+
+          &lt;Nav className='justify-content-end'>
+            &lt;NavDropdown
+              variant='info'
+              title={
+                &lt;Button
+                  variant='none'
+                  size='md'
+                  style={{
+                    color: '#17A2B8',
+                    fontSize: 'small',
+                    backgroundColor: '#17a2b8',
+                  }}
+                >
+                  &lt;Container className='justify-content-center'>
+                    &lt;Navbar.Text style={{ padding: '0' }}>
+                      signed in as:{' '}
+                      &lt;Navbar.Text style={{ color: 'white' }}>
+                        {user}
+                      &lt;/Navbar.Text>
+                    &lt;/Navbar.Text>
+                  &lt;/Container>
+                &lt;/Button>
+              }
+              id='basic-nav-dropdown'
+              style={{
+                backgroundColor: '#17a2b8',
+                marginLeft: '5rem',
+              }}
+            >
+              &lt;NavDropdown.Item
+                href='#logout'
+                style={{
+                  backgroundColor: '#17a2b8',
+                }}
+              >
+                &lt;Button
+                  onClick={onLoggedOut}
+                  variant='light'
+                  size='sm'
+                  style={{
+                    marginLeft: '1rem',
+                    color: '#17A2B8',
+                    fontSize: 'small',
+                    width: '85%',
+                  }}
+                >
+                  Logout
+                &lt;/Button>
+              &lt;/NavDropdown.Item>
+            &lt;/NavDropdown>
+          &lt;/Nav>
+        &lt;/Navbar>
+      &lt;/Row>
+    )
+  }
+}
+
+export default HeaderView
+
+// PropTypes
+HeaderView.propTypes = {
+  user: PropTypes.string,
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FooterView.html">FooterView</a></li><li><a href="HeaderView.html">HeaderView</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="MyFlixApplication.html">MyFlixApplication</a></li></ul><h3>Global</h3><ul><li><a href="global.html#accessToken">accessToken</a></li><li><a href="global.html#addFavMovie">addFavMovie</a></li><li><a href="global.html#Authorization">Authorization</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#Birthday">Birthday</a></li><li><a href="global.html#birthday">birthday</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#checkIfMovieIsInFavorites">checkIfMovieIsInFavorites</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#confirmed">confirmed</a></li><li><a href="global.html#container">container</a></li><li><a href="global.html#CurrentUserData">CurrentUserData</a></li><li><a href="global.html#data">data</a></li><li><a href="global.html#Description">Description</a></li><li><a href="global.html#director">director</a></li><li><a href="global.html#Director">Director</a></li><li><a href="global.html#editUser">editUser</a></li><li><a href="global.html#Email">Email</a></li><li><a href="global.html#email">email</a></li><li><a href="global.html#FavoriteMovies">FavoriteMovies</a></li><li><a href="global.html#favouriteMovies">favouriteMovies</a></li><li><a href="global.html#Featured">Featured</a></li><li><a href="global.html#fontSize">fontSize</a></li><li><a href="global.html#genre">genre</a></li><li><a href="global.html#Genre">Genre</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleTextChange1">handleTextChange1</a></li><li><a href="global.html#handleTextChange2">handleTextChange2</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#history">history</a></li><li><a href="global.html#ImagePath">ImagePath</a></li><li><a href="global.html#isActive">isActive</a></li><li><a href="global.html#isInFavorites">isInFavorites</a></li><li><a href="global.html#isReq">isReq</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#marginLeft">marginLeft</a></li><li><a href="global.html#match">match</a></li><li><a href="global.html#method">method</a></li><li><a href="global.html#minWidth">minWidth</a></li><li><a href="global.html#movie">movie</a></li><li><a href="global.html#movieID">movieID</a></li><li><a href="global.html#movies">movies</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#onBackClick">onBackClick</a></li><li><a href="global.html#onDeleteUser">onDeleteUser</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#onRegister">onRegister</a></li><li><a href="global.html#onRemoveFavorite">onRemoveFavorite</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#Password">Password</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavMovie">removeFavMovie</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#setBirthday">setBirthday</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setPassword">setPassword</a></li><li><a href="global.html#setUsername">setUsername</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#token">token</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#Username">Username</a></li><li><a href="global.html#username">username</a></li><li><a href="global.html#users">users</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validateUsername">validateUsername</a></li><li><a href="global.html#width">width</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 07 2022 17:52:40 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

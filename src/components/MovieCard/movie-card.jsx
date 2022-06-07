@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 
 import './movie-card.scss'
 
+/**
+ * MovieCard component
+ * @Component MovieCard component
+ */
 export default class MovieCard extends React.Component {
   render() {
     const { movie } = this.props
@@ -54,19 +58,10 @@ export default class MovieCard extends React.Component {
   }
 }
 
-/** PropTypes
- * @param {object} movie
- * @param {function} onBackClick
- * @param {function} onFavoriteClick
- * @param {function} onDeleteClick
- * @param {function} onEditClick
- * @param {function} onAddToCartClick
- * @param {function} onRemoveFromCartClick
- * @returns {object}
- * @memberof MovieCard
- * @static
- *
- * */
+/**
+ * PropTypes
+ *  @PropTypes {object} props
+ */
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,

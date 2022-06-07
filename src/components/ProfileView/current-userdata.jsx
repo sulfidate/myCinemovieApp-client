@@ -1,8 +1,12 @@
 import React from 'react'
-import { Card, Container, Form } from 'react-bootstrap'
 import { Form, Row, Col, Card, FormGroup, Button } from 'react-bootstrap'
 import './current-userdata.scss'
 
+/**
+ * CurrentUserData component
+ * @Component CurrentUserData component
+ * @param {props} props - props
+ */
 export default function CurrentUserData({ name, email, birthday }) {
   return (
     <>

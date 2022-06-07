@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/ProfileView/profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/ProfileView/profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import axios from 'axios'
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Card,
+  CardGroup,
+  Navbar,
+  FormGroup,
+} from 'react-bootstrap'
+import './profile-view.scss'
+import { Redirect, Link } from 'react-router-dom'
+import MovieCard from '../MovieCard/movie-card'
+import CurrentUserData from './current-userdata'
+
+export default class ProfileView extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
+      FavoriteMovies: [],
+    }
+  }
+
+  /**
+   * function to remove movie from favorites
+   * @memberof MovieView
+   * @param {object} movie
+   * @param {string} movieId
+   * @param {string} userId
+   */
+  onRemoveFavorite = (m) => {
+    const user = localStorage.getItem('user')
+    const token = localStorage.getItem('token')
+    axios
+      .delete(
+        `https://mycinemoviedatabase.herokuapp.com/users/${user}/FavoritesDelete/${m._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        localStorage.setItem(
+          'favMovies',
+          JSON.stringify(response.data.FavoriteMovies)
+        )
+        window.location.reload()
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  /**
+   * function to edit user data
+   * @memberof ProfileView
+   * @param {object} event
+   *
+   * @returns {object}
+   * @memberof ProfileView
+   */
+  editUser = (e) => {
+    e.preventDefault()
+    const username = localStorage.getItem('user')
+    const token = localStorage.getItem('token')
+
+    axios
+      .put(
+        `https://mycinemoviedatabase.herokuapp.com/users/${username}`,
+        {
+          Username: this.state.Username,
+          Password: this.state.Password,
+          Email: this.state.Email,
+          Birthday: this.state.Birthday,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        this.setState({
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+        })
+
+        localStorage.setItem('user', this.state.Username)
+        const data = response.data
+        alert('Profile is updated!')
+        window.open(`/users/${Username}`, '_self')
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  /**
+   * function to delete user
+   * @memberof ProfileView
+   * @param {object} event
+   * @returns {object}
+   */
+  onDeleteUser() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete your account?'
+    )
+    if (confirmed) {
+      const user = localStorage.getItem('user')
+      const token = localStorage.getItem('token')
+      axios
+        .delete(`https://mycinemoviedatabase.herokuapp.com/users/${user}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => {
+          alert(user + 'has been deleted')
+          localStorage.removeItem('user')
+          localStorage.removeItem('token')
+          window.location.pathname = '/'
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+  }
+
+  /**
+   * function to set username
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
+  setUsername(value) {
+    this.setState({
+      Username: value,
+    })
+    this.Username = value
+  }
+
+  /**
+   * function to set password
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
+  setPassword(value) {
+    this.setState({
+      Password: value,
+    })
+    this.Password = value
+  }
+
+  /**
+   * function to set email
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
+  setEmail(value) {
+    this.setState({
+      Email: value,
+    })
+    this.Email = value
+  }
+
+  /**
+   * function to set birthday
+   * @memberof ProfileView
+   * @param {*} value
+   * @returns {object}
+   */
+  setBirthday(value) {
+    this.setState({
+      Birthday: value,
+    })
+    this.Birthday = value
+  }
+
+  render() {
+    const { movies, user } = this.props
+    const { FavoriteMovies, Username, Email, Birthday } = this.props
+
+    return (
+      &lt;Container>
+        &lt;Row className='profile-view mt-7 mb-7' style={{ minWidth: '400px' }}>
+          &lt;Col>
+            &lt;CardGroup>
+              &lt;Card
+                bg='light'
+                key=''
+                text='info'
+                className='user-profile mb-2'
+                border='info'
+              >
+                &lt;Card.Header as='h3'>User Profile&lt;/Card.Header>
+
+                {/* current-userdata */}
+                &lt;CurrentUserData
+                  name={Username}
+                  email={Email}
+                  Birthday={Birthday}
+                />
+
+                {/* favorites-movies */}
+                &lt;Card.Body className='favorites-movies-data'>
+                  &lt;Card.Title as='h5' style={{ margin: '0.5% 0 1% 0' }}>
+                    Your Favorite Movies
+                  &lt;/Card.Title>
+
+                  &lt;Card
+                    style={{
+                      border: '0.1rem solid #17a2b8',
+                    }}
+                  >
+                    &lt;Card.Body>
+                      {FavoriteMovies.length === 0 &amp;&amp; (
+                        &lt;div className='text-center'>No Favorite Movie&lt;/div>
+                      )}
+                      &lt;Row className='favorite-container'>
+                        {FavoriteMovies.length > 0 &amp;&amp;
+                          movies.map((movie) => {
+                            if (
+                              movie._id ===
+                              FavoriteMovies.find((fav) => fav === movie._id)
+                            ) {
+                              return (
+                                &lt;Col
+                                  sm={6}
+                                  md={6}
+                                  lg={4}
+                                  xl={4}
+                                  xxl={2}
+                                  key={movie._id}
+                                >
+                                  &lt;Card>
+                                    &lt;MovieCard movie={movie} />
+                                    &lt;Button
+                                      size='sm'
+                                      variant='outline-warning'
+                                      value={movie._id}
+                                      onClick={() =>
+                                        this.onRemoveFavorite(movie)
+                                      }
+                                    >
+                                      {' '}
+                                      Remove{' '}
+                                    &lt;/Button>
+                                  &lt;/Card>
+                                &lt;/Col>
+                              )
+                            }
+                          })}
+                      &lt;/Row>
+                    &lt;/Card.Body>
+                  &lt;/Card>
+                &lt;/Card.Body>
+
+                {/* user-update */}
+                &lt;Card.Body className='user-update'>
+                  &lt;Form.Label as='h5' style={{ margin: '0.5% 0 1% 0' }}>
+                    Update your profile
+                  &lt;/Form.Label>
+
+                  &lt;Form
+                    className='update-form'
+                    style={{
+                      border: '0.1rem solid #17a2b8',
+                      padding: '1.5rem',
+                    }}
+                    onSubmit={(e) =>
+                      this.editUser(
+                        e,
+                        this.Username,
+                        this.Password,
+                        this.Email,
+                        this.Birthday
+                      )
+                    }
+                  >
+                    &lt;Form.Group className='form-group-username'>
+                      &lt;Form.Label className='form-label colorInfo'>
+                        Username:
+                        &lt;span className='ml-2'>{Username}&lt;/span>
+                      &lt;/Form.Label>
+                      &lt;Form.Control
+                        style={{ fontSize: 'small' }}
+                        type='text'
+                        placeholder='Username cannot be updated. (To get a new username delete profile and register with new username!)'
+                        disabled
+                        value={this.username}
+                      />
+                      &lt;Form.Text className='text-muted'>
+                        &lt;p>&lt;/p>
+                      &lt;/Form.Text>
+                    &lt;/Form.Group>
+
+                    &lt;Form.Group className='form-group-password'>
+                      &lt;Form.Label className='form-label colorInfo'>
+                        Update password:
+                      &lt;/Form.Label>
+                      &lt;Form.Control
+                        type='password'
+                        name='Password'
+                        placeholder='Choose new password - at least 6 Chars'
+                        onChange={(e) => this.setPassword(e.target.value)}
+                      />
+                      &lt;Form.Text className='text-muted'>
+                        &lt;p>&lt;/p>
+                      &lt;/Form.Text>
+                    &lt;/Form.Group>
+
+                    &lt;Form.Group className='form-group-email'>
+                      &lt;Form.Label className='form-label colorInfo'>
+                        Update email:
+                      &lt;/Form.Label>
+                      &lt;Form.Control
+                        type='email'
+                        name='Email'
+                        placeholder='Enter new email - valid format: xxx@xxx.xxx'
+                        onChange={(e) => this.setEmail(e.target.value)}
+                      />
+                      &lt;Form.Text className='text-muted'>
+                        &lt;p>&lt;/p>
+                      &lt;/Form.Text>
+                    &lt;/Form.Group>
+
+                    &lt;Form.Group className='form-group-birthday'>
+                      &lt;Form.Label className='form-label colorInfo'>
+                        Update birthday
+                      &lt;/Form.Label>
+                      &lt;Form.Control
+                        type='date'
+                        name='Birthday'
+                        onChange={(e) => this.setBirthday(e.target.value)}
+                      />
+                    &lt;/Form.Group>
+
+                    &lt;Container className='form-btn'>
+                      &lt;Button
+                        className='form-btn-sbm'
+                        variant='info'
+                        type='submit'
+                        onClick={this.editUser}
+                      >
+                        Update User
+                      &lt;/Button>
+
+                      &lt;Button
+                        className='form-btn-del'
+                        variant='outline-danger'
+                        style={{
+                          border: '1px solid #17a2b8',
+                          color: '#17a2b8',
+                        }}
+                        onClick={() => this.onDeleteUser()}
+                      >
+                        {' '}
+                        &lt;span>Delete User&lt;/span>{' '}
+                      &lt;/Button>
+                    &lt;/Container>
+                  &lt;/Form>
+                &lt;/Card.Body>
+              &lt;/Card>
+            &lt;/CardGroup>
+          &lt;/Col>
+        &lt;/Row>
+      &lt;/Container>
+    )
+  }
+}
+
+ProfileView.propTypes = {
+  profile: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.string,
+  }),
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FooterView.html">FooterView</a></li><li><a href="HeaderView.html">HeaderView</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="MyFlixApplication.html">MyFlixApplication</a></li></ul><h3>Global</h3><ul><li><a href="global.html#accessToken">accessToken</a></li><li><a href="global.html#addFavMovie">addFavMovie</a></li><li><a href="global.html#Authorization">Authorization</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#Birthday">Birthday</a></li><li><a href="global.html#birthday">birthday</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#checkIfMovieIsInFavorites">checkIfMovieIsInFavorites</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#confirmed">confirmed</a></li><li><a href="global.html#container">container</a></li><li><a href="global.html#CurrentUserData">CurrentUserData</a></li><li><a href="global.html#data">data</a></li><li><a href="global.html#Description">Description</a></li><li><a href="global.html#director">director</a></li><li><a href="global.html#Director">Director</a></li><li><a href="global.html#editUser">editUser</a></li><li><a href="global.html#Email">Email</a></li><li><a href="global.html#email">email</a></li><li><a href="global.html#FavoriteMovies">FavoriteMovies</a></li><li><a href="global.html#favouriteMovies">favouriteMovies</a></li><li><a href="global.html#Featured">Featured</a></li><li><a href="global.html#fontSize">fontSize</a></li><li><a href="global.html#genre">genre</a></li><li><a href="global.html#Genre">Genre</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleTextChange1">handleTextChange1</a></li><li><a href="global.html#handleTextChange2">handleTextChange2</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#history">history</a></li><li><a href="global.html#ImagePath">ImagePath</a></li><li><a href="global.html#isActive">isActive</a></li><li><a href="global.html#isInFavorites">isInFavorites</a></li><li><a href="global.html#isReq">isReq</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#marginLeft">marginLeft</a></li><li><a href="global.html#match">match</a></li><li><a href="global.html#method">method</a></li><li><a href="global.html#minWidth">minWidth</a></li><li><a href="global.html#movie">movie</a></li><li><a href="global.html#movieID">movieID</a></li><li><a href="global.html#movies">movies</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#onBackClick">onBackClick</a></li><li><a href="global.html#onDeleteUser">onDeleteUser</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#onRegister">onRegister</a></li><li><a href="global.html#onRemoveFavorite">onRemoveFavorite</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#Password">Password</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavMovie">removeFavMovie</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#setBirthday">setBirthday</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setPassword">setPassword</a></li><li><a href="global.html#setUsername">setUsername</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#token">token</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#Username">Username</a></li><li><a href="global.html#username">username</a></li><li><a href="global.html#users">users</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validateUsername">validateUsername</a></li><li><a href="global.html#width">width</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 07 2022 17:52:40 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

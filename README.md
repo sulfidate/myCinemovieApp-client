@@ -1,33 +1,8 @@
-<h1>Project Achievement 3 - myMovieApp (React)</h1>
+<h1>Project Achievement 3 - myCinemovieApp (React)</h1>
 <h5>Start 08.01.2022</h5>
 
-<h1>project myMovieApp</h1>
 <h2>Objective</h2>
 <p>Using React, build the client-side for an application called myFlix based on its existing server-side code (REST API and database).</p>
-
-<h2>Progress</h2>
-
-<ul>
-<li>Task 3.1:
-<p>In this task, i've decided which library or framework i want to use to build my movie application.</p>
-</li>
-<li>Task 3.2:
-<p>In this task, i've used build tools to build my movie application. In particular, i've set up my app-client directory with the relevant files and dependencies and use parcel to complete the necessary build operations for my project.</p>
-</li><li>Task 3.3:
-<p></p>
-</li><li>Task 3.4:
-<p></p>
-</li><li>Task 3.5:
-<p></p>
-</li><li>Task 3.6:
-<p></p>
-</li>
-<li>Task 3.7:
-<p></p>
-</li><li>Task 3.8:
-<p></p>
-</li>
-</ul>
 
 <h2>Context</h2>
 <p>Client-side development hasn’t always been so prominent. In the past, pages would be generated on the server-side and sent to the browser, resulting in a poor user experience. Thanks to modern browsers and libraries such as React, the client-side of an application is today considered to be just as important as the server-side. As a student of full-stack development, you need to be skilled in both the server-side and client-side.
@@ -138,75 +113,84 @@ and the movie rating</li>
 <li>The application may be hosted online</li>
 </ul>
 
-### What challenges did I face, what did I learn? 
+### What challenges did I face, what did I learn?
 
 ... from installing React
-* in 2021 React 18 introduced a new root API, namely ReactDOM.createRoot. It is no longer necessary to pass the container into the render. This means that one needs to  replace render with createRoot. For more information, click here https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+
+- in 2021 React 18 introduced a new root API, namely ReactDOM.createRoot. It is no longer necessary to pass the container into the render. This means that one needs to replace render with createRoot. For more information, click here https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
 
 ... from installing Parcel
-* Project setup: in the package.json the entry point may not be "main", because main is used as the output file of the build. Instead define the source code for the library as follows:
+
+- Project setup: in the package.json the entry point may not be "main", because main is used as the output file of the build. Instead define the source code for the library as follows:
+
 ```bash
 "source": "src/index.html"
 ```
+
 Use index.html as entry point for build process: parcel src/index.html
 
-* Parcel: the command parcel src/index.html threw an error, saying
+- Parcel: the command parcel src/index.html threw an error, saying
+
 ```bash
 @parcel/package-manager: Could not find module "@parcel/transformer-sass" satisfying 2.0.0-rc.0
 ```
-the solution was to remove the @oarcel/transformer-sass:^2.4.1 from the package.json,  deleting node-modules and package-lock.json file and then run npm install. As a result the version 2.0.0-rc.0 was installed and added as a dependencies.
 
-* Parcel build process threw error, which was solved by adding type="module" to script tag in index.html
-* add to package.json
+the solution was to remove the @oarcel/transformer-sass:^2.4.1 from the package.json, deleting node-modules and package-lock.json file and then run npm install. As a result the version 2.0.0-rc.0 was installed and added as a dependencies.
+
+- Parcel build process threw error, which was solved by adding type="module" to script tag in index.html
+- add to package.json
+
 ```bash
 "start": "parcel", // parcel watch + dev server
 "watch": "parcel watch", // parcel build + automatic reload
 "build": "parcel build"
 ```
 
-* There is a new version of react-router-dom (6.3.0) which differs significantly from the version used by CF (v.5.3.0). I had to downgrade to the older version in order to be able to follow the directions provided by CF for routing between the views.
+- There is a new version of react-router-dom (6.3.0) which differs significantly from the version used by CF (v.5.3.0). I had to downgrade to the older version in order to be able to follow the directions provided by CF for routing between the views.
 
-* React Redux has some pitfalls when loading data from an API (in this case, waiting for the user and movies state to be successfully set before setting the favorite movies state). Therefore, try using Redux toolkit (RTK) to fix this!
+- React Redux has some pitfalls when loading data from an API (in this case, waiting for the user and movies state to be successfully set before setting the favorite movies state). Therefore, try using Redux toolkit (RTK) to fix this!
 
-* Avoid passing down props to more than one compnent, bad practice! (props drilling) --> Use state managment! (e.g., Redux)
+- Avoid passing down props to more than one compnent, bad practice! (props drilling) --> Use state managment! (e.g., Redux)
 
 ## How to install and run the project ...
 
 ### ... as a developer, who wants to work with the project
+
 1. Clone or download repository ...
+
 ```bash
-git clone https://github.com/F3NJ0/movie_api.git
+git clone https://github.com/sulfidate/myCinemovieApp-Client.git
 ```
 
 2. Run parcel to build
+
 ```bash
 parcel src/index.html
 ```
 
-### ... as a movie enthusiast, who wants to see the movies
--- not hosted yet, TBD --
-
 ## Technical Requirements (according to project brief)
-* SPA application built using React
-* Navigate between views using react-router-dom
-* Use Parcel as build tool
-* Use react-bootstrap for UI
-* Use React Redux for state management (respecting the Flux pattern)
-* Use both class and function components
-* Use axios to connect to API (providing user and movie information)
 
+- SPA application built using React
+- Navigate between views using react-router-dom
+- Use Parcel as build tool
+- Use react-bootstrap for UI
+- Use React Redux for state management (respecting the Flux pattern)
+- Use both class and function components
+- Use axios to connect to API (providing user and movie information)
 
-## Development Process of the Client-Side for Femmovies Application
+## Development Process of the Client-Side for the Application
 
 ### Create React components for each view
-* Main View routes to all sub views using react-router-dom
-* Create functional component for each sub view // distinct functionality in view
-* Use bootstrap Card component to create Movie card for each movie
+
+- Main View routes to all sub views using react-router-dom
+- Create functional component for each sub view // distinct functionality in view
+- Use bootstrap Card component to create Movie card for each movie
 
 ### Connect to database via axios
-* Get data on movies and users from API using axios library
+
+- Get data on movies and users from API using axios library
 
 ### Use Redux for state management
-* User & movie data is accessed and modified from different components --> Use redux to mangage state in one place (store)
-* Same for favorite movies --> Has to be loaded once both user and movie data states are successfully set
 
+- User & movie data is accessed and modified from different components --> Use redux to mangage state in one place (store)
+- Same for favorite movies --> Has to be loaded once both user and movie data states are successfully set

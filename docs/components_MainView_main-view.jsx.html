@@ -1,4 +1,32 @@
-import React from 'react'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/MainView/main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/MainView/main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
 import axios from 'axios'
 import './main-view.scss'
 
@@ -15,12 +43,6 @@ import GenreView from '../GenreView/genre-view'
 import DirectorView from '../DirectorView/director-view'
 import FooterView from '../FooterView/footer-view'
 
-/**
- * MainView
- * @Component MainView component
- * @param {object} props
- * @returns {object} MainView component
- */
 export default class MainView extends React.Component {
   constructor() {
     super()
@@ -40,7 +62,13 @@ export default class MainView extends React.Component {
   /**
    * function to get movies from database and set them to state
    * @type {getMovies}
+   * @returns {movies} - movies from database
+   * @state {movies}
+   * @param {*} token
+   * @function {getMovies}
+   *
    */
+
   getMovies(token) {
     axios
       .get('https://mycinemoviedatabase.herokuapp.com/movies', {
@@ -58,10 +86,14 @@ export default class MainView extends React.Component {
 
   /**
    * fuction to get user from database and set it to state
-   * @type {getUser}
-   * @returns {user} - user from localStorage
-   * @state {user}
+   * @param {*} token
+   * @param {*} username
+   * @state {Username, Password, Email, Birthday} - user data
+   * @state {FavoriteMovies} - user favorite movies data
+   * @function {getUser}
+   * @returns {user} - user from database
    */
+
   getUser = (token) => {
     const username = localStorage.getItem('user')
     axios
@@ -84,7 +116,7 @@ export default class MainView extends React.Component {
 
   /**
    * function to componentDidMount and set user to state
-   * @type {componentDidMount}
+   * @function {componentDidMount}
    * @returns {user} - user from localStorage
    * @state {user}
    */
@@ -103,7 +135,7 @@ export default class MainView extends React.Component {
    * function to login user and set user to localStorage and set user to state and get movies from database
    * @param {*} username
    * @param {*} password
-   * @type {login}
+   * @function {login}
    */
   onLoggedIn(authData) {
     this.setState({
@@ -117,7 +149,7 @@ export default class MainView extends React.Component {
 
   /**
    * function to logout user and remove user from localStorage and set user to null
-   * @type {logout}
+   * @function {logout}
    * @returns {user} - null
    * @state {user}
    */
@@ -132,8 +164,10 @@ export default class MainView extends React.Component {
 
   /**
    *  function to remove movie from favorites
-   * @event {removeFavMovie}
+   *  @param {*} movie
+   * @function {removeFavMovie}
    * @returns {FavoriteMovies} - user favorite movies data
+   * @state {FavoriteMovies}
    *
    */
   onRemoveFavorite = (movie) => {
@@ -155,8 +189,11 @@ export default class MainView extends React.Component {
 
   /**
    *  function to add movie to favorites
-   * @event {addFavMovie}
+   * @param {*} movie
+   * @function {addFavMovie}
    * @returns {FavoriteMovies} - user favorite movies data
+   * @state {FavoriteMovies}
+   *
    */
   addFavMovie(movie) {
     const username = localStorage.getItem('user')
@@ -188,7 +225,8 @@ export default class MainView extends React.Component {
 
   /**
    *  function to remove movie from favorites
-   * @event {removeFavMovie}
+   *  @param {*} movie
+   * @function {removeFavMovie}
    * @returns {FavoriteMovies} - user favorite movies data
    * @state {FavoriteMovies}
    *
@@ -217,9 +255,13 @@ export default class MainView extends React.Component {
   }
 
   /** check if movie is in favorites
-   * @event {checkIfMovieIsInFavorites}
+   *  @param {*} movie
+   * @function {checkIfMovieIsInFavorites}
    * @returns {FavoriteMovies} - user favorite movies data
    * @state {FavoriteMovies}
+   * @state {isActive}
+   * @state {isSelected}
+   * @state {isInFavorites}
    */
   checkIfMovieIsInFavorites(movie) {
     let movieID = movie._id
@@ -255,81 +297,81 @@ export default class MainView extends React.Component {
     } = this.state
 
     return (
-      <Router>
-        <Row className='playground'>
-          <Col className='center'>
-            <Row className='header-view'>
-              <Col sm={6} md={4} lg={3} xl={3} xxl={3}>
-                <HeaderView
+      &lt;Router>
+        &lt;Row className='playground'>
+          &lt;Col className='center'>
+            &lt;Row className='header-view'>
+              &lt;Col sm={6} md={4} lg={3} xl={3} xxl={3}>
+                &lt;HeaderView
                   user={user}
                   onLoggedOut={(user) => {
                     this.onLoggedOut(user)
                   }}
                 />
-              </Col>
-            </Row>
+              &lt;/Col>
+            &lt;/Row>
 
-            <Row className='main-view justify-content-md-center'>
-              <Route
+            &lt;Row className='main-view justify-content-md-center'>
+              &lt;Route
                 exact
                 path='/'
                 render={() => {
                   if (!user)
                     return (
-                      <Col>
-                        <LoginView
+                      &lt;Col>
+                        &lt;LoginView
                           movies={movies}
                           onLoggedIn={(user) => this.onLoggedIn(user)}
                         />
-                      </Col>
+                      &lt;/Col>
                     )
 
-                  if (movies.length === 0) return <div className='main-view' />
+                  if (movies.length === 0) return &lt;div className='main-view' />
 
                   return movies.map((movie) => (
-                    <Col sm={6} md={4} lg={3} xl={3} xxl={3} key={movie._id}>
-                      <MovieCard movie={movie} />
-                    </Col>
+                    &lt;Col sm={6} md={4} lg={3} xl={3} xxl={3} key={movie._id}>
+                      &lt;MovieCard movie={movie} />
+                    &lt;/Col>
                   ))
                 }}
               />
 
-              <Route
+              &lt;Route
                 path='/register'
                 render={() => {
-                  if (user) return <Redirect to={'/'} />
+                  if (user) return &lt;Redirect to={'/'} />
 
                   return (
-                    <Col>
-                      <RegistrationView
+                    &lt;Col>
+                      &lt;RegistrationView
                         movies={movies}
                         onLoggedIn={(user) => this.onLoggedIn(user)}
                       />
-                    </Col>
+                    &lt;/Col>
                   )
                 }}
               />
 
-              <Route
+              &lt;Route
                 path='/movies/:movieId'
                 render={({ match, history }) => {
                   if (!user)
                     return (
-                      <Col>
-                        <LoginView
+                      &lt;Col>
+                        &lt;LoginView
                           movies={movies}
                           onLoggedIn={(user) => this.onLoggedIn(user)}
                         />
-                      </Col>
+                      &lt;/Col>
                     )
 
-                  if (movies.length === 0) return <div className='main-view' />
+                  if (movies.length === 0) return &lt;div className='main-view' />
 
                   return (
-                    <>
-                      <Col />
-                      <Col xs={10} sm={12} md={8}>
-                        <MovieView
+                    &lt;>
+                      &lt;Col />
+                      &lt;Col xs={10} sm={12} md={8}>
+                        &lt;MovieView
                           movie={movies.find(
                             (movie) => movie._id === match.params.movieId
                           )}
@@ -340,33 +382,33 @@ export default class MainView extends React.Component {
                           }
                           addFavMovie={this.addFavMovie.bind(this)}
                         />
-                      </Col>
-                      <Col />
-                    </>
+                      &lt;/Col>
+                      &lt;Col />
+                    &lt;/>
                   )
                 }}
               />
 
-              <Route
+              &lt;Route
                 path='/directors/:name'
                 render={({ match, history }) => {
                   if (!user)
                     return (
-                      <Col>
-                        <LoginView
+                      &lt;Col>
+                        &lt;LoginView
                           movies={movies}
                           onLoggedIn={(user) => this.onLoggedIn(user)}
                         />
-                      </Col>
+                      &lt;/Col>
                     )
 
-                  if (movies.length === 0) return <div className='main-view' />
+                  if (movies.length === 0) return &lt;div className='main-view' />
 
                   return (
-                    <>
-                      <Col />
-                      <Col sm={6} md={8}>
-                        <DirectorView
+                    &lt;>
+                      &lt;Col />
+                      &lt;Col sm={6} md={8}>
+                        &lt;DirectorView
                           director={
                             movies.find(
                               (movie) => movie.Director[1] === match.params.name
@@ -374,33 +416,33 @@ export default class MainView extends React.Component {
                           }
                           onBackClick={() => history.goBack()}
                         />
-                      </Col>
-                      <Col />
-                    </>
+                      &lt;/Col>
+                      &lt;Col />
+                    &lt;/>
                   )
                 }}
               />
 
-              <Route
+              &lt;Route
                 path='/genres/:name'
                 render={({ match, history }) => {
                   if (!user)
                     return (
-                      <Col>
-                        <LoginView
+                      &lt;Col>
+                        &lt;LoginView
                           movies={movies}
                           onLoggedIn={(user) => this.onLoggedIn(user)}
                         />
-                      </Col>
+                      &lt;/Col>
                     )
 
-                  if (movies.length === 0) return <div className='main-view' />
+                  if (movies.length === 0) return &lt;div className='main-view' />
 
                   return (
-                    <>
-                      <Col />
-                      <Col sm={6} md={8}>
-                        <GenreView
+                    &lt;>
+                      &lt;Col />
+                      &lt;Col sm={6} md={8}>
+                        &lt;GenreView
                           genre={
                             movies.find(
                               (movie) => movie.Genre[1] === match.params.name
@@ -408,22 +450,22 @@ export default class MainView extends React.Component {
                           }
                           onBackClick={() => history.goBack()}
                         />
-                      </Col>
-                      <Col />
-                    </>
+                      &lt;/Col>
+                      &lt;Col />
+                    &lt;/>
                   )
                 }}
               />
 
-              <Route
+              &lt;Route
                 path={`/users/${user}`}
                 render={({ match, history }) => {
-                  if (!user) return <Redirect to={'/'} />
+                  if (!user) return &lt;Redirect to={'/'} />
 
                   return (
-                    <>
-                      <Col key={'rofile-view'}>
-                        <ProfileView
+                    &lt;>
+                      &lt;Col key={'rofile-view'}>
+                        &lt;ProfileView
                           movies={movies}
                           user={user}
                           FavoriteMovies={FavoriteMovies}
@@ -436,16 +478,39 @@ export default class MainView extends React.Component {
                           }}
                           onBackClick={() => history.goBack()}
                         />
-                      </Col>
-                    </>
+                      &lt;/Col>
+                    &lt;/>
                   )
                 }}
               />
-            </Row>
-            <FooterView className='footer-view' />
-          </Col>
-        </Row>
-      </Router>
+            &lt;/Row>
+            &lt;FooterView className='footer-view' />
+          &lt;/Col>
+        &lt;/Row>
+      &lt;/Router>
     )
   }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FooterView.html">FooterView</a></li><li><a href="HeaderView.html">HeaderView</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="MyFlixApplication.html">MyFlixApplication</a></li></ul><h3>Global</h3><ul><li><a href="global.html#accessToken">accessToken</a></li><li><a href="global.html#addFavMovie">addFavMovie</a></li><li><a href="global.html#Authorization">Authorization</a></li><li><a href="global.html#backgroundColor">backgroundColor</a></li><li><a href="global.html#Birthday">Birthday</a></li><li><a href="global.html#birthday">birthday</a></li><li><a href="global.html#border">border</a></li><li><a href="global.html#borderBottom">borderBottom</a></li><li><a href="global.html#borderTop">borderTop</a></li><li><a href="global.html#checkIfMovieIsInFavorites">checkIfMovieIsInFavorites</a></li><li><a href="global.html#color">color</a></li><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#confirmed">confirmed</a></li><li><a href="global.html#container">container</a></li><li><a href="global.html#CurrentUserData">CurrentUserData</a></li><li><a href="global.html#data">data</a></li><li><a href="global.html#Description">Description</a></li><li><a href="global.html#director">director</a></li><li><a href="global.html#Director">Director</a></li><li><a href="global.html#editUser">editUser</a></li><li><a href="global.html#Email">Email</a></li><li><a href="global.html#email">email</a></li><li><a href="global.html#FavoriteMovies">FavoriteMovies</a></li><li><a href="global.html#favouriteMovies">favouriteMovies</a></li><li><a href="global.html#Featured">Featured</a></li><li><a href="global.html#fontSize">fontSize</a></li><li><a href="global.html#genre">genre</a></li><li><a href="global.html#Genre">Genre</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleTextChange1">handleTextChange1</a></li><li><a href="global.html#handleTextChange2">handleTextChange2</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#history">history</a></li><li><a href="global.html#ImagePath">ImagePath</a></li><li><a href="global.html#isActive">isActive</a></li><li><a href="global.html#isInFavorites">isInFavorites</a></li><li><a href="global.html#isReq">isReq</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#margin">margin</a></li><li><a href="global.html#marginLeft">marginLeft</a></li><li><a href="global.html#match">match</a></li><li><a href="global.html#method">method</a></li><li><a href="global.html#minWidth">minWidth</a></li><li><a href="global.html#movie">movie</a></li><li><a href="global.html#movieID">movieID</a></li><li><a href="global.html#movies">movies</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#onBackClick">onBackClick</a></li><li><a href="global.html#onDeleteUser">onDeleteUser</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#onRegister">onRegister</a></li><li><a href="global.html#onRemoveFavorite">onRemoveFavorite</a></li><li><a href="global.html#padding">padding</a></li><li><a href="global.html#Password">Password</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavMovie">removeFavMovie</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#setBirthday">setBirthday</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setPassword">setPassword</a></li><li><a href="global.html#setUsername">setUsername</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#token">token</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#Username">Username</a></li><li><a href="global.html#username">username</a></li><li><a href="global.html#users">users</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validateUsername">validateUsername</a></li><li><a href="global.html#width">width</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 07 2022 17:52:40 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,4 +1,32 @@
-import React, { useState } from 'react'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ProfileView/profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ProfileView/profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import {
@@ -189,50 +217,50 @@ export default class ProfileView extends React.Component {
     const { FavoriteMovies, Username, Email, Birthday } = this.props
 
     return (
-      <Container>
-        <Row className='profile-view mt-7 mb-7' style={{ minWidth: '400px' }}>
-          <Col>
-            <CardGroup>
-              <Card
+      &lt;Container>
+        &lt;Row className='profile-view mt-7 mb-7' style={{ minWidth: '400px' }}>
+          &lt;Col>
+            &lt;CardGroup>
+              &lt;Card
                 bg='light'
                 key=''
                 text='info'
                 className='user-profile mb-2'
                 border='info'
               >
-                <Card.Header as='h3'>User Profile</Card.Header>
+                &lt;Card.Header as='h3'>User Profile&lt;/Card.Header>
 
                 {/* current-userdata */}
-                <CurrentUserData
+                &lt;CurrentUserData
                   name={Username}
                   email={Email}
                   Birthday={Birthday}
                 />
 
                 {/* favorites-movies */}
-                <Card.Body className='favorites-movies-data'>
-                  <Card.Title as='h5' style={{ margin: '0.5% 0 1% 0' }}>
+                &lt;Card.Body className='favorites-movies-data'>
+                  &lt;Card.Title as='h5' style={{ margin: '0.5% 0 1% 0' }}>
                     Your Favorite Movies
-                  </Card.Title>
+                  &lt;/Card.Title>
 
-                  <Card
+                  &lt;Card
                     style={{
                       border: '0.1rem solid #17a2b8',
                     }}
                   >
-                    <Card.Body>
-                      {FavoriteMovies.length === 0 && (
-                        <div className='text-center'>No Favorite Movie</div>
+                    &lt;Card.Body>
+                      {FavoriteMovies.length === 0 &amp;&amp; (
+                        &lt;div className='text-center'>No Favorite Movie&lt;/div>
                       )}
-                      <Row className='favorite-container'>
-                        {FavoriteMovies.length > 0 &&
+                      &lt;Row className='favorite-container'>
+                        {FavoriteMovies.length > 0 &amp;&amp;
                           movies.map((movie) => {
                             if (
                               movie._id ===
                               FavoriteMovies.find((fav) => fav === movie._id)
                             ) {
                               return (
-                                <Col
+                                &lt;Col
                                   sm={6}
                                   md={6}
                                   lg={4}
@@ -240,9 +268,9 @@ export default class ProfileView extends React.Component {
                                   xxl={2}
                                   key={movie._id}
                                 >
-                                  <Card>
-                                    <MovieCard movie={movie} />
-                                    <Button
+                                  &lt;Card>
+                                    &lt;MovieCard movie={movie} />
+                                    &lt;Button
                                       size='sm'
                                       variant='outline-warning'
                                       value={movie._id}
@@ -252,24 +280,24 @@ export default class ProfileView extends React.Component {
                                     >
                                       {' '}
                                       Remove{' '}
-                                    </Button>
-                                  </Card>
-                                </Col>
+                                    &lt;/Button>
+                                  &lt;/Card>
+                                &lt;/Col>
                               )
                             }
                           })}
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                </Card.Body>
+                      &lt;/Row>
+                    &lt;/Card.Body>
+                  &lt;/Card>
+                &lt;/Card.Body>
 
                 {/* user-update */}
-                <Card.Body className='user-update'>
-                  <Form.Label as='h5' style={{ margin: '0.5% 0 1% 0' }}>
+                &lt;Card.Body className='user-update'>
+                  &lt;Form.Label as='h5' style={{ margin: '0.5% 0 1% 0' }}>
                     Update your profile
-                  </Form.Label>
+                  &lt;/Form.Label>
 
-                  <Form
+                  &lt;Form
                     className='update-form'
                     style={{
                       border: '0.1rem solid #17a2b8',
@@ -285,75 +313,75 @@ export default class ProfileView extends React.Component {
                       )
                     }
                   >
-                    <Form.Group className='form-group-username'>
-                      <Form.Label className='form-label colorInfo'>
+                    &lt;Form.Group className='form-group-username'>
+                      &lt;Form.Label className='form-label colorInfo'>
                         Username:
-                        <span className='ml-2'>{Username}</span>
-                      </Form.Label>
-                      <Form.Control
+                        &lt;span className='ml-2'>{Username}&lt;/span>
+                      &lt;/Form.Label>
+                      &lt;Form.Control
                         style={{ fontSize: 'small' }}
                         type='text'
                         placeholder='Username cannot be updated. (To get a new username delete profile and register with new username!)'
                         disabled
                         value={this.username}
                       />
-                      <Form.Text className='text-muted'>
-                        <p></p>
-                      </Form.Text>
-                    </Form.Group>
+                      &lt;Form.Text className='text-muted'>
+                        &lt;p>&lt;/p>
+                      &lt;/Form.Text>
+                    &lt;/Form.Group>
 
-                    <Form.Group className='form-group-password'>
-                      <Form.Label className='form-label colorInfo'>
+                    &lt;Form.Group className='form-group-password'>
+                      &lt;Form.Label className='form-label colorInfo'>
                         Update password:
-                      </Form.Label>
-                      <Form.Control
+                      &lt;/Form.Label>
+                      &lt;Form.Control
                         type='password'
                         name='Password'
                         placeholder='Choose new password - at least 6 Chars'
                         onChange={(e) => this.setPassword(e.target.value)}
                       />
-                      <Form.Text className='text-muted'>
-                        <p></p>
-                      </Form.Text>
-                    </Form.Group>
+                      &lt;Form.Text className='text-muted'>
+                        &lt;p>&lt;/p>
+                      &lt;/Form.Text>
+                    &lt;/Form.Group>
 
-                    <Form.Group className='form-group-email'>
-                      <Form.Label className='form-label colorInfo'>
+                    &lt;Form.Group className='form-group-email'>
+                      &lt;Form.Label className='form-label colorInfo'>
                         Update email:
-                      </Form.Label>
-                      <Form.Control
+                      &lt;/Form.Label>
+                      &lt;Form.Control
                         type='email'
                         name='Email'
                         placeholder='Enter new email - valid format: xxx@xxx.xxx'
                         onChange={(e) => this.setEmail(e.target.value)}
                       />
-                      <Form.Text className='text-muted'>
-                        <p></p>
-                      </Form.Text>
-                    </Form.Group>
+                      &lt;Form.Text className='text-muted'>
+                        &lt;p>&lt;/p>
+                      &lt;/Form.Text>
+                    &lt;/Form.Group>
 
-                    <Form.Group className='form-group-birthday'>
-                      <Form.Label className='form-label colorInfo'>
+                    &lt;Form.Group className='form-group-birthday'>
+                      &lt;Form.Label className='form-label colorInfo'>
                         Update birthday
-                      </Form.Label>
-                      <Form.Control
+                      &lt;/Form.Label>
+                      &lt;Form.Control
                         type='date'
                         name='Birthday'
                         onChange={(e) => this.setBirthday(e.target.value)}
                       />
-                    </Form.Group>
+                    &lt;/Form.Group>
 
-                    <Container className='form-btn'>
-                      <Button
+                    &lt;Container className='form-btn'>
+                      &lt;Button
                         className='form-btn-sbm'
                         variant='info'
                         type='submit'
                         onClick={this.editUser}
                       >
                         Update User
-                      </Button>
+                      &lt;/Button>
 
-                      <Button
+                      &lt;Button
                         className='form-btn-del'
                         variant='outline-danger'
                         style={{
@@ -363,16 +391,16 @@ export default class ProfileView extends React.Component {
                         onClick={() => this.onDeleteUser()}
                       >
                         {' '}
-                        <span>Delete User</span>{' '}
-                      </Button>
-                    </Container>
-                  </Form>
-                </Card.Body>
-              </Card>
-            </CardGroup>
-          </Col>
-        </Row>
-      </Container>
+                        &lt;span>Delete User&lt;/span>{' '}
+                      &lt;/Button>
+                    &lt;/Container>
+                  &lt;/Form>
+                &lt;/Card.Body>
+              &lt;/Card>
+            &lt;/CardGroup>
+          &lt;/Col>
+        &lt;/Row>
+      &lt;/Container>
     )
   }
 }
@@ -389,3 +417,26 @@ ProfileView.propTypes = {
     Birthday: PropTypes.string,
   }),
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:handleSubmit">handleSubmit</a></li><li><a href="global.html#event:handleSubmit-registrationform">handleSubmit - registration form</a></li><li><a href="global.html#event:%257BaddFavMovie%257D">{addFavMovie}</a></li><li><a href="global.html#event:%257BcheckIfMovieIsInFavorites%257D">{checkIfMovieIsInFavorites}</a></li><li><a href="global.html#event:%257BdeleteUser%257D">{deleteUser}</a></li><li><a href="global.html#event:%257BeditUserData%257D">{editUserData}</a></li><li><a href="global.html#event:%257BremoveFavMovie%257D">{removeFavMovie}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFavMovie">addFavMovie</a></li><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSubmit-loginformsubmitpassword">handleSubmit - login form submit password</a></li><li><a href="global.html#handleSubmit-loginformsubmitusername">handleSubmit - login form submit username</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#setBirthday">setBirthday</a></li><li><a href="global.html#setEmail">setEmail</a></li><li><a href="global.html#setPassword">setPassword</a></li><li><a href="global.html#setUsername">setUsername</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 07 2022 21:29:13 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
