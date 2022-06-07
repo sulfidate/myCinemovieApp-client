@@ -14,6 +14,12 @@ export default class MovieView extends React.Component {
     }
   }
 
+
+  componentDidMount() {
+    const isInFavorites = this.props.checkIfMovieIsInFavorites(this.props.movie)
+    this.setState({ isSelected: isInFavorites })
+    this.setState({ isActive: isInFavorites })
+
   addFavMovie() {
     const username = localStorage.getItem('user')
     const token = localStorage.getItem('token')
@@ -52,11 +58,12 @@ export default class MovieView extends React.Component {
       .catch(function (error) {
         console.log(error)
       })
+
   }
 
   render() {
-    const { movie, onBackClick, FavoriteMovies } = this.props
-    const { isActive, isSelected, movieId } = this.state
+    const { movie, onBackClick } = this.props
+    const { isActive, isSelected } = this.state
     return (
       <Row>
         <Col
@@ -92,7 +99,7 @@ export default class MovieView extends React.Component {
                       type='submit'
                       className='mr-2'
                       value={movie._id}
-                      onClick={() => this.addFavMovie(movie)}
+                      onClick={() => this.props.addFavMovie(movie)}
                       variant='info'
                       size='sm'
                       style={{
@@ -109,7 +116,7 @@ export default class MovieView extends React.Component {
                       type='submit'
                       className='mr-2'
                       value={movie._id}
-                      onClick={() => this.removeFavMovie(movie)}
+                      onClick={() => this.props.removeFavMovie(movie)}
                       variant='warning'
                       size='sm'
                       style={{
