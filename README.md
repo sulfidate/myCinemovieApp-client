@@ -4,6 +4,27 @@
 <h2>Objective</h2>
 <p>Using React, build the client-side for an application called myFlix based on its existing server-side code (REST API and database).</p>
 
+
+
+### Tools used
+- React / Redux / React Bootstrap
+- Node.js
+
+### Desktop views
+
+<img width="200" alt="Pasted Graphic" src="https://user-images.githubusercontent.com/78739948/173243910-ee14d899-e509-4322-a70d-887fca83b851.png"><img width="200" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/78739948/173243920-e4f18ce7-149c-4e30-b93b-7c0ea8e097fd.png"><img width="200" alt="Pasted Graphic 2" src="https://user-images.githubusercontent.com/78739948/173243923-c3b3b737-881d-476b-a1da-d96ae4f75547.png"><img width="200" alt="Pasted Graphic 3" src="https://user-images.githubusercontent.com/78739948/173243925-1e1a5d36-e8ae-494a-968b-1b7ff33382c6.png"><img width="200" alt="Pasted Graphic 4" src="https://user-images.githubusercontent.com/78739948/173243932-014106c8-c6e0-4b8c-afb9-622589c1382e.png"><img width="200" alt="Pasted Graphic 12" src="https://user-images.githubusercontent.com/78739948/173243943-4acd0c33-e6d4-402f-91c6-cff7d0d55d73.png"><img width="200" alt="Pasted Graphic 13" src="https://user-images.githubusercontent.com/78739948/173243948-173762b9-775b-4065-973c-a738f1a4665d.png">
+
+
+
+
+
+
+### Mobile views
+
+<img width="100" alt="myCineMovieApp" src="https://user-images.githubusercontent.com/78739948/173243760-25655e6c-46fb-4421-b24c-503a25c613e5.png"><img width="100" alt="The Godfather" src="https://user-images.githubusercontent.com/78739948/173243766-c2e0bf6b-1a21-4d0c-8790-966dc90be9be.png"><img width="100" alt="Coppola" src="https://user-images.githubusercontent.com/78739948/173243772-071c61d1-ad6c-48b2-8b1f-a523e0abee06.png"><img width="100" alt="myCineMovieApp" src="https://user-images.githubusercontent.com/78739948/173243777-8efb38dc-af8a-49f9-9e2d-4d249c0c51bd.png"><img width="100" alt="myCineMovieApp" src="https://user-images.githubusercontent.com/78739948/173243779-48e98217-bce5-4751-9f02-68c180275014.png"><img width="100" alt="myCineMovieApp" src="https://user-images.githubusercontent.com/78739948/173243783-2e49f246-3ecb-4190-9e58-e7d95b106d1e.png"><img width="100" alt="Registration" src="https://user-images.githubusercontent.com/78739948/173243787-50eabbe7-0bff-4b25-8450-ba3c67880cfa.png">
+  
+
+
 <h2>Context</h2>
 <p>Client-side development hasn’t always been so prominent. In the past, pages would be generated on the server-side and sent to the browser, resulting in a poor user experience. Thanks to modern browsers and libraries such as React, the client-side of an application is today considered to be just as important as the server-side. As a student of full-stack development, you need to be skilled in both the server-side and client-side.
 In the previous Achievement, you built the server-side for a movie application called myFlix. The API and database that you built meet the information needs of myFlix users. Now, you need to create the interface they will use when making requests to, and receiving responses from, the server-side. The client-side of your myFlix application will include several interface views built using the React library that will handle data through the previously-defined REST API endpoints.
@@ -31,8 +52,9 @@ By the end of the Achievement, you’ll have a complete web application (client-
 </p>
 <h4>Essential Views and Features</h4>
 
+
+
 <h5>Main View</h5>
-<ul>
 <li>Returns a list of ALL movies to the user (each listed item with an image, title, and
 description)
 </li>
